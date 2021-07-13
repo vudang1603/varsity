@@ -1,0 +1,76 @@
+<%- include('header'); %>
+
+<!-- Page breadcrumb -->
+<section id="mu-page-breadcrumb">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="mu-page-breadcrumb-area">
+            <h2><%-title%></h2>
+            <ol class="breadcrumb">
+             <li><a href="#">Trang Chủ</a></li>            
+             <li class="active"><%-title%></li>
+           </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End breadcrumb -->
+ 
+  <!-- Start contact  -->
+  <section id="mu-contact">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="mu-contact-area">
+           <!-- start title -->
+           <div class="mu-title">
+             <h2>Thông Tin Liên Hệ</h2>
+             <p>Vui lòng để lại thông tin liên hệ, chúng tôi sẽ liên lạc và hỗ trợ bạn sớm nhất có thể.</p>
+           </div>
+           <!-- end title -->
+           <!-- start contact content -->
+           <div class="mu-contact-content">           
+             <div class="row">
+               <div class="col-md-6">
+                 <div class="mu-contact-left">
+                   <form class="contactform">                  
+                     <p class="comment-form-author">
+                       <label for="author">Họ Tên <span class="required">*</span></label>
+                       <input type="text" required="required" size="30" value="" name="author">
+                     </p>
+                     <p class="comment-form-email">
+                       <label for="email">Email <span class="required">*</span></label>
+                       <input type="email" required="required" aria-required="true" value="" name="email">
+                     </p>
+                     <p class="comment-form-url">
+                       <label for="subject">Chủ Đề</label>
+                       <input type="text" name="subject">  
+                     </p>
+                     <p class="comment-form-comment">
+                       <label for="comment">Nội Dung</label>
+                       <textarea required="required" aria-required="true" rows="8" cols="45" name="comment"></textarea>
+                     </p>                
+                     <p class="form-submit">
+                       <input type="submit" value="Gửi" class="mu-post-btn" name="submit">
+                     </p>        
+                   </form>
+                 </div>
+               </div>
+               <div class="col-md-6">
+                 <div class="mu-contact-right">
+                   <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3928.841454343717!2d105.76842661428218!3d10.029938975271238!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31a0895a51d60719%3A0x9d76b0035f6d53d0!2zxJDhuqFpIGjhu41jIEPhuqduIFRoxqE!5e0!3m2!1svi!2s!4v1625994588609!5m2!1svi!2s" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+                 </div>
+               </div>
+             </div>
+           </div>
+           <!-- end contact content -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End contact  -->
+
+<%- include('footer'); %>

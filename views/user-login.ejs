@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%-title%></title>
+  <link href="assets/css/login.css" rel="stylesheet">
+</head>
+<body>
+  
+<%- include('./partials/messages') %>
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+    <h2 class="active"> Đăng Nhập </h2>
+    <h2 class="inactive underlineHover"><a href="register"> Đăng Ký </a></h2>
+
+    <!-- Icon -->
+    <div class="fadeIn first">
+      <i class="fa fa-university"></i>
+      <img src="assets/img/logo.png" id="icon" alt="User Icon" />
+    </div>
+
+    <!-- Login Form -->
+    <form action="" method="POST">
+      <input type="text" id="login" class="fadeIn second" name="login" placeholder="Email">
+      <input type="password" id="password" class="fadeIn third" name="login" placeholder="Mật khẩu">
+      <input type="submit" class="fadeIn fourth" value="Đăng Nhập">
+    </form>
+
+    <!-- Remind Passowrd -->
+    <div id="formFooter">
+      <a class="underlineHover" href="#">Quên Mật Khẩu?</a>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
