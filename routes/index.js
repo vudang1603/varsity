@@ -29,6 +29,15 @@ router.get('/teachers', function(req, res, next) {
 router.get('/teacher-detail', function(req, res, next) {
   res.render('teacher-detail',{title: "Thông Tin Gia Sư"});
 });
+router.get('/forums', function(req, res, next) {
+  res.render('forums',{title: "Diễn Đàn"});
+});
+router.get('/teacher-profile', function(req, res, next) {
+  res.render('teacher-profile',{title: "Trang Cá Nhân"});
+});
+router.get('/student-profile', function(req, res, next) {
+  res.render('student-profile',{title: "Trang Cá Nhân"});
+});
 //login
 router.get('/login', function(req, res) {
   res.render('user-login',{title: "Đăng Nhập"});
@@ -41,6 +50,8 @@ router.get('/register', function(req, res) {
 router.get('/teacher-register', function(req, res) {
   res.render('teacher-register',{title: "Đăng Ký Gia Sư"});
 });
+
+
 //dashboard
 router.get('/dashboard',ensureAuthenticated ,function(req, res) {
   res.render('dashboard',{
