@@ -3,18 +3,25 @@ var router = express.Router();
 const User = require('../models/users');
 var bcrypt = require('bcrypt');
 var passport = require('passport');
+var bodyParser = require('body-parser');
+var jsonParser = bodyParser.json();
+var urlencodedParser = bodyParser.urlencoded({extended: true})
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
 
+//register
+router.get('/register', function(req, res) {
+  res.render('user-register',{title: "Đăng Ký"});
+});
+router.get('/teacher-register', function(req, res) {
+  res.render('teacher-register',{title: "Đăng Ký Gia Sư"});
+});
 //login
 router.get('/login', function(req, res) {
-  res.render('user-login');
+  res.render('user-login',{title: "Đăng Nhập"});
 });
 router.post('/login', (req, res, next)=>{
   passport.authenticate('local',{
-    successRedirect : '../dashboard',
+    successRedirect : '../',
     failureRedirect : './login',
     failureFlash : true,
   }) (req, res, next);
@@ -22,10 +29,12 @@ router.post('/login', (req, res, next)=>{
 
 //register
 router.get('/register', function(req, res) {
-  res.render('user-register');
+  res.render('user-register',{title: "Đăng Ký"});
 });
-router.post('/register', (req, res)=>{
-  const {email, password, password2} = req.body;
+router.post('/register', urlencodedParser, (req, res)=>{
+  const email = req.body.email;
+  const password = req.body.password;
+  const password2 = req.body.password2;
   let errors=[];
   console.log('Email '+ email + ' pass '+ password);
   if(!email || !password || !password2){
@@ -42,6 +51,7 @@ router.post('/register', (req, res)=>{
 
   if(errors.length > 0){
     res.render('user-register',{
+      title: "Đăng Ký",
       errors: errors,
       email: email,
       password: password,
@@ -52,11 +62,68 @@ router.post('/register', (req, res)=>{
       console.log(user);
       if(user){
         errors.push({msg: 'Email đã tồn tại!!'});
-        res.render('user-register',{errors,email,password,password2})
+        res.render('user-register',{title: "Đăng Ký",errors,email,password,password2})
       } else {
         const newUser = new User({
           email : email,
-          password : password
+          password : password,
+          role: 0
+        });
+        bcrypt.genSalt(10,(err, salt)=>
+        bcrypt.hash(newUser.password,salt,
+          (err,hash)=>{
+            if(err) throw err;
+            newUser.password = hash;
+          newUser.save()
+            .then((value)=>{
+              console.log(value);
+              req.flash('success_msg','Đăng ký thành công!');
+              res.redirect('./login');
+            })
+            .catch(value=> console.log(value));
+          }))
+      }
+    })
+  }
+})
+
+router.post('/teacher-register', urlencodedParser, (req, res)=>{
+  const email = req.body.email;
+  const password = req.body.password;
+  const password2 = req.body.password2;
+  let errors=[];
+  console.log('Email '+ email + ' pass '+ password);
+  if(!email || !password || !password2){
+    errors.push({msg: 'Vui lòng nhập đầy đủ thông tin!!'})
+  }
+
+  if(password != password2){
+    errors.push({msg: 'Mật khẩu không khớp!!'})
+  }
+
+  if(password.length < 6){
+    errors.push({msg: 'Mật khẩu phải hơn 6 ký tự!!'})
+  }
+
+  if(errors.length > 0){
+    res.render('teacher-register',{
+      title: "Đăng Ký",
+      errors: errors,
+      email: email,
+      password: password,
+      password2: password2
+    })
+  } else {
+    User.findOne({email : email}).exec((err,user)=>{
+      console.log(user);
+      if(user){
+        errors.push({msg: 'Email đã tồn tại!!'});
+        res.render('teacher-register',{title: "Đăng Ký",errors,email,password,password2})
+      } else {
+        const newUser = new User({
+          email : email,
+          password : password,
+          role: 1
         });
         bcrypt.genSalt(10,(err, salt)=>
         bcrypt.hash(newUser.password,salt,

@@ -4,6 +4,6 @@ module.exports = {
             return next();
         }
     req.flash('error_msg','Vui lòng đăng nhập!!');
-    res.redirect('./login');
+    res.redirect('./users/login');
     }
 }

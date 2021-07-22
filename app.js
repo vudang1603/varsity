@@ -10,13 +10,11 @@ require('./config/passport')(passport);
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var bodyParser = require('body-parser');
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -62,7 +60,7 @@ app.use(function(err, req, res, next) {
 
 //mongoose
 const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://vudang:0RYMgg8CEQHAvSst@cluster0.vniig.mongodb.net/vnpt-project?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true}, function(err){
+mongoose.connect('mongodb+srv://vudang:0RYMgg8CEQHAvSst@cluster0.vniig.mongodb.net/varsity?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true}, function(err){
   if(err){
     console.log("Mongo connected error: "+ err);
   }else{

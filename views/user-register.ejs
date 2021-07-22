@@ -5,11 +5,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%-title%></title>
-  <link href="assets/css/login.css" rel="stylesheet">
+  <link href="/assets/css/login.css" rel="stylesheet">
 </head>
 <body>
-  
-<%- include('./partials/messages') %>
 <div class="wrapper fadeInDown">
   <div id="formContent">
     <!-- Tabs Titles -->
@@ -19,14 +17,14 @@
     <!-- Icon -->
     <div class="fadeIn first">
       <i class="fa fa-university"></i>
-      <img src="assets/img/logo.png" id="icon" alt="User Icon" />
+      <img src="/assets/img/logo.png" id="icon" alt="User Icon" />
     </div>
-
+    <%- include('./partials/messages') %>
     <!-- Login Form -->
-    <form action="" method="POST">
-      <input type="text" id="email" class="fadeIn second" name="register" placeholder="Email">
-      <input type="password" id="password" class="fadeIn third" name="register" placeholder="Mật khẩu">
-      <input type="password" id="repassword" class="fadeIn third" name="register" placeholder="Nhập lại mật khẩu">
+    <form method="POST">
+      <input type="text" id="email" class="fadeIn second" name="email" placeholder="Email">
+      <input type="password" id="password" class="fadeIn third" name="password" placeholder="Mật khẩu">
+      <input type="password" id="password2" class="fadeIn third" name="password2" placeholder="Nhập lại mật khẩu">
       <input type="submit" class="fadeIn fourth" value="Đăng Ký">
     </form>
 
