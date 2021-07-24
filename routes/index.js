@@ -42,10 +42,10 @@ router.get('/forums', function(req, res, next) {
   res.render('forums',{tab: 5, title: "Diễn Đàn"});
 });
 router.get('/teacher-profile',ensureAuthenticated, function(req, res, next) {
-  res.render('teacher-profile',{tab: 7, title: "Trang Cá Nhân"});
+  res.render('teacher-profile',{tab: 7, title: "Trang Cá Nhân", login: "true"});
 });
 router.get('/student-profile',ensureAuthenticated, function(req, res, next) {
-  res.render('student-profile',{tab: 7, title: "Trang Cá Nhân"});
+  res.render('student-profile',{tab: 7, title: "Trang Cá Nhân", login: "true"});
 });
 
 
