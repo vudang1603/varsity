@@ -27,7 +27,7 @@
                     </div>
                     <div class="content-panel">
                         <h2 class="title">Trang Cá Nhân</h2>
-                        <form class="form-horizontal">
+                        <form method="POST" enctype="multipart/form-data" class="form-horizontal">
                             <fieldset class="fieldset">
                                 <h3 class="fieldset-title">Thông Tin Cá Nhân</h3>
                                 <div class="form-group avatar">
@@ -35,7 +35,7 @@
                                         <img class="img-rounded img-responsive" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
                                     </figure>
                                     <div class="form-inline col-md-10 col-sm-9 col-xs-12">
-                                        <input type="file" class="file-uploader pull-left">
+                                        <input type="file" name="file" class="file-uploader pull-left">
                                         <button type="submit" class="btn btn-sm btn-default-alt pull-left">Cập nhật ảnh</button>
                                     </div>
                                 </div>
@@ -44,7 +44,7 @@
                                 <div class="form-group">
                                     <label class="col-md-2 col-sm-3 col-xs-12 control-label">Họ và Tên</label>
                                     <div class="col-md-10 col-sm-9 col-xs-12">
-                                        <input type="text" class="form-control" value="Rebecca">
+                                        <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Họ và tên">
                                     </div>
                                 </div>
 
@@ -56,14 +56,14 @@
                                 <div class="form-group">
                                     <label class="col-md-2  col-sm-3 col-xs-12 control-label">Email</label>
                                     <div class="col-md-10 col-sm-9 col-xs-12">
-                                        <input type="email" class="form-control" value="abc@gmail.com">
+                                        <input type="email" name="email" class="form-control" value="abc@gmail.com">
                                         <p class="help-block">Nhập Email của bạn</p>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-2  col-sm-3 col-xs-12 control-label">Facebook</label>
                                     <div class="col-md-10 col-sm-9 col-xs-12">
-                                        <input type="url" class="form-control" value="https://www.linkedin.com/in/nhntrung">
+                                        <input type="url" name="facebook" class="form-control" value="https://www.linkedin.com/in/nhntrung">
                                         <p class="help-block">Nhập link Facebook của bạn</p>
                                     </div>
                                 </div>
