@@ -7,9 +7,9 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
 require('./config/passport')(passport);
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var profileRouter = require('./routes/profile');
 var app = express();
 
 // view engine setup
@@ -40,6 +40,7 @@ app.use(express.urlencoded({ extended: false }));
 //route
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/profile', profileRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
