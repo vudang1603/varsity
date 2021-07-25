@@ -9,11 +9,27 @@
                         <div class="user-info">
                             <img class="img-profile img-circle img-responsive center-block" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
                             <ul class="meta list list-unstyled">
-                                <li class="name">Nguyễn Hồ Ngọc Trung
+                                <li class="name"><% if(username == ""){ %>
+                                    Your Name
+                                <% }else{ %>
+                                    <%-username%>
+                                <% } %>
                                     
                                 </li>
-                                <li class="email"><a href="#">nhntrung@gmail.com</a></li>
-                                <li class="activity">Gia sư Toán</li>
+                                <li class="email"><a href="#">
+                                    <% if(tcemail == ""){ %>
+                                        Your Email
+                                    <% }else{ %>
+                                        <%-tcemail%>
+                                    <% } %>
+                                </a></li>
+                                <li class="activity">
+                                    <% if(achievement == ""){ %>
+                                        Your Subject
+                                    <% }else{ %>
+                                        <%-achievement%>
+                                    <% } %>
+                                </li>
                             </ul>
                         </div>
                         <nav class="side-menu">
@@ -26,7 +42,7 @@
                     </div>
                     <div class="content-panel" id="infor">
                         <h2 class="title">Trang Cá Nhân</h2>
-                        <form class="form-horizontal">
+                        <form class="form-horizontal" enctype="multipart/form-data" method="POST" action="profile/addprofile">
                             <fieldset class="fieldset">
                                 <h3 class="fieldset-title">Thông Tin Cá Nhân</h3>
                                 <div class="form-group avatar">
@@ -34,7 +50,7 @@
                                         <img class="img-rounded img-responsive" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
                                     </figure>
                                     <div class="form-inline col-md-10 col-sm-9 col-xs-12">
-                                        <input type="file" class="file-uploader pull-left">
+                                        <input type="file" name="file" id="file" class="file-uploader pull-left">
                                         <button type="submit" class="btn btn-sm btn-default-alt pull-left">Cập nhật ảnh</button>
                                     </div>
                                 </div>
@@ -43,42 +59,72 @@
                                 <div class="form-group">
                                     <label class="col-md-2 col-sm-3 col-xs-12 control-label">Họ và Tên</label>
                                     <div class="col-md-10 col-sm-9 col-xs-12">
-                                        <input type="text" class="form-control" value="Rebecca">
+                                        <% if(username == ""){ %>
+                                            <input type="text" class="form-control" name="fullname" id="fullname"  value="Your Name">
+                                        <% }else{ %>
+                                            
+                                            <input type="text" class="form-control" name="fullname" id="fullname"  value="<%-username%>">
+                                        <% } %>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-md-2 col-sm-3 col-xs-12 control-label">Học Vị</label>
                                     <div class="col-md-10 col-sm-9 col-xs-12">
-                                        <input type="text" class="form-control" value="Tiến Sĩ">
+                                        <% if(degree == ""){ %>
+                                            <input type="text" name="deegree" class="form-control" value="Your Degree">
+                                        <% }else{ %>
+                                            <input type="text" name="deegree" class="form-control" value="<%-degree%>">
+                                        <% } %>
+                                        
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-md-2 col-sm-3 col-xs-12 control-label">Nơi Công Tác</label>
                                     <div class="col-md-10 col-sm-9 col-xs-12">
-                                        <input type="text" class="form-control" value="ĐH Cần Thơ">
+                                        
+                                        <% if(workplace == ""){ %>
+                                            <input type="text" class="form-control" name="workplace" value="Your WorkPlace">
+                                        <% }else{ %>
+                                            <input type="text" class="form-control" name="workplace" value="<%-workplace%>">
+                                        <% } %>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-md-2 col-sm-3 col-xs-12 control-label">Giới Thiệu</label>
                                     <div class="col-md-10 col-sm-9 col-xs-12">
-                                        <textarea class="form-control" name="" id=""></textarea>
+                                        
+                                        <% if(introduce == ""){ %>
+                                            <textarea class="form-control" name="introduce" id="introduce"></textarea>
+                                        <% }else{ %>
+                                            <textarea class="form-control" name="introduce" id="introduce"><%-introduce%></textarea>
+                                        <% } %>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-md-2 col-sm-3 col-xs-12 control-label">Thành Tích</label>
+                                    <label class="col-md-2 col-sm-3 col-xs-12 control-label">Môn giảng dạy</label>
                                     <div class="col-md-10 col-sm-9 col-xs-12">
-                                        <textarea class="form-control" name="" id=""></textarea>
+
+                                        <% if(achievement == ""){ %>
+                                            <textarea class="form-control" name="achievement" id="achievement"></textarea>
+                                        <% }else{ %>
+                                            <textarea class="form-control" name="achievement" id="achievement"><%-achievement%></textarea>
+                                        <% } %>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="col-md-2 col-sm-3 col-xs-12 control-label">Phương Pháp Giảng Dạy</label>
                                     <div class="col-md-10 col-sm-9 col-xs-12">
-                                        <textarea class="form-control" name="" id=""></textarea>
+                                        
+                                        <% if(tcmethod == ""){ %>
+                                            <textarea class="form-control" name="tcmethod" id="tcmethod"></textarea>
+                                        <% }else{ %>
+                                            <textarea class="form-control" name="tcmethod" id="tcmethod"><%-tcmethod%></textarea>
+                                        <% } %>
                                     </div>
                                 </div>
                                 
@@ -88,28 +134,47 @@
                                 <div class="form-group">
                                     <label class="col-md-2  col-sm-3 col-xs-12 control-label">Email</label>
                                     <div class="col-md-10 col-sm-9 col-xs-12">
-                                        <input type="email" class="form-control" value="abc@gmail.com">
+                                        
+                                        <% if(tcemail == ""){ %>
+                                            <input type="email" class="form-control" name="email" value="Your Email">
+                                        <% }else{ %>
+                                            <input type="email" class="form-control" name="email" value="<%-tcemail%>">
+                                        <% } %>
                                         <p class="help-block">Nhập Email của bạn</p>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-2  col-sm-3 col-xs-12 control-label">Facebook</label>
                                     <div class="col-md-10 col-sm-9 col-xs-12">
-                                        <input type="url" class="form-control" value="https://www.linkedin.com/in/nhntrung">
+                                        <% if(fb == ""){ %>
+                                            <input type="url" class="form-control" name="fb" value="">
+                                        <% }else{ %>
+                                            <input type="url" class="form-control" name="fb" value="<%-fb%>">
+                                        <% } %>
                                         <p class="help-block">Nhập link Facebook của bạn</p>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-2  col-sm-3 col-xs-12 control-label">Twitter</label>
                                     <div class="col-md-10 col-sm-9 col-xs-12">
-                                        <input type="text" class="form-control" value="nhnTrung">
+                                        
+                                        <% if(tw == ""){ %>
+                                            <input type="text" class="form-control" name="tw" value="">
+                                        <% }else{ %>
+                                            <input type="text" class="form-control" name="tw" value="<%-tw%>">
+                                        <% } %>
                                         <p class="help-block">Nhập username Twitter của bạn</p>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-2  col-sm-3 col-xs-12 control-label">Linkedin</label>
                                     <div class="col-md-10 col-sm-9 col-xs-12">
-                                        <input type="url" class="form-control" value="https://www.linkedin.com/in/lorem">
+                                        
+                                        <% if(lnk == ""){ %>
+                                            <input type="url" class="form-control" name="lnk" value="">
+                                        <% }else{ %>
+                                            <input type="url" class="form-control" name="lnk" value="<%-lnk%>">
+                                        <% } %>
                                         <p class="help-block">Ví dụ https://www.linkedin.com/in/yourname</p>
                                     </div>
                                 </div>

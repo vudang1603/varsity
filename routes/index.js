@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const {ensureAuthenticated} = require('../config/auth');
+const Teacher = require('../models/teacher-profile');
 const User = require('../models/users');
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -59,27 +60,38 @@ router.get('/forums', function(req, res, next) {
 });
 router.get('/profile', ensureAuthenticated, (req, res, next) => {
   const email = req.user.email;
+  const user_id = req.user.id;
     User.findOne({email: email}).exec((err, user)=> {
       if(user.role==0){
         res.render('student-profile',{tab: 7, title: "Trang Cá Nhân", login: "true", role: "0"});
-      } else {
-        res.render('teacher-profile',{tab: 7, title: "Trang Cá Nhân", login: "true", role: "1"});
-      }
+      } else {   
+        Teacher.findOne({_id: user_id}).exec((err, teacher)=> {
+          
+            const teacher_name = teacher.name
+            const teacher_email = teacher.email
+            const teacher_degree = teacher.degree
+            const teacher_achievement = teacher.achievement
+            const teacher_workplace = teacher.workplace
+            const teacher_introduce = teacher.introduce
+            const teacher_tcmethod = teacher.tcmethod
+            const teacher_fb = teacher.fb
+            const teacher_tw = teacher.tw
+            const teacher_lnk = teacher.lnk
+          res.render('teacher-profile',{tab: 7, title: "Trang Cá Nhân", login: "true", role: "1", username: teacher_name, tcemail: teacher_email,
+          achievement: teacher_achievement,
+          degree:teacher_degree,
+          workplace:teacher_workplace,
+          introduce:teacher_introduce,
+          tcmethod:teacher_tcmethod,
+          fb:teacher_fb,
+          tw:teacher_tw,
+          lnk:teacher_lnk
+        }); 
+        })        
+      }  
     })
 })
-router.get('/teacher-profile',ensureAuthenticated, function(req, res, next) {
-<<<<<<< HEAD
-  res.render('teacher-profile',{tab: 7, title: "Trang Cá Nhân", login: "true"});
-});
-router.get('/student-profile',ensureAuthenticated, function(req, res, next) {
-  res.render('student-profile',{tab: 7, title: "Trang Cá Nhân", login: "true"});
-=======
-  res.render('teacher-profile',{tab: 7, title: "Trang Cá Nhân", login: "true", role: "1"});
-});
-router.get('/student-profile',ensureAuthenticated, function(req, res, next) {
-  res.render('student-profile',{tab: 7, title: "Trang Cá Nhân", login: "true", role: "0"});
->>>>>>> 2289587fedfac75997f079a41b9d4182023f5700
-});
+
 
 
 
