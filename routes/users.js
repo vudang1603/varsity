@@ -6,6 +6,8 @@ var passport = require('passport');
 var bodyParser = require('body-parser');
 var jsonParser = bodyParser.json();
 var urlencodedParser = bodyParser.urlencoded({extended: true})
+const Student = require('../models/student-profile')
+const Teacher = require('../models/teacher-profile')
 /* GET users listing. */
 
 //register
@@ -82,6 +84,7 @@ router.post('/register', urlencodedParser, (req, res)=>{
             })
             .catch(value=> console.log(value));
           }))
+        
       }
     })
   }

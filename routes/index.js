@@ -1,8 +1,10 @@
 var express = require('express');
 var router = express.Router();
 const {ensureAuthenticated} = require('../config/auth');
+const Student = require('../models/student-profile')
 const Teacher = require('../models/teacher-profile');
 const User = require('../models/users');
+var fs = require('fs')
 /* GET home page. */
 router.get('/', function(req, res, next) {
   if(req.isAuthenticated()){
@@ -61,12 +63,31 @@ router.get('/forums', function(req, res, next) {
 router.get('/profile', ensureAuthenticated, (req, res, next) => {
   const email = req.user.email;
   const user_id = req.user.id;
-    User.findOne({email: email}).exec((err, user)=> {
+    User.findOne({_id: user_id}).exec((err, user)=> {
       if(user.role==0){
-        res.render('student-profile',{tab: 7, title: "Trang Cá Nhân", login: "true", role: "0"});
+        Student.findOne({_id: user_id}).exec((err, student)=> {
+          if(student){
+            const image = student.image
+            res.render('student-profile',{tab: 7, title: "Trang Cá Nhân", login: "true", role: "0", image: image, student: student});
+          } else {
+            var imageAsBase64 = fs.readFileSync('public/assets/img/student/no-avatar.png');
+            const newStudent = new Student({
+              _id: user_id,
+              image: {
+                data: imageAsBase64,
+                contentType: 'image/png',
+                image: new Buffer.from(imageAsBase64, 'base64')
+              }
+          })
+          newStudent.save().then((value)=>{
+              console.log(value);
+              res.redirect(req.get('referer'));
+          }).catch(value=> console.log(value));
+          res.render('student-profile',{tab: 7, title: "Trang Cá Nhân", login: "true", role: "0", student: student});
+          }
+        })
       } else {   
         Teacher.findOne({_id: user_id}).exec((err, teacher)=> {
-          
             const teacher_name = teacher.name
             const teacher_email = teacher.email
             const teacher_degree = teacher.degree

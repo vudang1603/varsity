@@ -8,6 +8,13 @@ const {ensureAuthenticated} = require('../config/auth');
 const Student = require('../models/student-profile')
 const Teacher = require('../models/teacher-profile')
 //console.log(path);
+const multerFilter = (req, file, cb) => {
+    if (file.mimetype.startsWith("image")) {
+      cb(null, true);
+    } else {
+      cb("Please upload only images.", false);
+    }
+  };
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb){
@@ -17,7 +24,7 @@ var storage = multer.diskStorage({
         cb(null, file.fieldname + '-' + Date.now())
     }
 })
-var upload = multer({ storage: storage })
+var upload = multer({ storage: storage, fileFilter: multerFilter})
 const handleError =(err, res)=>{
     res
     .status(500)
@@ -37,6 +44,7 @@ router.post('/', upload.single('file'), function(req, res, next){
     const facebook = req.body.facebook
     var encode_image = img.toString('base64')
     var final_image = {
+        data: img,
         contentType: req.file.mimetype,
         image: new Buffer.from(encode_image, 'base64')
     };

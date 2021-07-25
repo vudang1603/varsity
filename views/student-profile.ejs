@@ -8,12 +8,12 @@
                 <div class="module-inner">
                     <div class="side-bar">
                         <div class="user-info">
-                            <img class="img-profile img-circle img-responsive center-block" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                            <img class="img-profile img-circle img-responsive center-block" src="data:image/<%=image.contentType%>;base64,<%=image.data.toString('base64')%>" alt="" style="height: 80px; width: 80px;">
                             <ul class="meta list list-unstyled">
-                                <li class="name">Nguyễn Hồ Ngọc Trung
+                                <li class="name"><%=student.name%>
                                     
                                 </li>
-                                <li class="email"><a href="#">nhntrung@gmail.com</a></li>
+                                <li class="email"><a href="#"><%=student.email%></a></li>
                                 <li class="activity">Học Viên</li>
                             </ul>
                         </div>
@@ -33,11 +33,12 @@
                                 <h3 class="fieldset-title">Thông Tin Cá Nhân</h3>
                                 <div class="form-group avatar">
                                     <figure class="figure col-md-2 col-sm-3 col-xs-12">
-                                        <img class="img-rounded img-responsive" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                                        <img class="img-rounded img-responsive" src="data:image/<%=image.contentType%>;base64,<%=image.data.toString('base64')%>" alt="" style="height: 80px; width: 80px;">
+                                        
                                     </figure>
                                     <div class="form-inline col-md-10 col-sm-9 col-xs-12">
-                                        <input type="file" name="file" class="file-uploader pull-left">
-                                        <button type="submit" class="btn btn-sm btn-default-alt pull-left">Cập nhật ảnh</button>
+                                        <input type="file" name="file" class="file-uploader pull-left" required>
+                                        
                                     </div>
                                 </div>
                                 
@@ -45,7 +46,7 @@
                                 <div class="form-group">
                                     <label class="col-md-2 col-sm-3 col-xs-12 control-label">Họ và Tên</label>
                                     <div class="col-md-10 col-sm-9 col-xs-12">
-                                        <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Họ và tên">
+                                        <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Họ và tên" value="<%=student.name%>" required>
                                     </div>
                                 </div>
 
@@ -57,14 +58,14 @@
                                 <div class="form-group">
                                     <label class="col-md-2  col-sm-3 col-xs-12 control-label">Email</label>
                                     <div class="col-md-10 col-sm-9 col-xs-12">
-                                        <input type="email" name="email" class="form-control" value="abc@gmail.com">
+                                        <input type="email" name="email" class="form-control" placeholder="student@gmail.com" value="<%=student.email%>" required>
                                         <p class="help-block">Nhập Email của bạn</p>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-2  col-sm-3 col-xs-12 control-label">Facebook</label>
                                     <div class="col-md-10 col-sm-9 col-xs-12">
-                                        <input type="url" name="facebook" class="form-control" value="https://www.linkedin.com/in/nhntrung">
+                                        <input type="url" name="facebook" class="form-control" placeholder="https://www.facebook.com/profile.php?id=100008142433542" value="<%=student.fb%>">
                                         <p class="help-block">Nhập link Facebook của bạn</p>
                                     </div>
                                 </div>

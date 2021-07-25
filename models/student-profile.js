@@ -10,7 +10,7 @@ const studentSchema = new mongoose.Schema({
     },
     name: {
         type: String,
-        require: true
+        default: ''
     },
     image: {
         data: Buffer,
