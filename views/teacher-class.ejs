@@ -1,0 +1,88 @@
+<%- include('header'); %>
+<link href="/assets/css/profile.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <div class="container">
+        <div class="view-account">
+            <section class="module">
+                <div class="module-inner">
+                    <div class="side-bar">
+                        <div class="user-info">
+                            <img class="img-profile img-circle img-responsive center-block" src="data:image/<%=image.contentType%>;base64,<%=image.data.toString('base64')%>" alt="">
+                            <ul class="meta list list-unstyled">
+                                <li class="name"><% if(teacher.name == ""){ %>
+                                    Your Name
+                                <% }else{ %>
+                                    <%=teacher.name%>
+                                <% } %>
+                                    
+                                </li>
+                                <li class="email"><a href="#">
+                                    <% if(teacher.email == ""){ %>
+                                        Your Email
+                                    <% }else{ %>
+                                        <%=teacher.email%>
+                                    <% } %>
+                                </a></li>
+                                <li class="activity">
+                                    <% if(teacher.achievement == ""){ %>
+                                        Your Subject
+                                    <% }else{ %>
+                                        <%=teacher.achievement%>
+                                    <% } %>
+                                </li>
+                            </ul>
+                        </div>
+                        <nav class="side-menu">
+                            <ul class="nav">
+                                <li><a href="../profile"><span class="fa fa-user"></span> Thông Tin</a></li>
+                                <li><a href="../profile/course-management"><i class="fas fa-bookmark"></i> Quản Lý Khoá Học</a></li>
+                                <li class="active"><a href="#"><i class="fas fa-bookmark"></i> Quản Lý Lớp Học</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="content-panel" id="infor">
+                        <h2 class="title">Tạo Lớp Học</h2>
+                            <form action="../profile/class-management/" method="POST" class="form-horizontal" enctype="multipart/form-data">
+                                <p>Tên Lớp Học:</p>
+                                <input type="text" class="form-control" name="classname" id="classname">
+                                <p>Tên giáo viên:</p>
+                                <input type="text" class="form-control" name="teachername" id="teachername">
+                                <p>Ảnh bìa:</p>
+                                <input type="file" name="file" id="file" class="file-uploader pull-left">
+                            </br>
+                                <input type="submit" value="Tạo Lớp Học" class="btn btn-primary">
+                            
+                            </form>
+                        <h2 class="title">Lớp Học Của Tôi</h2>
+
+                        <% if(classroom.image == ""){ %>
+                            <h4> Chưa có lớp học</h4>
+                        <% }else{ %>
+                            
+                            <div class="row">
+                                <div class="col-sm-6 col-md-5 fa-border" style="padding: 10px; margin: 20px;">
+                                  <div class="card">
+                                    <div class="card-body">
+                                        <a href="#"><img src="data:classimage/<%=classimage.contentType%>;base64,<%=classimage.data.toString('base64')%>" alt="img" style="width: 100%;"></a>
+                                      <h4 class="card-title"><%-classroom.classname%></h4>
+                                      <p class="card-text">Giáo viên: <%-classroom.author%></p>
+                                      <a href="#" class="btn btn-primary">Đi đến lớp học</a>
+                                    </div>
+                                  </div>
+                                </div>
+                      <!-- end course pagination -->
+                              </div>
+                        <% } %>
+
+
+                        
+                    </div>
+                    
+                </div>
+            </section>
+        </div>
+        
+    </div>
+
+
+    <%- include('footer') %>

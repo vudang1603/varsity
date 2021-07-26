@@ -1,0 +1,124 @@
+<%- include('header'); %>
+<link href="/assets/css/profile.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <div class="container">
+        <div class="view-account">
+            <section class="module">
+                <div class="module-inner">
+                    <div class="side-bar">
+                        <div class="user-info">
+                            <img class="img-profile img-circle img-responsive center-block" src="data:image/<%=image.contentType%>;base64,<%=image.data.toString('base64')%>" alt="">
+                            <ul class="meta list list-unstyled">
+                                <li class="name"><% if(teacher.name == ""){ %>
+                                    Your Name
+                                <% }else{ %>
+                                    <%=teacher.name%>
+                                <% } %>
+                                    
+                                </li>
+                                <li class="email"><a href="#">
+                                    <% if(teacher.email == ""){ %>
+                                        Your Email
+                                    <% }else{ %>
+                                        <%=teacher.email%>
+                                    <% } %>
+                                </a></li>
+                                <li class="activity">
+                                    <% if(teacher.achievement == ""){ %>
+                                        Your Subject
+                                    <% }else{ %>
+                                        <%=teacher.achievement%>
+                                    <% } %>
+                                </li>
+                            </ul>
+                        </div>
+                        <nav class="side-menu">
+                            <ul class="nav">
+                                <li><a href="../profile"><span class="fa fa-user"></span> Thông Tin</a></li>
+                                <li class="active"><a href="#"><i class="fas fa-bookmark"></i> Quản Lý Khoá Học</a></li>
+                                <li><a href="../profile/class-management"><i class="fas fa-bookmark"></i> Quản Lý Lớp Học</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="content-panel" id="infor">
+                        <h2 class="title">Quản Lý Khoá Học</h2>
+                        <input class="btn btn-primary" type="button" value="Đăng Khoá Học Mới">
+                        <div class="row">
+                            <div class="col-sm-6 col-md-5 fa-border" style="padding: 10px; margin: 20px;">
+                              <div class="card">
+                                <div class="card-body">
+                                    <a href="#"><img src="/assets/img/courses/kh1.jpg" alt="img" style="width: 100%;"></a>
+                                  <h5 class="card-title">Special title treatment</h5>
+                                  <p class="card-text">It's a broader card with text below as a natural lead-in to extra content. This content is a little longer.</p>
+                                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-sm-6 col-md-5 fa-border" style="padding: 10px; margin: 20px;">
+                              <div class="card">
+                                <div class="card-body">
+                                    <a href="#"><img src="/assets/img/courses/kh1.jpg" alt="img" style="width: 100%;"></a>
+                                  <h5 class="card-title">Special title treatment</h5>
+                                  <p class="card-text">It's a broader card with text below as a natural lead-in to extra content. This content is a little longer.</p>
+                                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-sm-6 col-md-5 fa-border" style="padding: 10px; margin: 20px;">
+                                <div class="card">
+                                  <div class="card-body">
+                                      <a href="#"><img src="/assets/img/courses/kh1.jpg" alt="img" style="width: 100%;"></a>
+                                    <h5 class="card-title">Special title treatment</h5>
+                                    <p class="card-text">It's a broader card with text below as a natural lead-in to extra content. This content is a little longer.</p>
+                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-sm-6 col-md-5 fa-border" style="padding: 10px; margin: 20px;">
+                                <div class="card">
+                                  <div class="card-body">
+                                      <a href="#"><img src="/assets/img/courses/kh1.jpg" alt="img" style="width: 100%;"></a>
+                                    <h5 class="card-title">Special title treatment</h5>
+                                    <p class="card-text">It's a broader card with text below as a natural lead-in to extra content. This content is a little longer.</p>
+                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                  </div>
+                                </div>
+                              </div>
+                              
+
+                            
+
+                              <!-- start course pagination -->
+                <div class="mu-pagination">
+                    <nav>
+                      <ul class="pagination">
+                        <li>
+                          <a href="#" aria-label="Previous">
+                            <span class="fa fa-angle-left"></span> Prev 
+                          </a>
+                        </li>
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li>
+                          <a href="#" aria-label="Next">
+                           Next <span class="fa fa-angle-right"></span>
+                          </a>
+                        </li>
+                      </ul>
+                    </nav>
+                  </div>
+                  <!-- end course pagination -->
+                          </div>
+                    </div>
+                    
+                </div>
+            </section>
+        </div>
+        
+    </div>
+
+
+    <%- include('footer') %>

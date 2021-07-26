@@ -1,0 +1,108 @@
+<%- include('header') %>
+
+<link href="/assets/css/profile.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <div class="container">
+        <div class="view-account">
+            <section class="module">
+                <div class="module-inner">
+                    <div class="side-bar">
+                        <div class="user-info">
+                            <img class="img-profile img-circle img-responsive center-block" src="data:image/<%=image.contentType%>;base64,<%=image.data.toString('base64')%>" alt="" style="height: 80px; width: 80px;">
+                            <ul class="meta list list-unstyled">
+                                <li class="name"><%=student.name%>
+                                    
+                                </li>
+                                <li class="email"><a href="#"><%=student.email%></a></li>
+                                <li class="activity">Học Viên</li>
+                            </ul>
+                        </div>
+                        <nav class="side-menu">
+                            <ul class="nav">
+                                <li><a href="../profile"><span class="fa fa-user"></span> Thông Tin</a></li>
+                                <li class="active"><a href="#"><i class="fas fa-book"></i> Khoá Học Đã Đăng Ký</a></li>
+                                <li><a href="#"><i class="fas fa-book"></i> Lớp Học Đã Đăng Ký</a></li>
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="content-panel">
+                        <h2 class="title">Danh Sách Khoá Học Đã Đăng Ký</h2>
+                        <div class="row">
+                            <div class="col-sm-6 col-md-5 fa-border" style="padding: 10px; margin: 20px;">
+                              <div class="card">
+                                <div class="card-body">
+                                    <a href="#"><img src="/assets/img/courses/kh1.jpg" alt="img" style="width: 100%;"></a>
+                                  <h5 class="card-title">Special title treatment</h5>
+                                  <p class="card-text">It's a broader card with text below as a natural lead-in to extra content. This content is a little longer.</p>
+                                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-sm-6 col-md-5 fa-border" style="padding: 10px; margin: 20px;">
+                              <div class="card">
+                                <div class="card-body">
+                                    <a href="#"><img src="/assets/img/courses/kh1.jpg" alt="img" style="width: 100%;"></a>
+                                  <h5 class="card-title">Special title treatment</h5>
+                                  <p class="card-text">It's a broader card with text below as a natural lead-in to extra content. This content is a little longer.</p>
+                                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-sm-6 col-md-5 fa-border" style="padding: 10px; margin: 20px;">
+                                <div class="card">
+                                  <div class="card-body">
+                                      <a href="#"><img src="/assets/img/courses/kh1.jpg" alt="img" style="width: 100%;"></a>
+                                    <h5 class="card-title">Special title treatment</h5>
+                                    <p class="card-text">It's a broader card with text below as a natural lead-in to extra content. This content is a little longer.</p>
+                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-sm-6 col-md-5 fa-border" style="padding: 10px; margin: 20px;">
+                                <div class="card">
+                                  <div class="card-body">
+                                      <a href="#"><img src="/assets/img/courses/kh1.jpg" alt="img" style="width: 100%;"></a>
+                                    <h5 class="card-title">Special title treatment</h5>
+                                    <p class="card-text">It's a broader card with text below as a natural lead-in to extra content. This content is a little longer.</p>
+                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                  </div>
+                                </div>
+                              </div>
+                              
+
+                            
+
+                              <!-- start course pagination -->
+                <div class="mu-pagination">
+                    <nav>
+                      <ul class="pagination">
+                        <li>
+                          <a href="#" aria-label="Previous">
+                            <span class="fa fa-angle-left"></span> Prev 
+                          </a>
+                        </li>
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li>
+                          <a href="#" aria-label="Next">
+                           Next <span class="fa fa-angle-right"></span>
+                          </a>
+                        </li>
+                      </ul>
+                    </nav>
+                  </div>
+                  <!-- end course pagination -->
+                          </div>
+                        
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+
+    <%- include('footer') %>

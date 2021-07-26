@@ -9,17 +9,20 @@ var fs = require('fs')
 router.get('/', function(req, res, next) {
   if(req.isAuthenticated()){
     const email = req.user.email;
-    User.findOne({email: email}).exec((err, user)=> {
-      if(user.role==0){
-        res.render('index',{tab: 1, title: "Trang Chủ", login: "true", role: "0"});
-      } else {
-        res.render('index',{tab: 1, title: "Trang Chủ", login: "true", role: "1"});
-      }
-    })
+      Teacher.find({}).exec((err, teacher)=>{
+        User.findOne({email: email}).exec((err, user)=> {
+          if(user.role==0){
+            res.render('index',{tab: 1, title: "Trang Chủ", login: "true", role: "0", teachers: teacher});
+          } else {
+            res.render('index',{tab: 1, title: "Trang Chủ", login: "true", role: "1", teachers: teacher});
+          }
+        })
+      })
   } else {
-    res.render('index',{tab: 1, title: "Trang Chủ", login: "false"});
+    Teacher.find({}, (err, teachers)=>{
+      res.render('index',{tab: 1, title: "Trang Chủ", login: "false", teachers: teachers});
+    })
   }
-  
 });
 router.get('/index', function(req, res, next) {
   if(req.isAuthenticated()){
@@ -69,26 +72,12 @@ router.get('/profile', ensureAuthenticated, (req, res, next) => {
           if(student){
             const image = student.image
             res.render('student-profile',{tab: 7, title: "Trang Cá Nhân", login: "true", role: "0", image: image, student: student});
-          } else {
-            var imageAsBase64 = fs.readFileSync('public/assets/img/student/no-avatar.png');
-            const newStudent = new Student({
-              _id: user_id,
-              image: {
-                data: imageAsBase64,
-                contentType: 'image/png',
-                image: new Buffer.from(imageAsBase64, 'base64')
-              }
-          })
-          newStudent.save().then((value)=>{
-              console.log(value);
-              res.redirect(req.get('referer'));
-          }).catch(value=> console.log(value));
-          res.render('student-profile',{tab: 7, title: "Trang Cá Nhân", login: "true", role: "0", student: student});
-          }
+          } 
         })
       } else {   
         Teacher.findOne({_id: user_id}).exec((err, teacher)=> {
-          res.render('teacher-profile',{tab: 7, title: "Trang Cá Nhân", login: "true", role: "1", teacher: teacher}); 
+          const image = teacher.image
+            res.render('teacher-profile',{tab: 7, title: "Trang Cá Nhân", login: "true", role: "1", image: image, teacher: teacher});
         })        
       }  
     })

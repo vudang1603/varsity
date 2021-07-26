@@ -7,6 +7,7 @@ var fs = require('fs')
 const {ensureAuthenticated} = require('../config/auth');
 const Student = require('../models/student-profile')
 const Teacher = require('../models/teacher-profile')
+const ClassRoom = require('../models/class-room')
 //console.log(path);
 const multerFilter = (req, file, cb) => {
     if (file.mimetype.startsWith("image")) {
@@ -79,6 +80,107 @@ router.post('/', upload.single('file'), function(req, res, next){
     })
 
 });
+router.get('/registered-course', function(req, res, next){
+    if(req.isAuthenticated()){
+        const id = req.user.id;
+        Student.findOne({_id: id}).exec((err, student)=>{
+            const image = student.image
+            res.render('student-course',{tab: 7, title: "Trang Cá Nhân", login: "true", role: "0", image: image, student: student});
+        }) 
+    }
+    
+    
+})
+router.get('/course-management', function(req, res, next){
+    if(req.isAuthenticated()){
+        const id = req.user.id;
+        Teacher.findOne({_id: id}).exec((err, teacher)=>{
+            const image = teacher.image
+            res.render('teacher-course',{tab: 7, title: "Trang Cá Nhân", login: "true", role: "1", image: image, teacher: teacher});
+        }) 
+    }
+    
+    
+})
+
+router.get('/class-management', function(req, res, next){
+    if(req.isAuthenticated()){
+        const id = req.user.id;
+        Teacher.findOne({_id: id}).exec((err, teacher)=>{
+            const image = teacher.image
+            ClassRoom.findOne({_id: id}).exec((err, classroom)=>{
+                if(classroom){
+                    const classimage = classroom.image
+                    res.render('teacher-class',{tab: 7, title: "Trang Cá Nhân", login: "true", role: "1", image: image, classimage: classimage, teacher: teacher, classroom: classroom});
+                }else{
+                    var imageAsBase64 = fs.readFileSync('public/assets/img/student/no-avatar.png');
+                    const newclassroom = new ClassRoom({
+                        _id: id,
+                        image: {
+                            data: imageAsBase64,
+                            contentType: 'image/png',
+                            image: new Buffer.from(imageAsBase64, 'base64')
+                          }
+                    })
+                    newclassroom.save().then((value)=>{
+                        console.log(value);
+                        res.redirect(req.get('referer'));
+                    }).catch(value=> console.log(value));
+                    const classimage = newclassroom.image
+                    res.render('teacher-class',{tab: 7, title: "Trang Cá Nhân", login: "true", role: "1", image: image, classimage: classimage, teacher: teacher, classroom: newclassroom});
+                }
+            })
+            
+        }) 
+    }
+    
+    
+})
+
+router.post('/class-management',upload.single('file'), function(req, res, next){
+    const classname = req.body.classname
+    const teachername = req.body.teachername
+    const id = req.user.id;
+    const email = req.user.email;
+    var img = fs.readFileSync(req.file.path)
+    var encode_image = img.toString('base64')
+    var final_image = {
+        data: img,
+        contentType: req.file.mimetype,
+        image: new Buffer.from(encode_image, 'base64')
+    };
+    ClassRoom.findOne({_id: id}).exec((err, classroom)=>{
+        if(classroom){
+            ClassRoom.findByIdAndUpdate(id, {$set:{
+                
+                classname: classname,
+                author: teachername,
+                email: email,
+                image: final_image,
+            }}, {new: true}, (err, doc)=>{
+                if(err){
+                    console.log("Something wrong when updating data!");
+                }
+                console.log(doc)
+            })
+            res.redirect(req.get('referer'));
+        } else {
+            const newclassroom = new ClassRoom({
+                _id: id, 
+                classname:classname,
+                author:teachername,
+                email: email,
+                image: final_image,
+            })
+            newclassroom.save().then((value)=>{
+                console.log(value);
+                res.redirect(req.get('referer'));
+            }).catch(value=> console.log(value));
+        }
+    })
+});
+
+
 
 
 router.post('/addprofile', upload.single('file'), function(req, res, next){
@@ -95,6 +197,7 @@ router.post('/addprofile', upload.single('file'), function(req, res, next){
     const lnk = req.body.lnk
     var encode_image = img.toString('base64')
     var final_image = {
+        data: img,
         contentType: req.file.mimetype,
         image: new Buffer.from(encode_image, 'base64')
     };

@@ -10,7 +10,8 @@ const teacherSchema = new mongoose.Schema({
     },
     image: {
         data: Buffer,
-        contentType: String
+        contentType: String,
+        default: ''
     },
     name: {
         type: String,
