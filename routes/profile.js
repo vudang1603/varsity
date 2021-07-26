@@ -79,7 +79,28 @@ router.post('/', upload.single('file'), function(req, res, next){
     })
 
 });
-
+router.get('/registered-course', function(req, res, next){
+    if(req.isAuthenticated()){
+        const id = req.user.id;
+        Student.findOne({_id: id}).exec((err, student)=>{
+            const image = student.image
+            res.render('student-course',{tab: 7, title: "Trang Cá Nhân", login: "true", role: "0", image: image, student: student});
+        }) 
+    }
+    
+    
+})
+router.get('/course-management', function(req, res, next){
+    if(req.isAuthenticated()){
+        const id = req.user.id;
+        Teacher.findOne({_id: id}).exec((err, teacher)=>{
+            const image = teacher.image
+            res.render('teacher-course',{tab: 7, title: "Trang Cá Nhân", login: "true", role: "1", image: image, teacher: teacher});
+        }) 
+    }
+    
+    
+})
 
 router.post('/addprofile', upload.single('file'), function(req, res, next){
     var img = fs.readFileSync(req.file.path)
@@ -95,6 +116,7 @@ router.post('/addprofile', upload.single('file'), function(req, res, next){
     const lnk = req.body.lnk
     var encode_image = img.toString('base64')
     var final_image = {
+        data: img,
         contentType: req.file.mimetype,
         image: new Buffer.from(encode_image, 'base64')
     };

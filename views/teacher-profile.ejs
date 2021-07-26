@@ -7,27 +7,27 @@
                 <div class="module-inner">
                     <div class="side-bar">
                         <div class="user-info">
-                            <img class="img-profile img-circle img-responsive center-block" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                            <img class="img-profile img-circle img-responsive center-block" src="data:image/<%=image.contentType%>;base64,<%=image.data.toString('base64')%>" alt="">
                             <ul class="meta list list-unstyled">
-                                <li class="name"><% if(username == ""){ %>
+                                <li class="name"><% if(teacher.name == ""){ %>
                                     Your Name
                                 <% }else{ %>
-                                    <%-username%>
+                                    <%=teacher.name%>
                                 <% } %>
                                     
                                 </li>
                                 <li class="email"><a href="#">
-                                    <% if(tcemail == ""){ %>
+                                    <% if(teacher.email == ""){ %>
                                         Your Email
                                     <% }else{ %>
-                                        <%-tcemail%>
+                                        <%=teacher.email%>
                                     <% } %>
                                 </a></li>
                                 <li class="activity">
-                                    <% if(achievement == ""){ %>
+                                    <% if(teacher.achievement == ""){ %>
                                         Your Subject
                                     <% }else{ %>
-                                        <%-achievement%>
+                                        <%=teacher.achievement%>
                                     <% } %>
                                 </li>
                             </ul>
@@ -35,8 +35,8 @@
                         <nav class="side-menu">
                             <ul class="nav">
                                 <li class="active"><a href="#"><span class="fa fa-user"></span> Thông Tin</a></li>
+                                <li><a href="profile/course-management"><i class="fas fa-bookmark"></i> Quản Lý Khoá Học</a></li>
                                 <li><a href="#"><i class="fas fa-bookmark"></i> Quản Lý Lớp Học</a></li>
-                                <li><a href="#"><i class="fas fa-bookmark"></i> Quản Lý Khoá Học</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -47,7 +47,7 @@
                                 <h3 class="fieldset-title">Thông Tin Cá Nhân</h3>
                                 <div class="form-group avatar">
                                     <figure class="figure col-md-2 col-sm-3 col-xs-12">
-                                        <img class="img-rounded img-responsive" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                                        <img class="img-rounded img-responsive" src="data:image/<%=image.contentType%>;base64,<%=image.data.toString('base64')%>" alt="">
                                     </figure>
                                     <div class="form-inline col-md-10 col-sm-9 col-xs-12">
                                         <input type="file" name="file" id="file" class="file-uploader pull-left">
@@ -59,11 +59,11 @@
                                 <div class="form-group">
                                     <label class="col-md-2 col-sm-3 col-xs-12 control-label">Họ và Tên</label>
                                     <div class="col-md-10 col-sm-9 col-xs-12">
-                                        <% if(username == ""){ %>
+                                        <% if(teacher.name == ""){ %>
                                             <input type="text" class="form-control" name="fullname" id="fullname"  value="Your Name">
                                         <% }else{ %>
                                             
-                                            <input type="text" class="form-control" name="fullname" id="fullname"  value="<%-username%>">
+                                            <input type="text" class="form-control" name="fullname" id="fullname"  value="<%=teacher.name%>">
                                         <% } %>
                                     </div>
                                 </div>
@@ -71,10 +71,10 @@
                                 <div class="form-group">
                                     <label class="col-md-2 col-sm-3 col-xs-12 control-label">Học Vị</label>
                                     <div class="col-md-10 col-sm-9 col-xs-12">
-                                        <% if(degree == ""){ %>
+                                        <% if(teacher.degree == ""){ %>
                                             <input type="text" name="deegree" class="form-control" value="Your Degree">
                                         <% }else{ %>
-                                            <input type="text" name="deegree" class="form-control" value="<%-degree%>">
+                                            <input type="text" name="deegree" class="form-control" value="<%=teacher.degree%>">
                                         <% } %>
                                         
                                     </div>
@@ -84,10 +84,10 @@
                                     <label class="col-md-2 col-sm-3 col-xs-12 control-label">Nơi Công Tác</label>
                                     <div class="col-md-10 col-sm-9 col-xs-12">
                                         
-                                        <% if(workplace == ""){ %>
+                                        <% if(teacher.workplace == ""){ %>
                                             <input type="text" class="form-control" name="workplace" value="Your WorkPlace">
                                         <% }else{ %>
-                                            <input type="text" class="form-control" name="workplace" value="<%-workplace%>">
+                                            <input type="text" class="form-control" name="workplace" value="<%=teacher.workplace%>">
                                         <% } %>
                                     </div>
                                 </div>
@@ -96,10 +96,10 @@
                                     <label class="col-md-2 col-sm-3 col-xs-12 control-label">Giới Thiệu</label>
                                     <div class="col-md-10 col-sm-9 col-xs-12">
                                         
-                                        <% if(introduce == ""){ %>
+                                        <% if(teacher.introduce == ""){ %>
                                             <textarea class="form-control" name="introduce" id="introduce"></textarea>
                                         <% }else{ %>
-                                            <textarea class="form-control" name="introduce" id="introduce"><%-introduce%></textarea>
+                                            <textarea class="form-control" name="introduce" id="introduce"><%=teacher.introduce%></textarea>
                                         <% } %>
                                     </div>
                                 </div>
@@ -108,10 +108,10 @@
                                     <label class="col-md-2 col-sm-3 col-xs-12 control-label">Môn giảng dạy</label>
                                     <div class="col-md-10 col-sm-9 col-xs-12">
 
-                                        <% if(achievement == ""){ %>
+                                        <% if(teacher.achievement == ""){ %>
                                             <textarea class="form-control" name="achievement" id="achievement"></textarea>
                                         <% }else{ %>
-                                            <textarea class="form-control" name="achievement" id="achievement"><%-achievement%></textarea>
+                                            <textarea class="form-control" name="achievement" id="achievement"><%=teacher.achievement%></textarea>
                                         <% } %>
                                     </div>
                                 </div>
@@ -120,10 +120,10 @@
                                     <label class="col-md-2 col-sm-3 col-xs-12 control-label">Phương Pháp Giảng Dạy</label>
                                     <div class="col-md-10 col-sm-9 col-xs-12">
                                         
-                                        <% if(tcmethod == ""){ %>
+                                        <% if(teacher.tcmethod == ""){ %>
                                             <textarea class="form-control" name="tcmethod" id="tcmethod"></textarea>
                                         <% }else{ %>
-                                            <textarea class="form-control" name="tcmethod" id="tcmethod"><%-tcmethod%></textarea>
+                                            <textarea class="form-control" name="tcmethod" id="tcmethod"><%teacher.tcmethod%></textarea>
                                         <% } %>
                                     </div>
                                 </div>
@@ -135,10 +135,10 @@
                                     <label class="col-md-2  col-sm-3 col-xs-12 control-label">Email</label>
                                     <div class="col-md-10 col-sm-9 col-xs-12">
                                         
-                                        <% if(tcemail == ""){ %>
+                                        <% if(teacher.email == ""){ %>
                                             <input type="email" class="form-control" name="email" value="Your Email">
                                         <% }else{ %>
-                                            <input type="email" class="form-control" name="email" value="<%-tcemail%>">
+                                            <input type="email" class="form-control" name="email" value="<%=teacher.email%>">
                                         <% } %>
                                         <p class="help-block">Nhập Email của bạn</p>
                                     </div>
@@ -146,10 +146,10 @@
                                 <div class="form-group">
                                     <label class="col-md-2  col-sm-3 col-xs-12 control-label">Facebook</label>
                                     <div class="col-md-10 col-sm-9 col-xs-12">
-                                        <% if(fb == ""){ %>
+                                        <% if(teacher.fb == ""){ %>
                                             <input type="url" class="form-control" name="fb" value="">
                                         <% }else{ %>
-                                            <input type="url" class="form-control" name="fb" value="<%-fb%>">
+                                            <input type="url" class="form-control" name="fb" value="<%=teacher.fb%>">
                                         <% } %>
                                         <p class="help-block">Nhập link Facebook của bạn</p>
                                     </div>
@@ -158,10 +158,10 @@
                                     <label class="col-md-2  col-sm-3 col-xs-12 control-label">Twitter</label>
                                     <div class="col-md-10 col-sm-9 col-xs-12">
                                         
-                                        <% if(tw == ""){ %>
+                                        <% if(teacher.tw == ""){ %>
                                             <input type="text" class="form-control" name="tw" value="">
                                         <% }else{ %>
-                                            <input type="text" class="form-control" name="tw" value="<%-tw%>">
+                                            <input type="text" class="form-control" name="tw" value="<%=teacher.tw%>">
                                         <% } %>
                                         <p class="help-block">Nhập username Twitter của bạn</p>
                                     </div>
@@ -170,10 +170,10 @@
                                     <label class="col-md-2  col-sm-3 col-xs-12 control-label">Linkedin</label>
                                     <div class="col-md-10 col-sm-9 col-xs-12">
                                         
-                                        <% if(lnk == ""){ %>
+                                        <% if(teacher.lnk == ""){ %>
                                             <input type="url" class="form-control" name="lnk" value="">
                                         <% }else{ %>
-                                            <input type="url" class="form-control" name="lnk" value="<%-lnk%>">
+                                            <input type="url" class="form-control" name="lnk" value="<%=teacher.lnk%>">
                                         <% } %>
                                         <p class="help-block">Ví dụ https://www.linkedin.com/in/yourname</p>
                                     </div>

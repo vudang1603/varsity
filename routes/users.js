@@ -8,6 +8,7 @@ var jsonParser = bodyParser.json();
 var urlencodedParser = bodyParser.urlencoded({extended: true})
 const Student = require('../models/student-profile')
 const Teacher = require('../models/teacher-profile')
+var fs = require('fs')
 /* GET users listing. */
 
 //register
@@ -84,7 +85,18 @@ router.post('/register', urlencodedParser, (req, res)=>{
             })
             .catch(value=> console.log(value));
           }))
-        
+          var imageAsBase64 = fs.readFileSync('public/assets/img/student/no-avatar.png');
+          const newStudent = new Student({
+            _id: newUser.id,
+            image: {
+              data: imageAsBase64,
+              contentType: 'image/png',
+              image: new Buffer.from(imageAsBase64, 'base64')
+            }
+        })
+        newStudent.save().then((value)=>{
+            console.log(value);
+        }).catch(value=> console.log(value));
       }
     })
   }
@@ -141,6 +153,19 @@ router.post('/teacher-register', urlencodedParser, (req, res)=>{
             })
             .catch(value=> console.log(value));
           }))
+
+          var imageAsBase64 = fs.readFileSync('public/assets/img/teachers/no-avatar.png');
+          const newTeacher = new Teacher({
+            _id: newUser.id,
+            image: {
+              data: imageAsBase64,
+              contentType: 'image/png',
+              image: new Buffer.from(imageAsBase64, 'base64')
+            }
+        })
+        newTeacher.save().then((value)=>{
+            console.log(value);
+        }).catch(value=> console.log(value));
       }
     })
   }

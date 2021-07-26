@@ -433,82 +433,34 @@
             <!-- begain our teacher content -->
             <div class="mu-our-teacher-content">
               <div class="row">
-                <div class="col-lg-3 col-md-3  col-sm-6">
-                  <div class="mu-our-teacher-single">
-                    <figure class="mu-our-teacher-img">
-                      <img src="/assets/img/teachers/tc1.jpg" alt="teacher img">
-                      <div class="mu-our-teacher-social">
-                        <a href="#"><span class="fa fa-facebook"></span></a>
-                        <a href="#"><span class="fa fa-twitter"></span></a>
-                        <a href="#"><span class="fa fa-linkedin"></span></a>
-                        <a href="#"><span class="fa fa-google-plus"></span></a>
+                <% teachers.forEach(function(item) {%>
+                  <div class="col-lg-3 col-md-3  col-sm-6">
+                    <div class="mu-our-teacher-single">
+                      <figure class="mu-our-teacher-img">
+                        <img src="data:item/<%=item.image.contentType%>;base64,<%=item.image.data.toString('base64')%>" alt="teacher img">
+                        <div class="mu-our-teacher-social">
+                          <a href="<%=item.fb%>"><span class="fa fa-facebook"></span></a>
+                          <a href="<%=item.tw%>"><span class="fa fa-twitter"></span></a>
+                          <a href="<%=item.lnk%>"><span class="fa fa-linkedin"></span></a>
+                          <a href="<%=item.email%>"><span class="fa fa-google-plus"></span></a>
+                        </div>
+                      </figure>                    
+                      <div class="mu-ourteacher-single-content">
+                        <h4><%=item.name%></h4>
+                        <span>Gia Sư Toán</span>
+                        <p>- Chú trọng vào bản chất, phân tích vấn đề, tư duy giải quyết vấn đề, ví dụ minh họa trực quan, giúp học sinh tìm được con đường chính để học, không sa đà mất thời gian vào những bài tập vô bổ, ngõ cụt,... '</p>
                       </div>
-                    </figure>                    
-                    <div class="mu-ourteacher-single-content">
-                      <h4>Nguyễn Hồ Ngọc Trung</h4>
-                      <span>Gia Sư Toán</span>
-                      <p>- Chú trọng vào bản chất, phân tích vấn đề, tư duy giải quyết vấn đề, ví dụ minh họa trực quan, giúp học sinh tìm được con đường chính để học, không sa đà mất thời gian vào những bài tập vô bổ, ngõ cụt,... '</p>
                     </div>
                   </div>
-                </div>
-
-                <div class="col-lg-3 col-md-3  col-sm-6">
-                  <div class="mu-our-teacher-single">
-                    <figure class="mu-our-teacher-img">
-                      <img src="/assets/img/teachers/tc1.jpg" alt="teacher img">
-                      <div class="mu-our-teacher-social">
-                        <a href="#"><span class="fa fa-facebook"></span></a>
-                        <a href="#"><span class="fa fa-twitter"></span></a>
-                        <a href="#"><span class="fa fa-linkedin"></span></a>
-                        <a href="#"><span class="fa fa-google-plus"></span></a>
-                      </div>
-                    </figure>                    
-                    <div class="mu-ourteacher-single-content">
-                      <h4>Nguyễn Hồ Ngọc Trung</h4>
-                      <span>Gia Sư Toán</span>
-                      <p>- Chú trọng vào bản chất, phân tích vấn đề, tư duy giải quyết vấn đề, ví dụ minh họa trực quan, giúp học sinh tìm được con đường chính để học, không sa đà mất thời gian vào những bài tập vô bổ, ngõ cụt,... '</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-lg-3 col-md-3  col-sm-6">
-                  <div class="mu-our-teacher-single">
-                    <figure class="mu-our-teacher-img">
-                      <img src="/assets/img/teachers/tc1.jpg" alt="teacher img">
-                      <div class="mu-our-teacher-social">
-                        <a href="#"><span class="fa fa-facebook"></span></a>
-                        <a href="#"><span class="fa fa-twitter"></span></a>
-                        <a href="#"><span class="fa fa-linkedin"></span></a>
-                        <a href="#"><span class="fa fa-google-plus"></span></a>
-                      </div>
-                    </figure>                    
-                    <div class="mu-ourteacher-single-content">
-                      <h4>Nguyễn Hồ Ngọc Trung</h4>
-                      <span>Gia Sư Toán</span>
-                      <p>- Chú trọng vào bản chất, phân tích vấn đề, tư duy giải quyết vấn đề, ví dụ minh họa trực quan, giúp học sinh tìm được con đường chính để học, không sa đà mất thời gian vào những bài tập vô bổ, ngõ cụt,... '</p>
-                    </div>
-                  </div>
-                </div>
+                <% }) %>
                 
 
-                <div class="col-lg-3 col-md-3  col-sm-6">
-                  <div class="mu-our-teacher-single">
-                    <figure class="mu-our-teacher-img">
-                      <img src="/assets/img/teachers/tc1.jpg" alt="teacher img">
-                      <div class="mu-our-teacher-social">
-                        <a href="#"><span class="fa fa-facebook"></span></a>
-                        <a href="#"><span class="fa fa-twitter"></span></a>
-                        <a href="#"><span class="fa fa-linkedin"></span></a>
-                        <a href="#"><span class="fa fa-google-plus"></span></a>
-                      </div>
-                    </figure>                    
-                    <div class="mu-ourteacher-single-content">
-                      <h4>Nguyễn Hồ Ngọc Trung</h4>
-                      <span>Gia Sư Toán</span>
-                      <p>- Chú trọng vào bản chất, phân tích vấn đề, tư duy giải quyết vấn đề, ví dụ minh họa trực quan, giúp học sinh tìm được con đường chính để học, không sa đà mất thời gian vào những bài tập vô bổ, ngõ cụt,... '</p>
-                    </div>
-                  </div>
-                </div>
+                
+
+                
+                
+
+                
                 
               </div>
             </div> 
