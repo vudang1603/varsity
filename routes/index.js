@@ -88,26 +88,7 @@ router.get('/profile', ensureAuthenticated, (req, res, next) => {
         })
       } else {   
         Teacher.findOne({_id: user_id}).exec((err, teacher)=> {
-            const teacher_name = teacher.name
-            const teacher_email = teacher.email
-            const teacher_degree = teacher.degree
-            const teacher_achievement = teacher.achievement
-            const teacher_workplace = teacher.workplace
-            const teacher_introduce = teacher.introduce
-            const teacher_tcmethod = teacher.tcmethod
-            const teacher_fb = teacher.fb
-            const teacher_tw = teacher.tw
-            const teacher_lnk = teacher.lnk
-          res.render('teacher-profile',{tab: 7, title: "Trang Cá Nhân", login: "true", role: "1", username: teacher_name, tcemail: teacher_email,
-          achievement: teacher_achievement,
-          degree:teacher_degree,
-          workplace:teacher_workplace,
-          introduce:teacher_introduce,
-          tcmethod:teacher_tcmethod,
-          fb:teacher_fb,
-          tw:teacher_tw,
-          lnk:teacher_lnk
-        }); 
+          res.render('teacher-profile',{tab: 7, title: "Trang Cá Nhân", login: "true", role: "1", teacher: teacher}); 
         })        
       }  
     })
