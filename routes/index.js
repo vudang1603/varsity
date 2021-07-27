@@ -27,17 +27,20 @@ router.get('/', function(req, res, next) {
 router.get('/index', function(req, res, next) {
   if(req.isAuthenticated()){
     const email = req.user.email;
-    User.findOne({email: email}).exec((err, user)=> {
-      if(user.role==0){
-        res.render('index',{tab: 1, title: "Trang Chủ", login: "true", role: "0"});
-      } else {
-        res.render('index',{tab: 1, title: "Trang Chủ", login: "true", role: "1"});
-      }
-    })
+      Teacher.find({}).exec((err, teacher)=>{
+        User.findOne({email: email}).exec((err, user)=> {
+          if(user.role==0){
+            res.render('index',{tab: 1, title: "Trang Chủ", login: "true", role: "0", teachers: teacher});
+          } else {
+            res.render('index',{tab: 1, title: "Trang Chủ", login: "true", role: "1", teachers: teacher});
+          }
+        })
+      })
   } else {
-    res.render('index',{tab: 1, title: "Trang Chủ", login: "false"});
+    Teacher.find({}, (err, teachers)=>{
+      res.render('index',{tab: 1, title: "Trang Chủ", login: "false", teachers: teachers});
+    })
   }
-  
 });
 router.get('/course-list', function(req, res, next) {
   res.render('course-list',{tab: 3, title: "Danh Sách Khoá Học", login: "false"});

@@ -8,6 +8,7 @@ const {ensureAuthenticated} = require('../config/auth');
 const Student = require('../models/student-profile')
 const Teacher = require('../models/teacher-profile')
 const ClassRoom = require('../models/class-room')
+const Course = require('../models/courses')
 //console.log(path);
 const multerFilter = (req, file, cb) => {
     if (file.mimetype.startsWith("image")) {
@@ -91,19 +92,74 @@ router.get('/registered-course', function(req, res, next){
     
     
 })
-router.get('/course-management', function(req, res, next){
+router.get('/course-management', ensureAuthenticated, function(req, res, next){
     if(req.isAuthenticated()){
         const id = req.user.id;
         Teacher.findOne({_id: id}).exec((err, teacher)=>{
-            const image = teacher.image
-            res.render('teacher-course',{tab: 7, title: "Trang Cá Nhân", login: "true", role: "1", image: image, teacher: teacher});
+            Course.find({author: id}).exec((err, course)=>{
+                const image = teacher.image
+                res.render('teacher-course',{tab: 7, title: "Trang Cá Nhân", login: "true", role: "1", image: image, teacher: teacher, course: course});
+            })
         }) 
     }
     
     
 })
+router.post('/course-management', upload.single('file'), function(req, res, next){
+    const title = req.body.title
+    const desc = req.body.description
+    const cate = req.body.cate
+    var img = fs.readFileSync(req.file.path)
+    var encode_image = img.toString('base64')
+    var final_image = {
+        data: img,
+        contentType: req.file.mimetype,
+        image: new Buffer.from(encode_image, 'base64')
+    };
+    const id = req.user.id
+    const newCourse = new Course({   
+        author: id,
+        title: title,
+        category: cate,
+        image: final_image,
+        description: desc
+    })
+    newCourse.save().then((value)=>{
+        console.log(value);
+        res.redirect(req.get('referer'));
+    }).catch(value=> console.log(value));
+    
+})
+router.get('/course-management/:id', ensureAuthenticated, function(req, res, next){
+    if(req.isAuthenticated()){
+        const id = req.user.id;
+        const courseId = req.params.id;
+        Teacher.findOne({_id: id}).exec((err, teacher)=>{
+            const image = teacher.image
+            Course.findOne({_id: courseId}).exec((err, course)=>{
+                res.render('teacher-editCourse',{tab: 7, title: "Trang Cá Nhân", login: "true", role: "1", image: image, teacher: teacher, course: course});
+            })            
+        }) 
+    }
+    
+})
+router.post('/course-management/:id', ensureAuthenticated, function(req, res, next){
+    if(req.isAuthenticated()){
+        const courseId = req.params.id;
+        const title = req.body.title
+        const link = req.body.link
 
-router.get('/class-management', function(req, res, next){
+        Course.findOneAndUpdate({_id: courseId}, { $push: { lessons: {title: title, link: link} } }, function (error, success) {
+            if (error) {
+                console.log(error);
+            } else {
+                res.redirect(req.get('referer'));
+            }
+        });
+    }
+})
+
+router.get('/class-management', ensureAuthenticated, function(req, res, next){
     if(req.isAuthenticated()){
         const id = req.user.id;
         Teacher.findOne({_id: id}).exec((err, teacher)=>{

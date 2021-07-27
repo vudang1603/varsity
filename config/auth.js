@@ -4,6 +4,6 @@ module.exports = {
             return next();
         }
     req.flash('error_msg','Vui lòng đăng nhập!!');
-    res.redirect('./users/login');
+    res.redirect('http://localhost:3000/users/login');
     }
 }

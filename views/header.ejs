@@ -99,29 +99,29 @@
           </button>
           <!-- LOGO -->              
           <!-- TEXT BASED LOGO -->
-          <a class="navbar-brand" href="index"><i class="fa fa-university"></i><span>Varsity</span></a>
+          <a class="navbar-brand" href="http://localhost:3000/index"><i class="fa fa-university"></i><span>Varsity</span></a>
           <!-- IMG BASED LOGO  -->
           <!-- <a class="navbar-brand" href="index.html"><img src="/assets/img/logo.png" alt="logo"></a> -->
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul id="top-menu" class="nav navbar-nav navbar-right main-nav">
-            <li <% if(tab==1){%> class="active" <%} %>><a href="index">Trang Chủ</a></li>
-            <li <% if(tab==2){%> class="active" <%} %>><a href="teachers">Gia Sư</a></li>            
+            <li <% if(tab==1){%> class="active" <%} %>><a href="http://localhost:3000/index">Trang Chủ</a></li>
+            <li <% if(tab==2){%> class="active" <%} %>><a href="http://localhost:3000/teachers">Gia Sư</a></li>            
             <li <% if(tab==3){%> class="dropdown active" <%} else {%> class="dropdown"<%} %>>
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Khoá Học <span class="fa fa-angle-down"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="course-list">Danh Sách Khoá Học</a></li>                             
+                <li><a href="http://localhost:3000/course-list">Danh Sách Khoá Học</a></li>                             
               </ul>
             </li>           
             
             <li <% if(tab==4){%> class="dropdown active" <%} else {%> class="dropdown"<%} %>>
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Lớp Học <span class="fa fa-angle-down"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="class-list">Danh Sách Lớp Học</a></li>                              
+                <li><a href="http://localhost:3000/class-list">Danh Sách Lớp Học</a></li>                              
               </ul>
             </li>
-            <li <% if(tab==5){%> class="active" <%} %>><a href="forums">Diễn Đàn</a></li>               
-            <li <% if(tab==6){%> class="active" <%} %>><a href="support">Hỗ Trợ</a></li>
+            <li <% if(tab==5){%> class="active" <%} %>><a href="http://localhost:3000/forums">Diễn Đàn</a></li>               
+            <li <% if(tab==6){%> class="active" <%} %>><a href="http://localhost:3000/support">Hỗ Trợ</a></li>
             
             <% if(login=="true") {%>
               <li class="dropdown active"> 
