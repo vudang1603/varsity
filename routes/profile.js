@@ -141,6 +141,10 @@ router.post('/class-management',upload.single('file'), function(req, res, next){
     const classname = req.body.classname
     const teachername = req.body.teachername
     const id = req.user.id;
+    const timetable = req.body.timetable
+    const description = req.body.description
+    const password = req.body.password
+    const price = req.body.price
     const email = req.user.email;
     var img = fs.readFileSync(req.file.path)
     var encode_image = img.toString('base64')
@@ -152,10 +156,14 @@ router.post('/class-management',upload.single('file'), function(req, res, next){
     ClassRoom.findOne({_id: id}).exec((err, classroom)=>{
         if(classroom){
             ClassRoom.findByIdAndUpdate(id, {$set:{
-                
+
                 classname: classname,
                 author: teachername,
                 email: email,
+                description:description,
+                timetable:timetable,
+                password:password,
+                price:price,
                 image: final_image,
             }}, {new: true}, (err, doc)=>{
                 if(err){
@@ -166,10 +174,14 @@ router.post('/class-management',upload.single('file'), function(req, res, next){
             res.redirect(req.get('referer'));
         } else {
             const newclassroom = new ClassRoom({
-                _id: id, 
+                _id: id,
                 classname:classname,
                 author:teachername,
                 email: email,
+                description:description,
+                timetable:timetable,
+                password:password,
+                price:price,
                 image: final_image,
             })
             newclassroom.save().then((value)=>{

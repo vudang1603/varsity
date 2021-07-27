@@ -42,14 +42,24 @@
                     </div>
                     <div class="content-panel" id="infor">
                         <h2 class="title">Tạo Lớp Học</h2>
-                            <form action="../profile/class-management/" method="POST" class="form-horizontal" enctype="multipart/form-data">
+                            <br action="../profile/class-management/" method="POST" class="form-horizontal" enctype="multipart/form-data">
+                                
                                 <p>Tên Lớp Học:</p>
                                 <input type="text" class="form-control" name="classname" id="classname">
                                 <p>Tên giáo viên:</p>
                                 <input type="text" class="form-control" name="teachername" id="teachername">
+                                
+                                <p>Lịch dạy:</p>
+                                <input type="text" class="form-control" name="timetable" id="timetable">
+                                <p>Mô tả:</p>
+                                <input type="text" class="form-control" name="description" id="description">
+                                <p>Mã bảo mật:</p>
+                                <input type="text" class="form-control" name="password" id="password">
+                                <p>Giá tiền:</p>
+                                <input type="text" class="form-control" name="price" id="price">
                                 <p>Ảnh bìa:</p>
                                 <input type="file" name="file" id="file" class="file-uploader pull-left">
-                            </br>
+                                </br>
                                 <input type="submit" value="Tạo Lớp Học" class="btn btn-primary">
                             
                             </form>
@@ -63,7 +73,7 @@
                                 <div class="col-sm-6 col-md-5 fa-border" style="padding: 10px; margin: 20px;">
                                   <div class="card">
                                     <div class="card-body">
-                                        <a href="#"><img src="data:classimage/<%=classimage.contentType%>;base64,<%=classimage.data.toString('base64')%>" alt="img" style="width: 100%;"></a>
+                                        <a href="#"><img src="data:classimage/<%=classimage.contentType%>;base64,<%=classimage.data.toString('base64')%>" alt="img" style="width: 100%; height: 200px;"></a>
                                       <h4 class="card-title"><%-classroom.classname%></h4>
                                       <p class="card-text">Giáo viên: <%-classroom.author%></p>
                                       <a href="#" class="btn btn-primary">Đi đến lớp học</a>

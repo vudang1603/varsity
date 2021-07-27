@@ -32,6 +32,10 @@ const classRoom = new mongoose.Schema({
         type: String,
         default: ""
     },
+    videoid:{
+        type: String,
+        default: ""
+    },
     homework: {
         type: String,
         default: ""
@@ -40,6 +44,23 @@ const classRoom = new mongoose.Schema({
         type: String,
         default: ""
     },
+    price: {
+        type: String,
+        default: ""
+    },
+    password: {
+        type: String,
+        default: ""
+    },
+    timetable: {
+        type: String,
+        default: ""
+    },
+    quantity: {
+        type: String,
+        default: "3"
+    },
+    student: [String]
 })
 
     
