@@ -60,7 +60,12 @@ const classRoom = new mongoose.Schema({
         type: String,
         default: "3"
     },
-    student: [String]
+    student:[{
+        id: {
+            type: Object,
+            default: ''
+        }
+    }]
 })
 
     

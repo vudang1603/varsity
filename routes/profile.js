@@ -202,6 +202,7 @@ router.post('/class-management',upload.single('file'), function(req, res, next){
     const password = req.body.password
     const price = req.body.price
     const email = req.user.email;
+    
     var img = fs.readFileSync(req.file.path)
     var encode_image = img.toString('base64')
     var final_image = {
