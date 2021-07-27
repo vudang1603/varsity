@@ -23,6 +23,10 @@ const studentSchema = new mongoose.Schema({
     fb: {
         type: String,
         default: ""
+    },
+    registeredCourse: {
+        type: Array,
+        default: []
     }
 
 })

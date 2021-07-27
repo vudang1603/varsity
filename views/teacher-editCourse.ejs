@@ -41,45 +41,46 @@
                         </nav>
                     </div>
                     <div class="content-panel" id="infor">
-                      <h2 class="title">Tạo Khoá Học</h2>
-                        <form method="POST" enctype="multipart/form-data">
-                          <div class="form-group">
-                            <label for="title">Tiêu Đề: </label>
-                            <input type="text" name="title" class="form-control" id="title" placeholder="Nhập tiêu đề của khoá học">
-                            <br>
-                            <label for="title">Môn học: </label>
-                            <input type="text" name="cate" class="form-control" id="cate" placeholder="Nhập môn của khoá học">
-                            <br>
-                            <label for="file">Ảnh bìa: </label>
-                            <input type="file" name="file" class="form-control-file" id="file">
-                            <br>
-                            <label for="desc">Mô tả: </label>
-                            <textarea name="description" id="description" class="form-control"></textarea>
-                            <br>
-                            <button type="submit" class="btn btn-primary mb-2">Tạo</button>
-                          </div>
-                        </form>
-                        <h2 class="title">Quản Lý Khoá Học</h2>
-                        <div class="row">
-                          <% course.forEach(function(course){%>
-                            <div class="col-sm-6 col-md-5 fa-border" style="padding: 10px; margin: 20px;">
-                              <div class="card">
-                                <div class="card-body">
-                                    <a href="#"><img src="data:course/<%=course.image.contentType%>;base64,<%=course.image.data.toString('base64')%>" alt="img" style="width: 300px; height: 300xp;"></a>
-                                  <h5 class="card-title"><%=course.title%></h5>
-                                  <p class="card-text"><%=course.description%></p>
-                                  <a href="course-management/<%=course.id%>" class="btn btn-primary">Chi tiết</a>
-                                </div>
-                              </div>
+                      <h2 class="title">Chi Tiết Khoá Học</h2>
+                      <h3 class="title">Tiêu Đề: <span><%=course.title%></span></h3>
+                      <h3 class="title">Môn Học: <span><%=course.category%></span></h3> 
+                      <img src="data:course/<%=course.image.contentType%>;base64,<%=course.image.data.toString('base64')%>" alt="img" style="width: 50%; height: 200px;"> <br><br>
+                      <h3 class="title">Mô Tả: <span><%=course.description%></span></h3>
+                      
+                      <h3 class="title">Danh Sách Bài Giảng: </h3>
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Tiêu Đề</th>
+                            <th scope="col">Link</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        <% var i=0 %>
+                        <%course.lessons.forEach(function(lesson){%>
+                            <tr>
+                                <th scope="row"><%=i=i+1 %></th>
+                                <td><%=lesson.title%></td>
+                                <td><%=lesson.link%></td>
+                              </tr>
+                        <%})%>
+                          
+                        </tbody>
+                      </table>
+                      <hr>
+                      <h3 class="title">Thêm Bài Giảng: </h3>
+                        <form method="POST">
+                            <div class="form-group">
+                                <label for="title">Tiêu Đề: </label>
+                                <input type="text" name="title" class="form-control" id="title" placeholder="Nhập tiêu đề của bài giảng">
+                                <br>
+                                <label for="title">Link bài giảng: </label>
+                                <input type="link" name="link" class="form-control" id="link" placeholder="Nhập link Youtube của bài giảng">
+                                <br>
+                                <button type="submit" class="btn btn-primary mb-2">Thêm</button>
                             </div>
-                            <%})%>
-                            
-                              
-
-                            
-
-                     
-                          </div>
+                        </form>
                     </div>
                     
                 </div>
