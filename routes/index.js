@@ -4,9 +4,19 @@ const {ensureAuthenticated} = require('../config/auth');
 const Student = require('../models/student-profile')
 const Teacher = require('../models/teacher-profile');
 const User = require('../models/users');
-var fs = require('fs')
+var fs = require('fs');
+const { route } = require('./users');
+
+
+const server = require('http').Server(router)
+const io = require('socket.io')(server)
+const { v4: uuidV4 } = require('uuid');
+const { isObject } = require('util');
+
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  
   if(req.isAuthenticated()){
     const email = req.user.email;
       Teacher.find({}).exec((err, teacher)=>{
@@ -86,7 +96,18 @@ router.get('/profile', ensureAuthenticated, (req, res, next) => {
     })
 })
 
+router.get('/streamroom',(req, res) => {
+  res.redirect(`/${uuidV4()}`);
+})
 
+router.get('/:streamroom', function(req, res, next) {
+  res.render('streamroom',{tab: 8, title: "Steam Romm", login: "true", roomId: req.params.streamroom});
+});
 
+io.on('connection', socket => {
+  socket.on('join-room', (roomId, userId) => {
+    console.log(roomId,userId)
+  })
+})
 
 module.exports = router;
