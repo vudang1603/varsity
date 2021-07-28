@@ -30,73 +30,27 @@
                      <div class="col-md-12">
                        <div class="mu-latest-course-single">
                          <figure class="mu-latest-course-img">
-                           <a><img src="/assets/img/courses/kh1.jpg" alt="img"></a>
+                            <iframe name="youtube_iframe" id="course-video" width="100%" height="500px" src="">
+                            </iframe>
+                           <!-- <a><img src="data:course/<%=course.image.contentType%>;base64,<%=course.image.data.toString('base64')%>" alt="img"></a> -->
                            <figcaption class="mu-latest-course-imgcaption">
-                             <a href="#">Toán</a>
-                             <span><i class="fa fa-clock-o"></i>3 tháng</span>
+                             <a href="#"><%=course.category%></a>
+                             <span></i><%=course.lessons.length%> Bài Giảng</span>
                            </figcaption>
                          </figure>
                          <div class="mu-latest-course-single-content">
                            <h2><a>Học tốt toán 12</a></h2>
                            <h4>Thông Tin Khoá Học</h4>
                            <ul>
-                             <li> <span>Học Phí</span> <span>1.500.000vnđ</span></li>
-                             <li> <span>Mục Tiêu Khóa Học</span> <span>Nắm vững kiến thức Toán học lớp 12 ở mức độ cơ bản.</span></li>
-                             <li> <span>Số Lượng Học Viên</span> <span>50</span></li>
-                             <li> <span>Số Lượng Bài Giảng</span> <span>48</span></li>
-                             <li> <span>Ngày Tải Lên</span> <span>11/07/2021</span></li>
+                             <li> <span>Gia Sư: </span> <span><%=course.authorName%></span></li>
+                             <li> <span>Số Lượng Học Viên Đăng Ký</span> <span>50</span></li>
+                             <li> <span>Ngày Tải Lên</span> <span><%=course.date%></span></li>
                            </ul>
                            <h4>Mô Tả</h4>
-                           <p>Việc hiểu kĩ các thuật ngữ toán học, các công thức, các định nghĩa là cơ sở vững chắc để các em phát triển năng lực giải toán trắc nghiệm. Thầy Nguyễn Hồ Ngọc Trung sẽ giúp các em hiểu thế nào là đạo hàm, hệ số góc của tiếp tuyến, các công thức lượng giác..... những thuật ngữ các em gặp thường xuyên trong môn Toán nhưng không phải bạn nào cũng hiểu chúng là gì, vì sao lại có công thức đó..., giúp các em nắm vững kiến thức Toán học 12.</p>
+                           <p><%=course.description%>.</p>
                            <h4>Đề Cương Khoá Học</h4>
                            <div class="table-responsive">
-                             <table class="table">
-                             <thead>
-                               <tr>
-                                 <th> Tiêu Đề </th>
-                                 <th> Thời Lượng </th>
-                                 <th> Trạng Thái </th>
-                               </tr>
-                             </thead>
-                             <tbody>
-                               <tr>
-                                 <td> 1. Topic 1 </td>
-                                 
-                                 <td> 01:30 </td>
-                                 <td> Thành Công </td>
-                               </tr>
-                               <tr>
-                                 <td> 2. Topic 2 </td>
-                                 
-                                 <td> 01:30 </td>
-                                 <td> Thành Công </td>
-                               </tr>
-                               <tr>
-                                 <td> 3. Topic 3 </td>
-                                 
-                                 <td> 01:30 </td>
-                                 <td> Thành Công </td>
-                               </tr>
-                               <tr>
-                                 <td> 4. Topic 4 </td>
-                                 
-                                 <td> 01:30 </td>
-                                 <td> Thành Công </td>
-                               </tr>
-                               <tr>
-                                 <td> 5. Topic 5 </td>
-                                 
-                                 <td> 01:30 </td>
-                                 <td> Đang Chờ </td>
-                               </tr>
-                               <tr>
-                                 <td> 6. Topic 6 </td>
-                                 
-                                 <td> 01:30 </td>
-                                 <td> - </td>
-                               </tr>
-                             </tbody>
-                           </table>
+                            
                            <a class="mu-post-btn" href="">ĐĂNG KÝ</a>
                            </div>
                          </div>
@@ -112,63 +66,28 @@
                    <h3>Các Khoá Học Liên Quan</h3>
                    <div class="mu-related-item-area">
                      <div id="mu-related-item-slide">
-                       <div class="col-md-6">
-                        <div class="mu-latest-course-single">
-                            <figure class="mu-latest-course-img">
-                              <a href="course-detail"><img src="/assets/img/courses/kh1.jpg" alt="img"></a>
-                              <figcaption class="mu-latest-course-imgcaption">
-                                <a href="#">Toán</a>
-                                <span><i class="fa fa-clock-o"></i>3 Tháng</span>
-                              </figcaption>
-                            </figure>
-                            <div class="mu-latest-course-single-content">
-                             <h4><a href="course-detail">Học tốt toán 12</a></h4>
-                             <p>Gia sư: Nguyễn Hồ Ngọc Trung</p>
-                              <div class="mu-latest-course-single-contbottom">
-                                 <a class="mu-course-details" href="course-detail">Chi Tiết</a>
-                                 <span class="mu-course-price">1.500.000vnđ</span>
+                       <% recourse.forEach(function(recourse){%>
+                        <div class="col-md-6">
+                          <div class="mu-latest-course-single">
+                              <figure class="mu-latest-course-img">
+                                <a href="course-detail"><img src="data:recourse/<%=recourse.image.contentType%>;base64,<%=recourse.image.data.toString('base64')%>" alt="img"></a>
+                                <figcaption class="mu-latest-course-imgcaption">
+                                  <a href="#"><%=recourse.category%></a>
+                                  <span><%=recourse.lessons.length%> Bài Giảng</span>
+                                </figcaption>
+                              </figure>
+                              <div class="mu-latest-course-single-content">
+                               <h4><a href="course-detail"><%=recourse.title%></a></h4>
+                               <p>Gia sư: <%=recourse.authorName%></p>
+                                <div class="mu-latest-course-single-contbottom">
+                                   <a class="mu-course-details" href="course-detail/<%=recourse.id%>">Chi Tiết</a>
+                                </div>
                               </div>
-                            </div>
-                          </div> 
-                       </div>
-                       <div class="col-md-6">
-                        <div class="mu-latest-course-single">
-                            <figure class="mu-latest-course-img">
-                              <a href="course-detail"><img src="/assets/img/courses/kh1.jpg" alt="img"></a>
-                              <figcaption class="mu-latest-course-imgcaption">
-                                <a href="#">Toán</a>
-                                <span><i class="fa fa-clock-o"></i>3 Tháng</span>
-                              </figcaption>
-                            </figure>
-                            <div class="mu-latest-course-single-content">
-                             <h4><a href="course-detail">Học tốt toán 12</a></h4>
-                             <p>Gia sư: Nguyễn Hồ Ngọc Trung</p>
-                              <div class="mu-latest-course-single-contbottom">
-                                 <a class="mu-course-details" href="course-detail">Chi Tiết</a>
-                                 <span class="mu-course-price">1.500.000vnđ</span>
-                              </div>
-                            </div>
-                          </div> 
-                       </div>
-                       <div class="col-md-6">
-                        <div class="mu-latest-course-single">
-                            <figure class="mu-latest-course-img">
-                              <a href="course-detail"><img src="/assets/img/courses/kh1.jpg" alt="img"></a>
-                              <figcaption class="mu-latest-course-imgcaption">
-                                <a href="#">Toán</a>
-                                <span><i class="fa fa-clock-o"></i>3 Tháng</span>
-                              </figcaption>
-                            </figure>
-                            <div class="mu-latest-course-single-content">
-                             <h4><a href="course-detail">Học tốt toán 12</a></h4>
-                             <p>Gia sư: Nguyễn Hồ Ngọc Trung</p>
-                              <div class="mu-latest-course-single-contbottom">
-                                 <a class="mu-course-details" href="course-detail">Chi Tiết</a>
-                                 <span class="mu-course-price">1.500.000vnđ</span>
-                              </div>
-                            </div>
-                          </div> 
-                       </div>
+                            </div> 
+                         </div>
+                        <%})%>
+                       
+                       
                        
                      </div>
                    </div>
@@ -182,6 +101,28 @@
                  <aside class="mu-sidebar">
                    <!-- start single sidebar -->
                    <div class="mu-single-sidebar">
+                    <h3>Danh Sách Bài Học</h3>
+                    <div class="mu-sidebar-popular-courses">
+                      <div class="media">
+                        
+                        <div class="media-body">
+                          <%var i=1%>
+                          <%course.lessons.forEach(function(lesson){%>
+                            <% var video_id = lesson.link.split('v=')[1]; %>
+                            <% var ampersandPosition = video_id.indexOf('&');%>
+                              <% if(ampersandPosition != -1) { %>
+                                <% video_id = video_id.substring(0, ampersandPosition); %>
+                              <%}%>
+                          <h4 class="media-heading"><a id="course-link" href="https://www.youtube.com/embed/<%=video_id%>" target="youtube_iframe" style="margin-left: 10px"><%=i++%> - <%=lesson.title%></a></h4><hr>
+                          <%})%>                      
+                        </div>
+                      </div>
+ 
+                    </div>
+                  </div>
+                   <!-- end single sidebar -->
+                   <!-- start single sidebar -->
+                   <div class="mu-single-sidebar">
                      <h3>Categories</h3>
                      <ul class="mu-sidebar-catg">
                         <li><a href="#">Toán</a></li>
@@ -193,50 +134,7 @@
                      </ul>
                    </div>
                    <!-- end single sidebar -->
-                   <!-- start single sidebar -->
-                   <div class="mu-single-sidebar">
-                    <h3>Khoá Học Phổ Biến</h3>
-                    <div class="mu-sidebar-popular-courses">
-                      <div class="media">
-                        <div class="media-left">
-                          <a href="course-detail">
-                            <img class="media-object" src="/assets/img/courses/kh1.jpg" alt="img">
-                          </a>
-                        </div>
-                        <div class="media-body">
-                          <h4 class="media-heading"><a href="course-detail">Học Tốt Toán 11</a></h4>                      
-                          <span class="popular-course-price">2.000.000vnđ</span>
-                        </div>
-                      </div>
-
-                      <div class="media">
-                       <div class="media-left">
-                         <a href="course-detail">
-                           <img class="media-object" src="/assets/img/courses/kh1.jpg" alt="img">
-                         </a>
-                       </div>
-                       <div class="media-body">
-                         <h4 class="media-heading"><a href="course-detail">Học Tốt Toán 11</a></h4>                      
-                         <span class="popular-course-price">2.000.000vnđ</span>
-                       </div>
-                     </div>
-
-                     <div class="media">
-                       <div class="media-left">
-                         <a href="course-detail">
-                           <img class="media-object" src="/assets/img/courses/kh1.jpg" alt="img">
-                         </a>
-                       </div>
-                       <div class="media-body">
-                         <h4 class="media-heading"><a href="course-detail">Học Tốt Toán 11</a></h4>                      
-                         <span class="popular-course-price">2.000.000vnđ</span>
-                       </div>
-                     </div>
-                      
-                     
-                    </div>
-                  </div>
-                   <!-- end single sidebar -->
+                   
                    <!-- start single sidebar -->
                    
                    <!-- end single sidebar -->

@@ -34,7 +34,7 @@
                         </div>
                         <nav class="side-menu">
                             <ul class="nav">
-                                <li><a href="../profile"><span class="fa fa-user"></span> Thông Tin</a></li>
+                                <li><a href="http://localhost:3000/profile"><span class="fa fa-user"></span> Thông Tin</a></li>
                                 <li class="active"><a href="#"><i class="fas fa-bookmark"></i> Quản Lý Khoá Học</a></li>
                                 <li><a href="../profile/class-management"><i class="fas fa-bookmark"></i> Quản Lý Lớp Học</a></li>
                             </ul>
@@ -47,8 +47,15 @@
                             <label for="title">Tiêu Đề: </label>
                             <input type="text" name="title" class="form-control" id="title" placeholder="Nhập tiêu đề của khoá học">
                             <br>
-                            <label for="title">Môn học: </label>
-                            <input type="text" name="cate" class="form-control" id="cate" placeholder="Nhập môn của khoá học">
+                            <label for="cate">Môn học: </label>
+                            <select class="form-control" id="cate" name="cate">
+                                <option value="Toán">Toán</option>
+                                <option value="Hoá Học">Hoá Học</option>
+                                <option value="Vật Lý">Vật Lý</option>
+                                <option value="Sinh Học">Sinh Học</option>
+                                <option value="Anh Văn">Anh Văn</option>
+                                <option value="Ngữ Văn">Ngữ Văn</option>
+                              </select>
                             <br>
                             <label for="file">Ảnh bìa: </label>
                             <input type="file" name="file" class="form-control-file" id="file">

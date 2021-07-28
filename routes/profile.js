@@ -117,17 +117,20 @@ router.post('/course-management', upload.single('file'), function(req, res, next
         image: new Buffer.from(encode_image, 'base64')
     };
     const id = req.user.id
-    const newCourse = new Course({   
-        author: id,
-        title: title,
-        category: cate,
-        image: final_image,
-        description: desc
+    Teacher.findOne({_id: id}).exec((err, teacher)=>{
+        const newCourse = new Course({   
+            author: id,
+            authorName: teacher.name,
+            title: title,
+            category: cate,
+            image: final_image,
+            description: desc
+        })
+        newCourse.save().then((value)=>{
+            console.log(value);
+            res.redirect(req.get('referer'));
+        }).catch(value=> console.log(value));
     })
-    newCourse.save().then((value)=>{
-        console.log(value);
-        res.redirect(req.get('referer'));
-    }).catch(value=> console.log(value));
     
 })
 router.get('/course-management/:id', ensureAuthenticated, function(req, res, next){

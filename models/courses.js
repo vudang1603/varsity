@@ -3,7 +3,10 @@ const {ensureAuthenticated} = require('../config/auth');
 
 const course = new mongoose.Schema({
     author:{
-        type: String
+        type: String,
+    },
+    authorName:{
+        type: String,
     },
     title: {
         type: String,

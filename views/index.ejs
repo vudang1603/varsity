@@ -238,26 +238,28 @@
             <!-- End Title -->
             <!-- Start latest course content -->
             <div id="mu-latest-course-slide" class="mu-latest-courses-content">
-              <div class="col-lg-4 col-md-4 col-xs-12">
-                <div class="mu-latest-course-single">
-                  <figure class="mu-latest-course-img">
-                    <a href="#"><img src="/assets/img/courses/kh1.jpg" alt="img"></a>
-                    <figcaption class="mu-latest-course-imgcaption">
-                      <a href="#">Toán</a>
-                      <span><i class="fa fa-clock-o"></i>3 tháng</span>
-                      
-                    </figcaption>
-                  </figure>
-                  <div class="mu-latest-course-single-content">
-                    <h4><a href="#">Học tốt toán 12</a></h4>
-                    <p>Gia sư: Nguyễn Hồ Ngọc Trung</p>
-                    <div class="mu-latest-course-single-contbottom">
-                      <a class="mu-course-details" href="#">Chi Tiết</a>
-                      <span class="mu-course-price" href="#">1.500.000vnđ</span>
+              <% course.forEach(function(course) {%>
+                <div class="col-lg-4 col-md-4 col-xs-12">
+                  <div class="mu-latest-course-single">
+                    <figure class="mu-latest-course-img">
+                      <a href="course-detail/<%=course.id%>"><img src="data:course/<%=course.image.contentType%>;base64,<%=course.image.data.toString('base64')%>" alt="img" style="height: 284px;"></a>
+                      <figcaption class="mu-latest-course-imgcaption">
+                        <a href="#"><%=course.category%></a>
+                        <span><i class="fa fa-clock-o"></i><%=course.lessons.length%> Bài Giảng</span>
+                        
+                      </figcaption>
+                    </figure>
+                    <div class="mu-latest-course-single-content">
+                      <h4><a href="course-detail/<%=course.id%>"><%=course.title%></a></h4>
+                      <p>Gia sư: <%=course.authorName%></p>
+                      <div class="mu-latest-course-single-contbottom">
+                        <a class="mu-course-details" href="course-detail/<%=course.id%>">Chi Tiết</a>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+                <%})%>
+              
 
               <div class="col-lg-4 col-md-4 col-xs-12">
                 <div class="mu-latest-course-single">
