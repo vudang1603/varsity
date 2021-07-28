@@ -8,11 +8,15 @@ var fs = require('fs');
 const { route } = require('./users');
 
 
-const server = require('http').Server(router)
-const io = require('socket.io')(server)
-const { v4: uuidV4 } = require('uuid');
-const { isObject } = require('util');
-
+// const server = require('http').Server(router)
+// const io = require('socket.io')(server)
+// const { v4: uuidV4 } = require('uuid');
+// const { isObject } = require('util');
+// const { ExpressPeerServer } = require('peer');
+// const peerServer = ExpressPeerServer(server, {
+//     debug: true
+// });
+// router.use('/peerjs', peerServer)
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -96,18 +100,23 @@ router.get('/profile', ensureAuthenticated, (req, res, next) => {
     })
 })
 
-router.get('/streamroom',(req, res) => {
-  res.redirect(`/${uuidV4()}`);
-})
+// router.get('/streamroom',(req, res) => {
+//   res.redirect(`/${uuidV4()}`);
+// })
 
-router.get('/:streamroom', function(req, res, next) {
-  res.render('streamroom',{tab: 8, title: "Steam Romm", login: "true", roomId: req.params.streamroom});
-});
+// router.get('/:streamroom', function(req, res, next) {
+//   res.render('streamroom',{tab: 8, title: "Steam Romm", login: "true", roomId: req.params.streamroom});
+// });
 
-io.on('connection', socket => {
-  socket.on('join-room', (roomId, userId) => {
-    console.log(roomId,userId)
-  })
-})
+// io.on('connection', socket => {
+//   socket.on('join-room', (roomId, userId) => {
+//     socket.join(roomId)
+//     socket.to(roomId).broadcast.emit('user-connected', userId)
+
+//     socket.on('disconnect', () =>{
+//       socket.to(roomId).broadcast.emit('user-disconnect')
+//     })
+//   })
+// })
 
 module.exports = router;
