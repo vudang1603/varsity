@@ -106,6 +106,15 @@ router.get('/course-management', ensureAuthenticated, function(req, res, next){
     
 })
 router.post('/course-management', upload.single('file'), function(req, res, next){
+    var storage = multer.diskStorage({
+        destination: function (req, file, cb){
+            cb(null, 'public/assets/img/courses')
+        },
+        filename: function (req, file, cb){
+            cb(null, file.fieldname + '-' + Date.now())
+        }
+    })
+    var upload = multer({ storage: storage, fileFilter: multerFilter})
     const title = req.body.title
     const desc = req.body.description
     const cate = req.body.cate
