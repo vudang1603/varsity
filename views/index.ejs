@@ -238,89 +238,28 @@
             <!-- End Title -->
             <!-- Start latest course content -->
             <div id="mu-latest-course-slide" class="mu-latest-courses-content">
-              <div class="col-lg-4 col-md-4 col-xs-12">
-                <div class="mu-latest-course-single">
-                  <figure class="mu-latest-course-img">
-                    <a href="#"><img src="/assets/img/courses/kh1.jpg" alt="img"></a>
-                    <figcaption class="mu-latest-course-imgcaption">
-                      <a href="#">Toán</a>
-                      <span><i class="fa fa-clock-o"></i>3 tháng</span>
-                      
-                    </figcaption>
-                  </figure>
-                  <div class="mu-latest-course-single-content">
-                    <h4><a href="#">Học tốt toán 12</a></h4>
-                    <p>Gia sư: Nguyễn Hồ Ngọc Trung</p>
-                    <div class="mu-latest-course-single-contbottom">
-                      <a class="mu-course-details" href="#">Chi Tiết</a>
-                      <span class="mu-course-price" href="#">1.500.000vnđ</span>
+              <% course.forEach(function(course) {%>
+                <div class="col-lg-4 col-md-4 col-xs-12">
+                  <div class="mu-latest-course-single">
+                    <figure class="mu-latest-course-img">
+                      <a href="course-detail/<%=course.id%>"><img src="data:course/<%=course.image.contentType%>;base64,<%=course.image.data.toString('base64')%>" alt="img" style="height: 284px;"></a>
+                      <figcaption class="mu-latest-course-imgcaption">
+                        <a href="#"><%=course.category%></a>
+                        <span><i class="fa fa-clock-o"></i><%=course.lessons.length%> Bài Giảng</span>
+                        
+                      </figcaption>
+                    </figure>
+                    <div class="mu-latest-course-single-content">
+                      <h4><a href="course-detail/<%=course.id%>"><%=course.title%></a></h4>
+                      <p>Gia sư: <%=course.authorName%></p>
+                      <div class="mu-latest-course-single-contbottom">
+                        <a class="mu-course-details" href="course-detail/<%=course.id%>">Chi Tiết</a>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-
-              <div class="col-lg-4 col-md-4 col-xs-12">
-                <div class="mu-latest-course-single">
-                  <figure class="mu-latest-course-img">
-                    <a href="#"><img src="/assets/img/courses/kh1.jpg" alt="img"></a>
-                    <figcaption class="mu-latest-course-imgcaption">
-                      <a href="#">Toán</a>
-                      <span><i class="fa fa-clock-o"></i>3 tháng</span>
-                      
-                    </figcaption>
-                  </figure>
-                  <div class="mu-latest-course-single-content">
-                    <h4><a href="#">Học tốt toán 12</a></h4>
-                    <p>Gia sư: Nguyễn Hồ Ngọc Trung</p>
-                    <div class="mu-latest-course-single-contbottom">
-                      <a class="mu-course-details" href="#">Chi Tiết</a>
-                      <span class="mu-course-price" href="#">1.500.000vnđ</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-lg-4 col-md-4 col-xs-12">
-                <div class="mu-latest-course-single">
-                  <figure class="mu-latest-course-img">
-                    <a href="#"><img src="/assets/img/courses/kh1.jpg" alt="img"></a>
-                    <figcaption class="mu-latest-course-imgcaption">
-                      <a href="#">Toán</a>
-                      <span><i class="fa fa-clock-o"></i>3 tháng</span>
-                      
-                    </figcaption>
-                  </figure>
-                  <div class="mu-latest-course-single-content">
-                    <h4><a href="#">Học tốt toán 12</a></h4>
-                    <p>Gia sư: Nguyễn Hồ Ngọc Trung</p>
-                    <div class="mu-latest-course-single-contbottom">
-                      <a class="mu-course-details" href="#">Chi Tiết</a>
-                      <span class="mu-course-price" href="#">1.500.000vnđ</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-lg-4 col-md-4 col-xs-12">
-                <div class="mu-latest-course-single">
-                  <figure class="mu-latest-course-img">
-                    <a href="#"><img src="/assets/img/courses/kh1.jpg" alt="img"></a>
-                    <figcaption class="mu-latest-course-imgcaption">
-                      <a href="#">Toán</a>
-                      <span><i class="fa fa-clock-o"></i>3 tháng</span>
-                      
-                    </figcaption>
-                  </figure>
-                  <div class="mu-latest-course-single-content">
-                    <h4><a href="#">Học tốt toán 12</a></h4>
-                    <p>Gia sư: Nguyễn Hồ Ngọc Trung</p>
-                    <div class="mu-latest-course-single-contbottom">
-                      <a class="mu-course-details" href="#">Chi Tiết</a>
-                      <span class="mu-course-price" href="#">1.500.000vnđ</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                <%})%>
+              
              
               
             </div>
@@ -344,69 +283,31 @@
             </div>
             <!-- End Title -->
             <!-- Start latest course content -->
+            
             <div id="mu-latest-course-slide" class="mu-latest-courses-content">
+              <% classroom.forEach(function(classroom) {%>
               <div class="col-lg-4 col-md-4 col-xs-12">
                 <div class="mu-latest-course-single">
                   <figure class="mu-latest-course-img">
-                    <a href="#"><img src="/assets/img/courses/kh1.jpg" alt="img"></a>
+                    <a href="class-detail/<%=classroom.id%>"><img src="data:classroom/<%=classroom.image.contentType%>;base64,<%=classroom.image.data.toString('base64')%>" alt="img" style="height: 200px;"></a>
                     <figcaption class="mu-latest-course-imgcaption">
-                      <a href="#">Toán</a>
-                      <span><i class="fa fa-clock-o"></i>3 tháng</span>
+                      
+                      <span><i class="fa fa-clock-o"></i><%=classroom.timetable%></span>
                       
                     </figcaption>
                   </figure>
                   <div class="mu-latest-course-single-content">
-                    <h4><a href="#">Lớp luyện đề thi Toán THPT</a></h4>
-                    <p>Gia sư: Nguyễn Hồ Ngọc Trung</p>
+                    <h4><a href="class-detail/<%=classroom.id%>"><%=classroom.classname%></a></h4>
+                    <p>Gia sư: <%=classroom.author%></p>
                     <div class="mu-latest-course-single-contbottom">
-                      <a class="mu-course-details" href="#">Chi Tiết</a>
-                      <span class="mu-course-price" href="#">1.500.000vnđ</span>
+                      <a class="mu-course-details" href="class-detail/<%=classroom.id%>">Chi Tiết</a>
+                      <span class="mu-course-price" href="#"><%=classroom.price%>vnđ</span>
                     </div>
                   </div>
                 </div>
               </div>
-
-              <div class="col-lg-4 col-md-4 col-xs-12">
-                <div class="mu-latest-course-single">
-                  <figure class="mu-latest-course-img">
-                    <a href="#"><img src="/assets/img/courses/kh1.jpg" alt="img"></a>
-                    <figcaption class="mu-latest-course-imgcaption">
-                      <a href="#">Toán</a>
-                      <span><i class="fa fa-clock-o"></i>3 tháng</span>
-                      
-                    </figcaption>
-                  </figure>
-                  <div class="mu-latest-course-single-content">
-                    <h4><a href="#">Lớp luyện đề thi Toán THPT</a></h4>
-                    <p>Gia sư: Nguyễn Hồ Ngọc Trung</p>
-                    <div class="mu-latest-course-single-contbottom">
-                      <a class="mu-course-details" href="#">Chi Tiết</a>
-                      <span class="mu-course-price" href="#">1.500.000vnđ</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-lg-4 col-md-4 col-xs-12">
-                <div class="mu-latest-course-single">
-                  <figure class="mu-latest-course-img">
-                    <a href="#"><img src="/assets/img/courses/kh1.jpg" alt="img"></a>
-                    <figcaption class="mu-latest-course-imgcaption">
-                      <a href="#">Toán</a>
-                      <span><i class="fa fa-clock-o"></i>3 tháng</span>
-                      
-                    </figcaption>
-                  </figure>
-                  <div class="mu-latest-course-single-content">
-                    <h4><a href="#">Lớp luyện đề thi Toán THPT</a></h4>
-                    <p>Gia sư: Nguyễn Hồ Ngọc Trung</p>
-                    <div class="mu-latest-course-single-contbottom">
-                      <a class="mu-course-details" href="#">Chi Tiết</a>
-                      <span class="mu-course-price" href="#">1.500.000vnđ</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <%})%>
+              
 
               
              
@@ -437,7 +338,7 @@
                   <div class="col-lg-3 col-md-3  col-sm-6">
                     <div class="mu-our-teacher-single">
                       <figure class="mu-our-teacher-img">
-                        <img src="data:item/<%=item.image.contentType%>;base64,<%=item.image.data.toString('base64')%>" alt="teacher img">
+                        <img src="data:item/<%=item.image.contentType%>;base64,<%=item.image.data.toString('base64')%>" alt="teacher img" style="height: 200px;" >
                         <div class="mu-our-teacher-social">
                           <a href="<%=item.fb%>"><span class="fa fa-facebook"></span></a>
                           <a href="<%=item.tw%>"><span class="fa fa-twitter"></span></a>

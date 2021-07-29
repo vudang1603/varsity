@@ -4,63 +4,68 @@ const {ensureAuthenticated} = require('../config/auth');
 const Student = require('../models/student-profile')
 const Teacher = require('../models/teacher-profile');
 const User = require('../models/users');
+const Course = require('../models/courses');
 var fs = require('fs');
-const { route } = require('./users');
-
-
-// const server = require('http').Server(router)
-// const io = require('socket.io')(server)
-// const { v4: uuidV4 } = require('uuid');
-// const { isObject } = require('util');
-// const { ExpressPeerServer } = require('peer');
-// const peerServer = ExpressPeerServer(server, {
-//     debug: true
-// });
-// router.use('/peerjs', peerServer)
-
+const ClassRoom = require('../models/class-room');
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  
+  var tcFind = Teacher.find({}).limit(8)
+  var coFind = Course.find({}).limit(10)
+  var clFind = ClassRoom.find({}).limit(3)
   if(req.isAuthenticated()){
     const email = req.user.email;
-      Teacher.find({}).exec((err, teacher)=>{
-        User.findOne({email: email}).exec((err, user)=> {
-          if(user.role==0){
-            res.render('index',{tab: 1, title: "Trang Chủ", login: "true", role: "0", teachers: teacher});
-          } else {
-            res.render('index',{tab: 1, title: "Trang Chủ", login: "true", role: "1", teachers: teacher});
-          }
+    clFind.exec((err, classroom) =>{
+      tcFind.exec((err, teacher)=>{
+        coFind.exec((err, course)=>{
+          User.findOne({email: email}).exec((err, user)=> {
+            if(user.role==0){
+              res.render('index',{tab: 1, title: "Trang Chủ", login: "true", role: "0", teachers: teacher, course: course, classroom: classroom});
+            } else {
+              res.render('index',{tab: 1, title: "Trang Chủ", login: "true", role: "1", teachers: teacher, course: course,classroom: classroom});
+            }
+          })
         })
       })
-  } else {
-    Teacher.find({}, (err, teachers)=>{
-      res.render('index',{tab: 1, title: "Trang Chủ", login: "false", teachers: teachers});
     })
+  } else {
+    clFind.exec((err, classroom) =>{
+    tcFind.exec((err, teacher)=>{
+      coFind.exec((err, course)=>{
+        res.render('index',{tab: 1, title: "Trang Chủ", login: "false", teachers: teacher, course: course, classroom: classroom});
+      })
+    })
+  })
   }
 });
 router.get('/index', function(req, res, next) {
-  if(req.isAuthenticated()){
-    const email = req.user.email;
-      Teacher.find({}).exec((err, teacher)=>{
-        User.findOne({email: email}).exec((err, user)=> {
-          if(user.role==0){
-            res.render('index',{tab: 1, title: "Trang Chủ", login: "true", role: "0", teachers: teacher});
-          } else {
-            res.render('index',{tab: 1, title: "Trang Chủ", login: "true", role: "1", teachers: teacher});
-          }
-        })
-      })
-  } else {
-    Teacher.find({}, (err, teachers)=>{
-      res.render('index',{tab: 1, title: "Trang Chủ", login: "false", teachers: teachers});
-    })
-  }
+  res.redirect('/')
 });
 router.get('/course-list', function(req, res, next) {
-  res.render('course-list',{tab: 3, title: "Danh Sách Khoá Học", login: "false"});
+  let teacher = [];
+  Course.find({}).then(function(course){
+    let teacher1 = []
+    course.forEach(function(i){
+      teacher.push(i.author)            
+    })
+    teacher.forEach(function(u){
+      Teacher.findOne({_id: u}).exec((err, doc)=>{
+        teacher1.push(doc.name)
+      })
+    })
+    console.log(teacher1)
+    res.render('course-list',{tab: 3, title: "Danh Sách Khoá Học", login: "false", course: course, teacher: teacher});
+  })
+  
+  
 });
-router.get('/course-detail', function(req, res, next) {
-  res.render('course-detail',{tab: 3, title: "Chi Tiết Khoá Học", login: "false"});
+router.get('/course-detail/:id', function(req, res, next) {
+  const courseId = req.params.id;
+  Course.findOne({_id: courseId}).exec((err, course)=>{
+    Course.find({category: course.category}).exec((err, doc)=>{
+      res.render('course-detail',{tab: 3, title: "Chi Tiết Khoá Học", login: "false", course: course, recourse: doc});
+    })
+  })
+  
 });
 router.get('/class-list', function(req, res, next) {
   res.render('class-list',{tab: 4, title: "Danh Sách Lớp Học", login: "false"});
@@ -100,23 +105,6 @@ router.get('/profile', ensureAuthenticated, (req, res, next) => {
     })
 })
 
-// router.get('/streamroom',(req, res) => {
-//   res.redirect(`/${uuidV4()}`);
-// })
 
-// router.get('/:streamroom', function(req, res, next) {
-//   res.render('streamroom',{tab: 8, title: "Steam Romm", login: "true", roomId: req.params.streamroom});
-// });
-
-// io.on('connection', socket => {
-//   socket.on('join-room', (roomId, userId) => {
-//     socket.join(roomId)
-//     socket.to(roomId).broadcast.emit('user-connected', userId)
-
-//     socket.on('disconnect', () =>{
-//       socket.to(roomId).broadcast.emit('user-disconnect')
-//     })
-//   })
-// })
 
 module.exports = router;

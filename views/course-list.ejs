@@ -27,85 +27,34 @@
                  <!-- start course content container -->
                  <div class="mu-course-container">
                    <div class="row">
-                    <div class="col-md-6 col-sm-6">
-                     <div class="mu-latest-course-single">
-                       <figure class="mu-latest-course-img">
-                         <a href="course-detail"><img src="/assets/img/courses/kh1.jpg" alt="img"></a>
-                         <figcaption class="mu-latest-course-imgcaption">
-                           <a href="#">Toán</a>
-                           <span><i class="fa fa-clock-o"></i>3 Tháng</span>
-                         </figcaption>
-                       </figure>
-                       <div class="mu-latest-course-single-content">
-                        <h4><a href="course-detail">Học tốt toán 12</a></h4>
-                        <p>Gia sư: Nguyễn Hồ Ngọc Trung</p>
-                         <div class="mu-latest-course-single-contbottom">
-                            <a class="mu-course-details" href="course-detail">Chi Tiết</a>
-                            <span class="mu-course-price">1.500.000vnđ</span>
-                         </div>
-                       </div>
-                     </div> 
-                   </div>
+                    <% course.forEach(function(course){ %>
+                      <div class="col-md-6 col-sm-6">
+                        <div class="mu-latest-course-single">
+                          <figure class="mu-latest-course-img">
+                            <a href="course-detail/<%=course.id%>"><img src="/assets/img/courses/kh1.jpg" alt="img"></a>
+                            <figcaption class="mu-latest-course-imgcaption">
+                              <a href="#"><%=course.category%></a>
+                              <span><%=course.lessons.length%> Bài Giảng</span>
+                            </figcaption>
+                          </figure>
+                          <div class="mu-latest-course-single-content">
+                           <h4><a href="course-detail/<%=course.id%>"><%=course.title%></a></h4>
+                           <p>Gia sư: <%=course.authorName%></p>
+                            <div class="mu-latest-course-single-contbottom">
+                               <a class="mu-course-details" href="course-detail/<%=course.id%>">Chi Tiết</a>
+                            </div>
+                          </div>
+                        </div> 
+                      </div>
+                        
+                      <% }) %>
+                    
                    
-                   <div class="col-md-6 col-sm-6">
-                    <div class="mu-latest-course-single">
-                      <figure class="mu-latest-course-img">
-                        <a href="course-detail"><img src="/assets/img/courses/kh1.jpg" alt="img"></a>
-                        <figcaption class="mu-latest-course-imgcaption">
-                          <a href="#">Toán</a>
-                          <span><i class="fa fa-clock-o"></i>3 Tháng</span>
-                        </figcaption>
-                      </figure>
-                      <div class="mu-latest-course-single-content">
-                       <h4><a href="course-detail">Học tốt toán 12</a></h4>
-                       <p>Gia sư: Nguyễn Hồ Ngọc Trung</p>
-                        <div class="mu-latest-course-single-contbottom">
-                           <a class="mu-course-details" href="course-detail">Chi Tiết</a>
-                           <span class="mu-course-price">1.500.000vnđ</span>
-                        </div>
-                      </div>
-                    </div> 
-                  </div>
+                  
 
-                  <div class="col-md-6 col-sm-6">
-                    <div class="mu-latest-course-single">
-                      <figure class="mu-latest-course-img">
-                        <a href="course-detail"><img src="/assets/img/courses/kh1.jpg" alt="img"></a>
-                        <figcaption class="mu-latest-course-imgcaption">
-                          <a href="#">Toán</a>
-                          <span><i class="fa fa-clock-o"></i>3 Tháng</span>
-                        </figcaption>
-                      </figure>
-                      <div class="mu-latest-course-single-content">
-                       <h4><a href="course-detail">Học tốt toán 12</a></h4>
-                       <p>Gia sư: Nguyễn Hồ Ngọc Trung</p>
-                        <div class="mu-latest-course-single-contbottom">
-                           <a class="mu-course-details" href="course-detail">Chi Tiết</a>
-                           <span class="mu-course-price">1.500.000vnđ</span>
-                        </div>
-                      </div>
-                    </div> 
-                  </div>
+                  
 
-                  <div class="col-md-6 col-sm-6">
-                    <div class="mu-latest-course-single">
-                      <figure class="mu-latest-course-img">
-                        <a href="course-detail"><img src="/assets/img/courses/kh1.jpg" alt="img"></a>
-                        <figcaption class="mu-latest-course-imgcaption">
-                          <a href="#">Toán</a>
-                          <span><i class="fa fa-clock-o"></i>3 Tháng</span>
-                        </figcaption>
-                      </figure>
-                      <div class="mu-latest-course-single-content">
-                       <h4><a href="course-detail">Học tốt toán 12</a></h4>
-                       <p>Gia sư: Nguyễn Hồ Ngọc Trung</p>
-                        <div class="mu-latest-course-single-contbottom">
-                           <a class="mu-course-details" href="course-detail">Chi Tiết</a>
-                           <span class="mu-course-price">1.500.000vnđ</span>
-                        </div>
-                      </div>
-                    </div> 
-                  </div>
+                  
                   
                    </div>
                  </div>
