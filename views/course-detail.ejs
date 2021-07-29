@@ -43,12 +43,10 @@
                            <h4>Thông Tin Khoá Học</h4>
                            <ul>
                              <li> <span>Gia Sư: </span> <span><%=course.authorName%></span></li>
-                             <li> <span>SL Học Viên Đã Đăng Ký</span><span>50</span></li>
-                             <li> <span>Ngày Tải Lên</span> <span><%=course.date%></span></li>
+                             <li> <span>Ngày Tải Lên</span> <span><%=date%></span></li>
                            </ul>
                            <h4>Mô Tả</h4>
                            <p><%=course.description%>.</p>
-                           <h4>Đề Cương Khoá Học</h4>
                            <div class="table-responsive">
                             
                            <a class="mu-post-btn" href="">ĐĂNG KÝ</a>
@@ -80,7 +78,7 @@
                                <h4><a href="course-detail"><%=recourse.title%></a></h4>
                                <p>Gia sư: <%=recourse.authorName%></p>
                                 <div class="mu-latest-course-single-contbottom">
-                                   <a class="mu-course-details" href="course-detail/<%=recourse.id%>">Chi Tiết</a>
+                                   <a class="mu-course-details" href="../course-detail/<%=recourse.id%>">Chi Tiết</a>
                                 </div>
                               </div>
                             </div> 

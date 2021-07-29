@@ -17,7 +17,6 @@ const multerFilter = (req, file, cb) => {
       cb("Please upload only images.", false);
     }
   };
-
 var storage = multer.diskStorage({
     destination: function (req, file, cb){
         cb(null, 'public/assets/img/student')
@@ -26,14 +25,14 @@ var storage = multer.diskStorage({
         cb(null, file.fieldname + '-' + Date.now())
     }
 })
-var upload = multer({ storage: storage, fileFilter: multerFilter})
+
 const handleError =(err, res)=>{
     res
     .status(500)
     .contentType("text/plain")
     .end("Something went wrong!")
 }
-
+var upload = multer({ storage: storage, fileFilter: multerFilter})
 
 
 
@@ -105,16 +104,17 @@ router.get('/course-management', ensureAuthenticated, function(req, res, next){
     
     
 })
+var storage = multer.diskStorage({
+    destination: function (req, file, cb){
+        cb(null, 'public/assets/img/courses')
+    },
+    filename: function (req, file, cb){
+        cb(null, file.fieldname + '-' + Date.now())
+    }
+})
+
+var upload = multer({ storage: storage, fileFilter: multerFilter})
 router.post('/course-management', upload.single('file'), function(req, res, next){
-    var storage = multer.diskStorage({
-        destination: function (req, file, cb){
-            cb(null, 'public/assets/img/courses')
-        },
-        filename: function (req, file, cb){
-            cb(null, file.fieldname + '-' + Date.now())
-        }
-    })
-    var upload = multer({ storage: storage, fileFilter: multerFilter})
     const title = req.body.title
     const desc = req.body.description
     const cate = req.body.cate
@@ -204,7 +204,16 @@ router.get('/class-management', ensureAuthenticated, function(req, res, next){
     
     
 })
+var storage = multer.diskStorage({
+    destination: function (req, file, cb){
+        cb(null, 'public/assets/img/classes')
+    },
+    filename: function (req, file, cb){
+        cb(null, file.fieldname + '-' + Date.now())
+    }
+})
 
+var upload = multer({ storage: storage, fileFilter: multerFilter})
 router.post('/class-management',upload.single('file'), function(req, res, next){
     const classname = req.body.classname
     const teachername = req.body.teachername
@@ -263,7 +272,16 @@ router.post('/class-management',upload.single('file'), function(req, res, next){
 
 
 
+var storage = multer.diskStorage({
+    destination: function (req, file, cb){
+        cb(null, 'public/assets/img/teachers')
+    },
+    filename: function (req, file, cb){
+        cb(null, file.fieldname + '-' + Date.now())
+    }
+})
 
+var upload = multer({ storage: storage, fileFilter: multerFilter})
 router.post('/addprofile', upload.single('file'), function(req, res, next){
     var img = fs.readFileSync(req.file.path)
     const fullname = req.body.fullname
