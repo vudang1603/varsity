@@ -104,6 +104,36 @@ router.get('/course-detail/:id', function(req, res, next) {
   })
   
 });
+
+router.get('/register-class/:id', function(req, res, next){
+  const password = req.params.id;
+  
+  res.render('register-class',{tab:9 , title: "Xác Nhận Đăng Ký", login: "true", password:password})
+  
+})
+
+
+router.post('/register-class/', function(req, res, next){
+  const email = req.body.useremail;
+  const password = req.body.password;
+  console.log(email)
+  console.log(password)
+  User.findOne({email: email}).exec((err,user)=>{
+      if(user){
+        if(user.role == 1){
+          res.render('register-successful', {tab:10 ,title: "Đăng Ký Không Thành Công", login: "true", password: password, user: user })
+        }else{
+          res.render('register-successful', {tab:10 ,title: "Đăng Ký Thành Công", login: "true", password: password, user: user })
+        }
+      }else{
+        
+        res.render('register-class',{tab:9 , title: "Xác Nhận Đăng Ký", login: "true", password:password})
+      }
+  })
+  
+})
+
+
 router.get('/class-list', function(req, res, next) {
   var clFind = ClassRoom.find({}).limit(10)
   if(req.isAuthenticated()){
