@@ -55,8 +55,13 @@ router.get('/course-list', function(req, res, next) {
 router.get('/course-detail/:id', function(req, res, next) {
   const courseId = req.params.id;
   Course.findOne({_id: courseId}).exec((err, course)=>{
+    var video_id = course.lessons[0].link.split('v=')[1];
+    var ampersandPosition = video_id.indexOf('&');
+    if(ampersandPosition != -1) {
+       video_id = video_id.substring(0, ampersandPosition); 
+    }
     Course.find({category: course.category}).exec((err, doc)=>{
-      res.render('course-detail',{tab: 3, title: "Chi Tiết Khoá Học", login: "false", course: course, recourse: doc});
+      res.render('course-detail',{tab: 3, title: "Chi Tiết Khoá Học", login: "false", course: course, recourse: doc, firstId: video_id});
     })
   })
   
