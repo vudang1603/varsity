@@ -58,14 +58,12 @@ const classRoom = new mongoose.Schema({
     },
     quantity: {
         type: String,
-        default: "3"
+        default: "1"
     },
-    student:[{
-        id: {
-            type: String,
-            default: ''
-        }
-    }]
+    student:{
+        type: String,
+        default: ""
+    }
 })
 
     

@@ -105,10 +105,30 @@ router.get('/course-detail/:id', function(req, res, next) {
   
 });
 router.get('/class-list', function(req, res, next) {
-  res.render('class-list',{tab: 4, title: "Danh Sách Lớp Học", login: "false"});
-});
-router.get('/class-detail', function(req, res, next) {
-  res.render('class-detail',{tab: 4, title: "Chi Tiết Lớp Học", login: "false"});
+  var clFind = ClassRoom.find({}).limit(10)
+  if(req.isAuthenticated()){
+    clFind.exec((err, classroom) =>{
+      res.render('class-list',{tab: 4, title: "Danh Sách Lớp Học", login: "true", classroom: classroom});  
+    })
+  } else {
+    clFind.exec((err, classroom) =>{
+      res.render('class-list',{tab: 4, title: "Danh Sách Lớp Học", login: "true",classroom: classroom});  
+    })
+  }
+})
+  
+router.get('/class-detail/:id', function(req, res, next) {
+  const classId = req.params.id;
+  var coFind = Course.find({}).limit(3)
+  var clFind = ClassRoom.find({}).limit(5)
+  coFind.exec((err, course) =>{
+    clFind.exec((err, classroom) =>{
+      ClassRoom.findOne({_id: classId}).exec((err, classone)=>{
+        const image = classone.image
+        res.render('class-detail',{tab: 4, title: "Chi Tiết Lớp Học", login: "true",image:image ,classone: classone, classroom: classroom, course: course });
+      })
+    })
+  })
 });
 router.get('/support', function(req, res, next) {
   res.render('support',{tab: 6, title: "Hỗ Trợ", login: "false"});
