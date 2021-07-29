@@ -30,33 +30,22 @@
                      <div class="col-md-12">
                        <div class="mu-latest-course-single">
                          <figure class="mu-latest-course-img">
-                           <a href="#"><img src="/assets/img/teachers/tc1.jpg" alt="img"></a>
+                           <a href="#"><img src="data:teacher/<%=teacher.image.contentType%>;base64,<%=teacher.image.data.toString('base64')%>" alt="img"></a>
                          </figure>
                          <div class="mu-latest-course-single-content">
-                           <h2><a>Thầy Nguyễn Hồ Ngọc Trung</a></h2>
+                           <h2><a>Gia Sư <%=teacher.name%></a></h2>
                            <h4>THÔNG TIN GIA SƯ</h4>
                            <ul>
-                             <li> <span>Họ Và Tên</span> <span>Nguyễn Hồ Ngọc Trung</span></li>
-                             <li> <span>Nơi Công Tác</span> <span>ĐH Cần Thơ</span></li>
-                             <li> <span>Môn Dạy</span> <span>Toán</span></li>
-                             <li> <span>Học Vị</span> <span>Tiến Sĩ</span></li>
-                             <li> <span>Email</span> <span>nhnTrung@ctu.edu.vn</span></li>
-                             <li> <span>Facebook</span> <span><a href="https://www.facebook.com/profile.php?id=100008285595253">https://www.facebook.com/profile.php?id=100008285595253</a></span></li>
+                             <li> <span>Họ Và Tên</span> <span><%=teacher.name%></span></li>
+                             <li> <span>Nơi Công Tác</span> <span><%=teacher.workplace%></span></li>
+                             <li> <span>Môn Dạy</span> <span><%=teacher.achievement%></span></li>
+                             <li> <span>Học Vị</span> <span><%=teacher.degree%></span></li>
+                             <li> <span>Email</span> <span><%=teacher.email%></span></li>
+                             <li> <span>Facebook</span> <span><a href="<%=teacher.fb%>"><%=teacher.fb%></a></span></li>
                            </ul>
                            <h4>ĐÔI NÉT VỀ THẦY</h4>
-                           <p>- Là một giảng viên Đại học nhưng rất quan tâm tới hoạt động dạy, học ở bậc trung học phổ thông.<br>
-                            - Là giáo viên gắn bó với dạy học online ngay từ những ngày đầu tiên với quan điểm dạy học sinh bằng cả trái tim, sự nỗ lực cũng như sự tìm tòi, sự học hỏi của chính bản thân mình. Thầy luôn luôn tâm niệm "một người thày giỏi là người thày biết truyền cảm hứng".<br>
-                            - Giọng nói truyền cảm, cách dẫn dắt vấn đề logic đi từ tổng thể đến chi tiết Thầy đã biến các kiến thức khô khan của toán học trở nên nhẹ nhàng, gần gũi với học sinh.<br>
-                            - Luôn khích lệ, động viên trong mỗi giờ giảng khiến cho áp lực thi cử với mỗi học sinh được giảm đi rất nhiều.</p><br>
-                            <h4>THÀNH TÍCH GIẢNG DẠY</h4>
-                            <p>- Thành tích trong giảng dạy: Đã có rất rất nhiều học sinh đỗ vào các trường đại học danh tiếng.<br>
-                            - Thành tích trong lĩnh vực khác: Có nhiều công trình khoa học được công bố trên các tạp chí giáo dục.<br>
-                            - Sách đã viết: Hướng dẫn tự học Toán Cao Cấp Tập 1 và Tập 2 (Nhà xuất bản giáo dục Việt Nam)<br>
-                            - Trưởng khoa Khoa học Tự nhiên - Đại học Cần Thơ</p><br>
-                           <h4>PHƯƠNG PHÁP GIẢNG DẠY</h4>
-                           <p>- Cung cấp kiến thức tỉ mỉ, chi tiết, logic rõ ràng, mạch lạc giúp học sinh hiểu bản chất kiến thức và ứng dụng được vào mọi dạng bài tập<br>
-                            - Đơn giản hóa các thuật ngữ mang tính hàn lâm thành những ngôn ngữ đời thường, biến những bài toán khó thành những bài tập đơn giản, dễ hiểu.<br>
-                            - Coi trọng việc thực hành, vì thế khi giải thích kiến thức thầy đưa ra rất nhiều ví dụ khác nhau giúp học sinh nắm chắc, hiểu sâu kiến thức.</p>
+                           <p>- <%=teacher.introduce%>.</p><br>
+                            
                            
                          </div>
                        </div> 
@@ -75,41 +64,19 @@
                   <div class="mu-single-sidebar">
                     <h3>Lớp học của Thầy</h3>
                     <div class="mu-sidebar-popular-courses">
-                      <div class="media">
-                        <div class="media-left">
-                          <a href="course-detail">
-                            <img class="media-object" src="/assets/img/courses/kh1.jpg" alt="img">
-                          </a>
+                        <div class="media">
+                          <div class="media-left">
+                            <a href="course-detail">
+                              <img class="media-object" src="" alt="img">
+                            </a>
+                          </div>
+                          <div class="media-body">
+                            <h4 class="media-heading"><a href="course-detail"><%=classroom.classname%></a></h4>                      
+                          </div>
                         </div>
-                        <div class="media-body">
-                          <h4 class="media-heading"><a href="course-detail">Học Tốt Toán 11</a></h4>                      
-                          <span class="popular-course-price">2.000.000vnđ</span>
-                        </div>
-                      </div>
+                      
  
-                      <div class="media">
-                       <div class="media-left">
-                         <a href="course-detail">
-                           <img class="media-object" src="/assets/img/courses/kh1.jpg" alt="img">
-                         </a>
-                       </div>
-                       <div class="media-body">
-                         <h4 class="media-heading"><a href="course-detail">Học Tốt Toán 11</a></h4>                      
-                         <span class="popular-course-price">2.000.000vnđ</span>
-                       </div>
-                     </div>
- 
-                     <div class="media">
-                       <div class="media-left">
-                         <a href="course-detail">
-                           <img class="media-object" src="/assets/img/courses/kh1.jpg" alt="img">
-                         </a>
-                       </div>
-                       <div class="media-body">
-                         <h4 class="media-heading"><a href="course-detail">Học Tốt Toán 11</a></h4>                      
-                         <span class="popular-course-price">2.000.000vnđ</span>
-                       </div>
-                     </div>
+                      
                       
                      
                     </div>
@@ -119,41 +86,21 @@
                   <div class="mu-single-sidebar">
                    <h3>Khoá Học của Thầy</h3>
                    <div class="mu-sidebar-popular-courses">
-                     <div class="media">
-                       <div class="media-left">
-                         <a href="course-detail">
-                           <img class="media-object" src="/assets/img/courses/kh1.jpg" alt="img">
-                         </a>
-                       </div>
-                       <div class="media-body">
-                         <h4 class="media-heading"><a href="course-detail">Học Tốt Toán 11</a></h4>                      
-                         <span class="popular-course-price">2.000.000vnđ</span>
-                       </div>
-                     </div>
+                     <% course.forEach(function(course){%>
+                      <div class="media">
+                        <div class="media-left">
+                          <a href="../course-detail/<%=course.id%>">
+                            <img class="media-object" src="data:course/<%=course.image.contentType%>;base64,<%=course.image.data.toString('base64')%>" alt="img">
+                          </a>
+                        </div>
+                        <div class="media-body">
+                          <h4 class="media-heading"><a href="../course-detail/<%=course.id%>"><%=course.title%></a></h4>                      
+                        </div>
+                      </div>
+                     <% }) %>
+                     
 
-                     <div class="media">
-                      <div class="media-left">
-                        <a href="course-detail">
-                          <img class="media-object" src="/assets/img/courses/kh1.jpg" alt="img">
-                        </a>
-                      </div>
-                      <div class="media-body">
-                        <h4 class="media-heading"><a href="course-detail">Học Tốt Toán 11</a></h4>                      
-                        <span class="popular-course-price">2.000.000vnđ</span>
-                      </div>
-                    </div>
-
-                    <div class="media">
-                      <div class="media-left">
-                        <a href="course-detail">
-                          <img class="media-object" src="/assets/img/courses/kh1.jpg" alt="img">
-                        </a>
-                      </div>
-                      <div class="media-body">
-                        <h4 class="media-heading"><a href="course-detail">Học Tốt Toán 11</a></h4>                      
-                        <span class="popular-course-price">2.000.000vnđ</span>
-                      </div>
-                    </div>
+                     
                      
                     
                    </div>

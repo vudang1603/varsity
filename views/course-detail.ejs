@@ -30,7 +30,7 @@
                      <div class="col-md-12">
                        <div class="mu-latest-course-single">
                          <figure class="mu-latest-course-img">
-                            <iframe name="youtube_iframe" id="course-video" width="100%" height="500px" src="">
+                            <iframe name="youtube_iframe" id="course-video" width="100%" height="500px" src="https://www.youtube.com/embed/<%=firstId%>">
                             </iframe>
                            <!-- <a><img src="data:course/<%=course.image.contentType%>;base64,<%=course.image.data.toString('base64')%>" alt="img"></a> -->
                            <figcaption class="mu-latest-course-imgcaption">
@@ -43,12 +43,10 @@
                            <h4>Thông Tin Khoá Học</h4>
                            <ul>
                              <li> <span>Gia Sư: </span> <span><%=course.authorName%></span></li>
-                             <li> <span>Số Lượng Học Viên Đăng Ký</span> <span>50</span></li>
-                             <li> <span>Ngày Tải Lên</span> <span><%=course.date%></span></li>
+                             <li> <span>Ngày Tải Lên</span> <span><%=date%></span></li>
                            </ul>
                            <h4>Mô Tả</h4>
                            <p><%=course.description%>.</p>
-                           <h4>Đề Cương Khoá Học</h4>
                            <div class="table-responsive">
                             
                            <a class="mu-post-btn" href="">ĐĂNG KÝ</a>
@@ -80,7 +78,7 @@
                                <h4><a href="course-detail"><%=recourse.title%></a></h4>
                                <p>Gia sư: <%=recourse.authorName%></p>
                                 <div class="mu-latest-course-single-contbottom">
-                                   <a class="mu-course-details" href="course-detail/<%=recourse.id%>">Chi Tiết</a>
+                                   <a class="mu-course-details" href="../course-detail/<%=recourse.id%>">Chi Tiết</a>
                                 </div>
                               </div>
                             </div> 

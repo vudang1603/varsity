@@ -31,7 +31,7 @@
                       <div class="col-md-6 col-sm-6">
                         <div class="mu-latest-course-single">
                           <figure class="mu-latest-course-img">
-                            <a href="course-detail/<%=course.id%>"><img src="/assets/img/courses/kh1.jpg" alt="img"></a>
+                            <a href="course-detail/<%=course.id%>"><img src="data:course/<%=course.image.contentType%>;base64,<%=course.image.data.toString('base64')%>" alt="img"></a>
                             <figcaption class="mu-latest-course-imgcaption">
                               <a href="#"><%=course.category%></a>
                               <span><%=course.lessons.length%> Bài Giảng</span>
@@ -90,54 +90,36 @@
                    <div class="mu-single-sidebar">
                      <h3>Danh Mục</h3>
                      <ul class="mu-sidebar-catg">
-                       <li><a href="#">Toán</a></li>
-                       <li><a href="">Hoá Học</a></li>
-                       <li><a href="">Vật Lý</a></li>
-                       <li><a href="">Sinh Học</a></li>
-                       <li><a href="">Anh Văn</a></li>
-                       <li><a href="">Ngữ Văn</a></li>
+                       <li><a href="http://localhost:3000/course-list/Toán">Toán</a></li>
+                       <li><a href="http://localhost:3000/course-list/Hoá Học">Hoá Học</a></li>
+                       <li><a href="http://localhost:3000/course-list/Vật Lý">Vật Lý</a></li>
+                       <li><a href="http://localhost:3000/course-list/Sinh Học">Sinh Học</a></li>
+                       <li><a href="http://localhost:3000/course-list/Anh Văn">Anh Văn</a></li>
+                       <li><a href="http://localhost:3000/course-list/Ngữ Văn">Ngữ Văn</a></li>
                      </ul>
                    </div>
                    <!-- end single sidebar -->
                    <!-- start single sidebar -->
                    <div class="mu-single-sidebar">
-                     <h3>Khoá Học Phổ Biến</h3>
+                     <h3>Khoá Học Mới Nhất</h3>
                      <div class="mu-sidebar-popular-courses">
-                       <div class="media">
-                         <div class="media-left">
-                           <a href="course-detail">
-                             <img class="media-object" src="/assets/img/courses/kh1.jpg" alt="img">
-                           </a>
-                         </div>
-                         <div class="media-body">
-                           <h4 class="media-heading"><a href="course-detail">Học Tốt Toán 11</a></h4>                      
-                           <span class="popular-course-price">2.000.000vnđ</span>
-                         </div>
-                       </div>
+                       <% newCourse.forEach(function(newCourse){%>
+                        <div class="media">
+                          <div class="media-left">
+                            <a href="course-detail/<%=newCourse.id%>">
+                              <img class="media-object" src="data:newCourse/<%=newCourse.image.contentType%>;base64,<%=newCourse.image.data.toString('base64')%>" alt="img">
+                            </a>
+                          </div>
+                          <div class="media-body">
+                            <h4 class="media-heading"><a href="course-detail/<%=newCourse.id%>"><%=newCourse.title%></a></h4>
+                          </div>
+                        </div>
+                       <% }) %>
+                       
 
-                       <div class="media">
-                        <div class="media-left">
-                          <a href="course-detail">
-                            <img class="media-object" src="/assets/img/courses/kh1.jpg" alt="img">
-                          </a>
-                        </div>
-                        <div class="media-body">
-                          <h4 class="media-heading"><a href="course-detail">Học Tốt Toán 11</a></h4>                      
-                          <span class="popular-course-price">2.000.000vnđ</span>
-                        </div>
-                      </div>
+                       
 
-                      <div class="media">
-                        <div class="media-left">
-                          <a href="course-detail">
-                            <img class="media-object" src="/assets/img/courses/kh1.jpg" alt="img">
-                          </a>
-                        </div>
-                        <div class="media-body">
-                          <h4 class="media-heading"><a href="course-detail">Học Tốt Toán 11</a></h4>                      
-                          <span class="popular-course-price">2.000.000vnđ</span>
-                        </div>
-                      </div>
+                      
                        
                      </div>
                    </div>
