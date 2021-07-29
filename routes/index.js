@@ -5,8 +5,9 @@ const Student = require('../models/student-profile')
 const Teacher = require('../models/teacher-profile');
 const User = require('../models/users');
 const Course = require('../models/courses');
-const Classroom = require('../models/class-room')
-var fs = require('fs')
+const ClassRoom = require('../models/class-room')
+var fs = require('fs');
+const { Document } = require('mongoose');
 /* GET home page. */
 
 router.get('/', function(req, res, next) {
@@ -116,11 +117,11 @@ router.get('/teachers', function(req, res, next) {
 router.get('/teacher-detail/:id', function(req, res, next) {
   const tcId = req.params.id
   var coFind = Course.find({author: tcId}).limit(3)
-  var clFind = Classroom.find({_id: tcId}).limit(3)
+  var clFind = ClassRoom.find({_id: tcId}).limit(3)
   coFind.exec((err, course)=>{
-    clFind.exec((err, classroom)=>{
+    clFind.exec((err, doc)=>{
       Teacher.findOne({_id: tcId}).exec((err, teacher)=>{
-        res.render('teacher-detail',{tab: 2, title: "Thông Tin Gia Sư", login: "false", teacher: teacher, course: course, classroom: classroom});
+        res.render('teacher-detail',{tab: 2, title: "Thông Tin Gia Sư", login: "false", teacher: teacher, course: course, classRoom: doc});
       })
     })
   })
