@@ -57,6 +57,28 @@ router.get('/course-list', function(req, res, next) {
   
   
 });
+router.get('/course-list/:cate', function(req, res, next) {
+  var cate = req.params.cate
+  var coFind = Course.find({}).limit(3)
+  let teacher = [];
+  Course.find({category: cate}).then(function(course){
+    coFind.exec((err, newCourse)=>{
+      let teacher1 = []
+    course.forEach(function(i){
+      teacher.push(i.author)            
+    })
+    teacher.forEach(function(u){
+      Teacher.findOne({_id: u}).exec((err, doc)=>{
+        teacher1.push(doc.name)
+      })
+    })
+    console.log(teacher1)
+    res.render('course-list',{tab: 3, title: "Danh Sách Khoá Học", login: "false", course: course, teacher: teacher, newCourse: newCourse});
+    })
+  })
+  
+  
+});
 router.get('/course-detail/:id', function(req, res, next) {
   const courseId = req.params.id;
   Course.findOne({_id: courseId}).exec((err, course)=>{
