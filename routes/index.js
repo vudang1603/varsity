@@ -134,6 +134,47 @@ router.post('/register-class/', function(req, res, next){
 })
 
 
+router.get('/classroom/:idclass', function(req,res, next){
+  const idclass = req.params.idclass;
+  if(req.isAuthenticated()){
+    const userid = req.user.id;
+    ClassRoom.findOne({_id: idclass}).exec((err, classroom)=>{
+      User.findOne({_id: userid}).exec((err,user)=>{
+        const role = user.role
+        res.render('classroom', {tab: 11, title: "Lớp Học", login: "true",role: role, classroom: classroom, user:user})
+      })
+    })
+  }
+})
+
+
+router.post('/classroom/', function(req, res, next){
+  if(req.isAuthenticated()){
+    const tittle = req.body.tittlelesson
+    const contain = req.body.contaillesson
+    const video = req.body.idvideo
+    const homework = req.body.homework
+    console.log(tittle)
+    console.log(contain)
+    console.log(video)
+    console.log(homework)
+    const userid = req.user.id;
+    ClassRoom.findByIdAndUpdate(userid, {$set:{
+
+      tittle: tittle,
+      conntain: contain,
+      videoid: video,
+      homework:homework,
+    }}, {new: true}, (err, doc)=>{
+      if(err){
+          console.log("Something wrong when updating data!");
+      }
+      console.log(doc)
+    })
+  res.redirect(req.get('referer'));
+  }
+})
+
 router.get('/class-list', function(req, res, next) {
   var clFind = ClassRoom.find({}).limit(10)
   if(req.isAuthenticated()){
