@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 const Student = require('../models/student-profile')
+const Comment = require('../models/comment')
 
 const forum = Schema({
     poster: {
@@ -15,13 +16,9 @@ const forum = Schema({
         type: String,
         default: ""
     },
-    commentAuthor:[{
+    comment:[{
         type: Schema.Types.ObjectId,
-        ref: 'Student'
-    }],
-    commentContent:[{
-        type: String,
-        default: ""
+        ref: Comment
     }],
     date: {
         type: Date,

@@ -80,10 +80,10 @@ router.post('/', upload.single('file'), function(req, res, next){
     })
 
 });
-router.get('/registered-course', function(req, res, next){
+router.get('/registered-course',ensureAuthenticated , function(req, res, next){
     if(req.isAuthenticated()){
         const id = req.user.id;
-        Student.findOne({_id: id}).exec((err, student)=>{
+        Student.findOne({_id: id}).populate('registeredCourse').exec((err, student)=>{
             const image = student.image
             res.render('student-course',{tab: 7, title: "Trang Cá Nhân", login: "true", role: "0", image: image, student: student});
         }) 

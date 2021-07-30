@@ -98,7 +98,7 @@
                                     </p>
                                 </div>
                                 <div class="text-muted small text-center align-self-center">
-                                    <span><i class="far fa-comment ml-2"></i> <%=forum.commentContent.length%></span>
+                                    <span><i class="far fa-comment ml-2"></i> <%=forum.comment.length%></span>
                                 </div>
                             </div>
                         </div>
@@ -148,7 +148,7 @@
                                     </div>
                                 </div>
                                 <div class="text-muted small text-center">
-                                    <span><i class="far fa-comment ml-2"></i> <%=forum.commentContent.length%></span>
+                                    <span><i class="far fa-comment ml-2"></i> <%=forum.comment.length%></span>
                                 </div>
                             </div>
                         </div>
@@ -171,20 +171,22 @@
                                                 <div class="clearfix"></div>
                                                 <hr>
                                                 <ul class="media-list">
-                                                    <li class="media">
-                                                        <a href="#" class="pull-left">
-                                                            <img src="https://bootdey.com/img/Content/user_1.jpg" alt="" class="img-circle">
-                                                        </a>
-                                                        <div class="media-body">
-                                                            <span class="text-muted pull-right">
-                                                            </span>
-                                                            <strong class="text-success">@MartinoMont</strong>
-                                                            <p>
-                                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                                                Lorem ipsum dolor sit amet, <a href="#">#consecteturadipiscing </a>.
-                                                            </p>
-                                                        </div>
-                                                    </li>
+                                                    <% forum.comment.forEach(function(comment){ %>
+                                                        <li class="media">
+                                                            <a href="#" class="pull-left">
+                                                                <img src="data:comment.poster/<%=comment.poster.image.contentType%>;base64,<%=comment.poster.image.data.toString('base64')%>" alt="" class="img-circle">
+                                                            </a>
+                                                            <div class="media-body">
+                                                                <span class="text-muted pull-right">
+                                                                </span>
+                                                                <strong class="text-primary">@<%=comment.poster.name%></strong>
+                                                                <p>
+                                                                    <%=comment.content%>.
+                                                                </p>
+                                                            </div>
+                                                        </li>
+                                                    <% }) %>
+    
                                                     
                                                     
                                                 </ul>

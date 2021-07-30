@@ -8,6 +8,7 @@ const Course = require('../models/courses');
 var fs = require('fs');
 const ClassRoom = require('../models/class-room');
 const Forums = require('../models/forums')
+const Comment = require('../models/comment')
 /* GET home page. */
 
 router.get('/', function(req, res, next) {
@@ -44,20 +45,13 @@ router.get('/index', function(req, res, next) {
 });
 router.get('/course-list', function(req, res, next) {
   var coFind = Course.find({}).limit(3)
-  let teacher = [];
   Course.find({}).then(function(course){
     coFind.exec((err, newCourse)=>{
-      let teacher1 = []
-    course.forEach(function(i){
-      teacher.push(i.author)            
-    })
-    teacher.forEach(function(u){
-      Teacher.findOne({_id: u}).exec((err, doc)=>{
-        teacher1.push(doc.name)
-      })
-    })
-    console.log(teacher1)
-    res.render('course-list',{tab: 3, title: "Danh Sách Khoá Học", login: "false", course: course, teacher: teacher, newCourse: newCourse});
+      if(req.isAuthenticated()){
+        res.render('course-list',{tab: 3, title: "Danh Sách Khoá Học", login: "true", course: course, newCourse: newCourse});
+      } else {
+        res.render('course-list',{tab: 3, title: "Danh Sách Khoá Học", login: "false", course: course, newCourse: newCourse});
+      }
     })
   })
   
@@ -68,7 +62,12 @@ router.get('/course-list/:cate', function(req, res, next) {
   var coFind = Course.find({}).limit(3)
   Course.find({category: cate}).then(function(course){
     coFind.exec((err, newCourse)=>{
-    res.render('course-list',{tab: 3, title: "Danh Sách Khoá Học", login: "false", course: course, newCourse: newCourse});
+      if(req.isAuthenticated()){
+        res.render('course-list',{tab: 3, title: "Danh Sách Khoá Học", login: "true", course: course, newCourse: newCourse});
+      } else {
+        res.render('course-list',{tab: 3, title: "Danh Sách Khoá Học", login: "false", course: course, newCourse: newCourse});
+      }
+    
     })
   })
   
@@ -88,10 +87,36 @@ router.get('/course-detail/:id', function(req, res, next) {
     var y = date.getFullYear()
     var final_date = d+'/'+m+'/'+y
     Course.find({category: course.category}).exec((err, doc)=>{
-      res.render('course-detail',{tab: 3, title: "Chi Tiết Khoá Học", login: "false", course: course, recourse: doc, firstId: video_id, date: final_date});
+      if(req.isAuthenticated()){
+        const id = req.user.id
+        Student.findOne({registeredCourse: courseId}).exec((err, student)=>{
+          res.render('course-detail',{tab: 3, title: "Chi Tiết Khoá Học", login: "true", course: course, recourse: doc, firstId: video_id, date: final_date, student: student});
+        })
+        
+      } else {
+        res.render('course-detail',{tab: 3, title: "Chi Tiết Khoá Học", login: "false", course: course, recourse: doc, firstId: video_id, date: final_date, student: ""});
+      }
+      
     })
   })
   
+});
+router.get('/course-detail/:id/register', ensureAuthenticated, function(req, res, next) {
+  const courseId = req.params.id;
+  const id = req.user.id;
+  User.findOne({_id: id}).exec((err, user)=>{
+    if(user.role==0){
+     Student.findByIdAndUpdate(id, {$set:{
+      registeredCourse: courseId
+     }}, {new: true}, (err, doc)=>{
+       if(err){
+         console.log(err)
+       }
+       console.log(doc)
+     })
+    }
+  })
+  res.redirect(req.get('referer'));
 });
 
 router.get('/register-class/:id', ensureAuthenticated, function(req, res, next){
@@ -213,13 +238,7 @@ router.get('/teacher-detail/:id', function(req, res, next) {
   })
 });
 router.get('/forums', function(req, res, next) {
-  Forums.find({}).populate('poster').exec((err, doc)=>{
-    if(err) {
-      console.log(err)
-    }
-    console.log(doc)
-  })
-  Forums.find({}).populate('poster').exec((err, forums)=>{
+  Forums.find({}).populate('poster comment').exec((err, forums)=>{
     var final_date = []
     forums.forEach(function(f){
       var date = new Date(f.date)
@@ -256,7 +275,27 @@ router.post('/forums/:id/add-comment',ensureAuthenticated , function(req, res, n
   const foId = req.params.id
   const content = req.body.comment
   
-  
+  Student.findOne({_id: id}).exec((err, student)=>{
+    const comment = new Comment({
+      forumId: foId,
+      poster: {
+        name: student.name,
+        image: student.image
+      },
+      content: content
+    })
+    Forums.findByIdAndUpdate({_id: foId}, {$push:{
+      comment: comment._id
+    }}, {new: true}, (err, doc)=>{
+      if(err){
+        console.log(err)
+      }
+    })
+    comment.save().then((value)=>{
+      console.log(value);
+      res.redirect(req.get('referer'));
+    }).catch(value=> console.log(value));
+  })
 });
 
 
@@ -280,6 +319,13 @@ router.get('/profile', ensureAuthenticated, (req, res, next) => {
     })
 })
 
-
+router.get('/search', (req, res, next)=>{
+  let txt = req.query.search
+  txt = txt.toLowerCase()
+  
+  Course.find({ 'title' : new RegExp("^"+txt+"$",'i')}).exec((err, course)=>{
+    console.log(course)
+  })
+})
 
 module.exports = router;
