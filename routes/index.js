@@ -11,7 +11,6 @@ const ClassRoom = require('../models/class-room');
 const Forums = require('../models/forums')
 const Comment = require('../models/comment')
 /* GET home page. */
-<<<<<<< HEAD
 function removeVietnameseTones(str) {
   str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g,"a"); 
   str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g,"e"); 
@@ -40,13 +39,11 @@ function removeVietnameseTones(str) {
   str = str.replace(/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'|\"|\&|\#|\[|\]|~|\$|_|`|-|{|}|\||\\/g," ");
   return str;
 }
-=======
 
 // gửi mail
 var nodemailer = require('nodemailer');
 
 
->>>>>>> 3c210c783decfe28754ebee1c9bdf17db5a08085
 router.get('/', function(req, res, next) {
   var tcFind = Teacher.find({}).limit(8)
   var coFind = Course.find({}).limit(10)
