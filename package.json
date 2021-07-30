@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon ./bin/www",
+    "build": "webpack --config webpack.config.js"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
@@ -30,6 +31,8 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.12"
+    "nodemon": "^2.0.12",
+    "webpack": "^5.47.1",
+    "webpack-cli": "^4.7.2"
   }
 }

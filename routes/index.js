@@ -420,6 +420,9 @@ router.post('/sendmail', (req, res, next)=>{
 
 
 
+router.get('/videocall/:id', ensureAuthenticated, (req, res, next) => {
+  res.render('streamroom', {tab: 13, title: "Video Call", login: "true"})
+})
 
 
 module.exports = router;
