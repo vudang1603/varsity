@@ -28,23 +28,24 @@
                  <div class="mu-course-container">
                    <div class="row">
                      <div class="col-md-6 col-sm-6">
+                      <% classroom.forEach(function(classroom) {%>
                      <div class="mu-latest-course-single">
                        <figure class="mu-latest-course-img">
-                         <a href="class-detail"><img src="/assets/img/courses/kh1.jpg" alt="img"></a>
+                        <a href="class-detail/<%=classroom.id%>"><img src="data:classroom/<%=classroom.image.contentType%>;base64,<%=classroom.image.data.toString('base64')%>" alt="img" style="height: 200px;"></a>
                          <figcaption class="mu-latest-course-imgcaption">
-                           <a href="#">Toán</a>
-                           <span><i class="fa fa-clock-o"></i>3 Tháng</span>
+                           <span><i class="fa fa-clock-o"></i><%=classroom.timetable%></span>
                          </figcaption>
                        </figure>
                        <div class="mu-latest-course-single-content">
-                        <h4><a href="class-detail">Lớp luyện đề thi Toán THPT</a></h4>
-                        <p>Gia sư: Nguyễn Hồ Ngọc Trung</p>
+                        <h4><a href="class-detail/<%=classroom.id%>"><%=classroom.classname%></a></h4>
+                        <p>Gia sư: <%=classroom.author%></p>
                          <div class="mu-latest-course-single-contbottom">
-                            <a class="mu-course-details" href="class-detail">Chi Tiết</a>
-                            <span class="mu-course-price" href="#">1.500.000vnđ</span>
+                            <a class="mu-course-details" href="class-detail/<%=classroom.id%>">Chi Tiết</a>
+                            <span class="mu-course-price" href="#"><%=classroom.price%> vnđ</span>
                          </div>
                        </div>
-                     </div> 
+                     </div>
+                     <%})%>
                    </div>                  
                   
                    </div>
@@ -93,19 +94,18 @@
                    <!-- start single sidebar -->
                    <div class="mu-single-sidebar">
                      <h3>Lớp Học Phổ Biến</h3>
+                     <% classroom.forEach(function(classroom) {%>
                      <div class="mu-sidebar-popular-courses">
                        <div class="media">
                          <div class="media-left">
-                           <a href="class-detail">
-                             <img class="media-object" src="/assets/img/courses/kh1.jpg" alt="img">
-                           </a>
+                          <a href="class-detail/<%=classroom.id%>"><img src="data:classroom/<%=classroom.image.contentType%>;base64,<%=classroom.image.data.toString('base64')%>" alt="img" style="width:70px ;;height: 50px;"></a>
                          </div>
                          <div class="media-body">
-                           <h4 class="media-heading"><a href="class-detail">Luyện đề thi Hoá THPT</a></h4>                      
-                           <span class="popular-course-price">2.000.000vnđ</span>
+                           <h4 class="media-heading"><a href="class-detail/<%=classroom.id%>"><%=classroom.classname%></a></h4>                      
+                           <span class="popular-course-price"><%=classroom.price%> vnđ</span>
                          </div>
                        </div>
-                       
+                       <%})%>
                      </div>
                    </div>
                    <!-- end single sidebar -->

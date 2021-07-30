@@ -1,0 +1,16 @@
+<%- include('header'); %>
+
+<div class="registerclass" style="width: 100%; display: flex; justify-content: center; align-items: center; flex-direction: column;">
+    
+
+    <% if(<%=user.role%> == 1){ %>
+        <h1>Đăng Ký Không Thành Công :(</h1>
+    <% }else{ %>
+        <h1>Đăng Ký Thành Công</h1>
+        <p> Mã tham gia lớp của bạn:  <%= password %></p>
+    <% } %>
+    
+</div>
+
+
+<%- include('footer'); %>

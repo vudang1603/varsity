@@ -1,0 +1,81 @@
+<%- include('header'); %>
+    <div class="containclassroom" style="width: 100; height: auto;">
+
+    <center>
+    <% if( role == 1 ){ %>
+       <H2 style="margin: 50px 50px 50px 50px;">Cập Nhật Bài Học</H2>
+        <div class="divform" style="width: 60%; height: auto;">
+            <form action="../classroom/" method="POST" enctype="multipart/form-data" class="form-horizontal">
+                <p>Tiêu Đề Bài Học</p>
+                <input type="text" id="tittlelesson" name="tittlelesson" class="form-control">
+                <p>Nội Dung Chính</p>
+                <textarea name="contaillesson" id="contaillesson" cols="40" rows="10" class="form-control"></textarea>
+                <p>Video (Copy Embed)</p>
+                <input type="text" id="idvideo" name="idvideo" class="form-control">
+                <p>Link GG drive(bài tập)</p>
+                <input type="text" id="homework" name="homework" class="form-control">
+                </br>
+
+                <input type="submit" value="Cập Nhật Bài Học Mới" class="btn btn-primary">
+            </form>
+        </div>
+        <h2 style="margin: 50px 50px 50px 50px;">Bài Học Hôm Nay</h2>
+        <div class="divcontail">
+            <% if(classroom.tittle == ""){ %>
+                <h3>Chưa Có Tiêu Đề</h3>
+            <% }else{ %>
+                <%=classroom.tittle%></h3>
+            <% } %>
+            
+            <% if(classroom.videoid == ""){ %>
+                <h5>Chưa Có Video</h5>
+            <% }else{ %>
+                <%=classroom.videoid%>
+            <% } %>
+            
+            <% if(classroom.conntain == ""){ %>
+                <h5>Chưa Có Nội Dung</h5>
+            <% }else{ %>
+                <%=classroom.conntain%>
+            <% } %>
+            
+            <% if(classroom.homework == ""){ %>
+                <h5>Chưa Có Bài Tập</h5>
+            <% }else{ %>
+                <%=classroom.homework%>
+            <% } %>
+        </div>
+    <% }else{ %>
+        <div class="divcontail">
+            <h2 style="margin: 50px 50px 50px 50px;">Bài Học Hôm Nay</h2>
+        
+            <% if(classroom.tittle == ""){ %>
+                <h3>Chưa Có Tiêu Đề</h3>
+            <% }else{ %>
+                <%=classroom.tittle%></h3>
+            <% } %>
+            
+            <% if(classroom.videoid == ""){ %>
+                <h5>Chưa Có Video</h5>
+            <% }else{ %>
+                <%=classroom.videoid%>
+            <% } %>
+            
+            <% if(classroom.conntain == ""){ %>
+                <h5>Chưa Có Nội Dung</h5>
+            <% }else{ %>
+                <%=classroom.conntain%>
+            <% } %>
+            
+            <% if(classroom.homework == ""){ %>
+                <h5>Chưa Có Bài Tập</h5>
+            <% }else{ %>
+                <%=classroom.homework%>
+            <% } %>
+        
+        </div>
+    <% } %>
+    </center>
+    </div>
+    
+<%- include('footer') %>

@@ -93,11 +93,102 @@ router.get('/course-detail/:id', function(req, res, next) {
   })
   
 });
+
+router.get('/register-class/:id', function(req, res, next){
+  const password = req.params.id;
+  
+  res.render('register-class',{tab:9 , title: "Xác Nhận Đăng Ký", login: "true", password:password})
+  
+})
+
+
+router.post('/register-class/', function(req, res, next){
+  const email = req.body.useremail;
+  const password = req.body.password;
+  console.log(email)
+  console.log(password)
+  User.findOne({email: email}).exec((err,user)=>{
+      if(user){
+        if(user.role == 1){
+          res.render('register-successful', {tab:10 ,title: "Đăng Ký Không Thành Công", login: "true", password: password, user: user })
+        }else{
+          res.render('register-successful', {tab:10 ,title: "Đăng Ký Thành Công", login: "true", password: password, user: user })
+        }
+      }else{
+        
+        res.render('register-class',{tab:9 , title: "Xác Nhận Đăng Ký", login: "true", password:password})
+      }
+  })
+  
+})
+
+
+router.get('/classroom/:idclass', function(req,res, next){
+  const idclass = req.params.idclass;
+  if(req.isAuthenticated()){
+    const userid = req.user.id;
+    ClassRoom.findOne({_id: idclass}).exec((err, classroom)=>{
+      User.findOne({_id: userid}).exec((err,user)=>{
+        const role = user.role
+        res.render('classroom', {tab: 11, title: "Lớp Học", login: "true",role: role, classroom: classroom, user:user})
+      })
+    })
+  }
+})
+
+
+router.post('/classroom/', function(req, res, next){
+  if(req.isAuthenticated()){
+    const tittle = req.body.tittlelesson
+    const contain = req.body.contaillesson
+    const video = req.body.idvideo
+    const homework = req.body.homework
+    console.log(tittle)
+    console.log(contain)
+    console.log(video)
+    console.log(homework)
+    const userid = req.user.id;
+    ClassRoom.findByIdAndUpdate(userid, {$set:{
+
+      tittle: tittle,
+      conntain: contain,
+      videoid: video,
+      homework:homework,
+    }}, {new: true}, (err, doc)=>{
+      if(err){
+          console.log("Something wrong when updating data!");
+      }
+      console.log(doc)
+    })
+  res.redirect(req.get('referer'));
+  }
+})
+
 router.get('/class-list', function(req, res, next) {
-  res.render('class-list',{tab: 4, title: "Danh Sách Lớp Học", login: "false"});
-});
-router.get('/class-detail', function(req, res, next) {
-  res.render('class-detail',{tab: 4, title: "Chi Tiết Lớp Học", login: "false"});
+  var clFind = ClassRoom.find({}).limit(10)
+  if(req.isAuthenticated()){
+    clFind.exec((err, classroom) =>{
+      res.render('class-list',{tab: 4, title: "Danh Sách Lớp Học", login: "true", classroom: classroom});  
+    })
+  } else {
+    clFind.exec((err, classroom) =>{
+      res.render('class-list',{tab: 4, title: "Danh Sách Lớp Học", login: "true",classroom: classroom});  
+    })
+  }
+})
+  
+router.get('/class-detail/:id', function(req, res, next) {
+  const classId = req.params.id;
+  var coFind = Course.find({}).limit(3)
+  var clFind = ClassRoom.find({}).limit(5)
+  coFind.exec((err, course) =>{
+    clFind.exec((err, classroom) =>{
+      ClassRoom.findOne({_id: classId}).exec((err, classone)=>{
+        const image = classone.image
+        res.render('class-detail',{tab: 4, title: "Chi Tiết Lớp Học", login: "true",image:image ,classone: classone, classroom: classroom, course: course });
+      })
+    })
+  })
 });
 router.get('/support', function(req, res, next) {
   res.render('support',{tab: 6, title: "Hỗ Trợ", login: "false"});
