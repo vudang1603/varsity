@@ -48,8 +48,11 @@
                            <h4>Mô Tả</h4>
                            <p><%=course.description%>.</p>
                            <div class="table-responsive">
-                            
-                           <a class="mu-post-btn" href="<%=course.id%>/register">ĐĂNG KÝ</a>
+                            <% if(student){%>
+                              <a class="mu-post-btn" aria-disabled="true">BẠN ĐÃ ĐĂNG KÝ KHÓA HỌC NÀY</a>
+                            <% } else { %>
+                              <a class="mu-post-btn" href="<%=course.id%>/register">ĐĂNG KÝ</a>
+                            <% } %>
                            </div>
                          </div>
                        </div> 

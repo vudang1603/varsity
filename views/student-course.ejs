@@ -29,47 +29,21 @@
                     <div class="content-panel">
                         <h2 class="title">Danh Sách Khoá Học Đã Đăng Ký</h2>
                         <div class="row">
+                          <% student.registeredCourse.forEach(function(course){%>
                             <div class="col-sm-6 col-md-5 fa-border" style="padding: 10px; margin: 20px;">
                               <div class="card">
                                 <div class="card-body">
-                                    <a href="#"><img src="/assets/img/courses/kh1.jpg" alt="img" style="width: 100%;"></a>
-                                  <h5 class="card-title">Special title treatment</h5>
-                                  <p class="card-text">It's a broader card with text below as a natural lead-in to extra content. This content is a little longer.</p>
-                                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                                    <a href="#"><img src="data:course/<%=course.image.contentType%>;base64,<%=course.image.data.toString('base64')%>" alt="img" style="width: 100%;"></a>
+                                  <h5 class="card-title"><%=course.category%></h5>
+                                  <h4 class="card-title"><%=course.title%></h4>
+                                  <p class="card-text"><%=course.description%>.</p>
+                                  <a href="../course-detail/<%=course.id%>" class="btn btn-primary">Chi Tiết</a>
                                 </div>
                               </div>
                             </div>
-                            <div class="col-sm-6 col-md-5 fa-border" style="padding: 10px; margin: 20px;">
-                              <div class="card">
-                                <div class="card-body">
-                                    <a href="#"><img src="/assets/img/courses/kh1.jpg" alt="img" style="width: 100%;"></a>
-                                  <h5 class="card-title">Special title treatment</h5>
-                                  <p class="card-text">It's a broader card with text below as a natural lead-in to extra content. This content is a little longer.</p>
-                                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="col-sm-6 col-md-5 fa-border" style="padding: 10px; margin: 20px;">
-                                <div class="card">
-                                  <div class="card-body">
-                                      <a href="#"><img src="/assets/img/courses/kh1.jpg" alt="img" style="width: 100%;"></a>
-                                    <h5 class="card-title">Special title treatment</h5>
-                                    <p class="card-text">It's a broader card with text below as a natural lead-in to extra content. This content is a little longer.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-sm-6 col-md-5 fa-border" style="padding: 10px; margin: 20px;">
-                                <div class="card">
-                                  <div class="card-body">
-                                      <a href="#"><img src="/assets/img/courses/kh1.jpg" alt="img" style="width: 100%;"></a>
-                                    <h5 class="card-title">Special title treatment</h5>
-                                    <p class="card-text">It's a broader card with text below as a natural lead-in to extra content. This content is a little longer.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                                  </div>
-                                </div>
-                              </div>
-                              
+                          <% }) %>
+                            
+                            
 
                             
 

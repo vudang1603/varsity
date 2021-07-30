@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const {ensureAuthenticated} = require('../config/auth');
 const User = require('../models/users')
+const Course = require('../models/courses')
 const Schema = mongoose.Schema;
 
 
@@ -25,10 +26,10 @@ const studentSchema = Schema({
         type: String,
         default: ""
     },
-    registeredCourse: {
-        type: Array,
-        default: []
-    }
+    registeredCourse: [{
+        type: Schema.Types.ObjectId,
+        ref: Course
+    }]
 
 })
 
