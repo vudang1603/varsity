@@ -5,74 +5,119 @@
     <% if( role == 1 ){ %>
        <H2 style="margin: 50px 50px 50px 50px;">Cập Nhật Bài Học</H2>
         <div class="divform" style="width: 60%; height: auto;">
-            <form action="../classroom/" method="POST" enctype="multipart/form-data" class="form-horizontal">
+            <form action="../classroom/" method="POST" class="form-horizontal">
                 <p>Tiêu Đề Bài Học</p>
                 <input type="text" id="tittlelesson" name="tittlelesson" class="form-control">
                 <p>Nội Dung Chính</p>
                 <textarea name="contaillesson" id="contaillesson" cols="40" rows="10" class="form-control"></textarea>
-                <p>Video (Copy Embed)</p>
+                <p>Video (Copy idVideo)</p>
                 <input type="text" id="idvideo" name="idvideo" class="form-control">
                 <p>Link GG drive(bài tập)</p>
                 <input type="text" id="homework" name="homework" class="form-control">
+                <input type="hidden" id="idclass" name="idclass" value="<%=classroom._id%>">
                 </br>
 
                 <input type="submit" value="Cập Nhật Bài Học Mới" class="btn btn-primary">
             </form>
         </div>
+
+        </br>
+        </br>
+        </br>
+        <a href="/videocall/<%=classroom._id%>#"><button class="btn btn-primary">Video Call</button></a> </br>
+
         <h2 style="margin: 50px 50px 50px 50px;">Bài Học Hôm Nay</h2>
-        <div class="divcontail">
+        
+        <div class="divcontail" style="width: 60%;">
+            
             <% if(classroom.tittle == ""){ %>
                 <h3>Chưa Có Tiêu Đề</h3>
             <% }else{ %>
-                <%=classroom.tittle%></h3>
+                <h1><%=classroom.tittle%></h1></br>
             <% } %>
-            
+
             <% if(classroom.videoid == ""){ %>
                 <h5>Chưa Có Video</h5>
             <% }else{ %>
-                <%=classroom.videoid%>
-            <% } %>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/<%=classroom.videoid%>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </br>
+                <% } %>
             
+                
+
             <% if(classroom.conntain == ""){ %>
                 <h5>Chưa Có Nội Dung</h5>
             <% }else{ %>
-                <%=classroom.conntain%>
+            </br>
+                <H2>Nội dung</H2> </br>
+                
+                    <%=classroom.conntain%> </br>
+                
+                
             <% } %>
             
             <% if(classroom.homework == ""){ %>
                 <h5>Chưa Có Bài Tập</h5>
             <% }else{ %>
-                <%=classroom.homework%>
+            </br>
+            <H2>Link bài tập</H2> </br>
+
+                <a href="<%=classroom.homework%>" target="_blank"><%=classroom.homework%> <br></a>
+                
+                <p></p>
+        </br>
             <% } %>
         </div>
     <% }else{ %>
-        <div class="divcontail">
-            <h2 style="margin: 50px 50px 50px 50px;">Bài Học Hôm Nay</h2>
+
         
+        <div class="divcontail" style="width: 60%;">
+            <br>
+        </br>
+    </br>
+    </br>
+                <a href="/videocall/<%=classroom._id%>"><button class="btn btn-primary">Video Call</button></a> </br>
+            <h2 style="margin: 50px 50px 50px 50px;">Bài Học Hôm Nay</h2>
+            
             <% if(classroom.tittle == ""){ %>
                 <h3>Chưa Có Tiêu Đề</h3>
             <% }else{ %>
-                <%=classroom.tittle%></h3>
+                <H1><%=classroom.tittle%></H1></br>
             <% } %>
+            
             
             <% if(classroom.videoid == ""){ %>
                 <h5>Chưa Có Video</h5>
             <% }else{ %>
-                <%=classroom.videoid%>
-            <% } %>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/<%=classroom.videoid%>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </br>
+                <% } %>
             
+
+                
+
             <% if(classroom.conntain == ""){ %>
                 <h5>Chưa Có Nội Dung</h5>
             <% }else{ %>
-                <%=classroom.conntain%>
+            </br>
+            <H2>Nội dung</H2> </br>
+                
+                    <%=classroom.conntain%> </br>
+                
+                
             <% } %>
             
             <% if(classroom.homework == ""){ %>
                 <h5>Chưa Có Bài Tập</h5>
             <% }else{ %>
-                <%=classroom.homework%>
+            </br>
+            <H2>link bài tập</H2> </br>
+            <a href="<%=classroom.homework%>" target="_blank"><%=classroom.homework%> <br></a>
+
+                <p></p>
+            </br>
             <% } %>
-        
+        </center>
         </div>
     <% } %>
     </center>

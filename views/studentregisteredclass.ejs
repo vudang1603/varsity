@@ -1,0 +1,62 @@
+<%- include('header') %>
+
+<link href="/assets/css/profile.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <div class="container">
+        <div class="view-account">
+            <section class="module">
+                <div class="module-inner">
+                    <div class="side-bar">
+                        <div class="user-info">
+                            <img class="img-profile img-circle img-responsive center-block" src="data:image/<%=image.contentType%>;base64,<%=image.data.toString('base64')%>" alt="" style="height: 80px; width: 80px;">
+                            <ul class="meta list list-unstyled">
+                                <li class="name"><%=student.name%>
+                                    
+                                </li>
+                                <li class="email"><a href="#"><%=student.email%></a></li>
+                                <li class="activity">Học Viên</li>
+                            </ul>
+                        </div>
+                        <nav class="side-menu">
+                            <ul class="nav">
+                                <li><a href="profile/"><span class="fa fa-user"></span> Thông Tin</a></li>
+                                <li><a href="../profile/registered-course"><i class="fas fa-book"></i> Khoá Học Đã Đăng Ký</a></li>
+                                <li class="active"><a href="#"><i class="fas fa-book"></i> Lớp Học Đã Đăng Ký</a></li>
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="content-panel">
+                            
+
+                            <% class_room.forEach(function(class_room) {%>
+                                <% if(userid == class_room.student){ %>
+                                    <div class="row">
+                                        <div class="col-sm-6 col-md-5 fa-border" style="padding: 10px; margin: 20px;">
+                                          <div class="card">
+                                            <div class="card-body">
+                                                <a href="#"><img src="data:class_room.image/<%=class_room.image.contentType%>;base64,<%=class_room.image.data.toString('base64')%>" alt="img" style="width: 100%; height: 200px;"></a>
+                                              <h4 class="card-title"><%-class_room.classname%></h4>
+                                              <p class="card-text">Giáo viên: <%-class_room.author%></p>
+                                              <p class="card-text">Lịch Dạy: <%-class_room.timetable%></p>
+                                              <p class="card-text">Mô Tả: <%-class_room.description%></p>
+                                              <p class="card-text">Giá: <%-class_room.price%></p>
+                                              <a href="../checkloginclass/<%-class_room._id%>" class="btn btn-primary">Đi đến lớp học</a>
+                                            </div>
+                                          </div>
+                                        </div>
+                              <!-- end course pagination -->
+                                      </div>
+                                <% }else{ %>
+                                    
+                                <% } %>
+                                
+                                <%})%>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+
+    <%- include('footer') %>

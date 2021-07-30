@@ -11,6 +11,7 @@ const ClassRoom = require('../models/class-room');
 const Forums = require('../models/forums')
 const Comment = require('../models/comment')
 /* GET home page. */
+<<<<<<< HEAD
 function removeVietnameseTones(str) {
   str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g,"a"); 
   str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g,"e"); 
@@ -39,6 +40,13 @@ function removeVietnameseTones(str) {
   str = str.replace(/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'|\"|\&|\#|\[|\]|~|\$|_|`|-|{|}|\||\\/g," ");
   return str;
 }
+=======
+
+// gửi mail
+var nodemailer = require('nodemailer');
+
+
+>>>>>>> 3c210c783decfe28754ebee1c9bdf17db5a08085
 router.get('/', function(req, res, next) {
   var tcFind = Teacher.find({}).limit(8)
   var coFind = Course.find({}).limit(10)
@@ -148,18 +156,49 @@ router.get('/course-detail/:id/register', ensureAuthenticated, function(req, res
 });
 
 router.get('/register-class/:id', ensureAuthenticated, function(req, res, next){
-  const password = req.params.id;
-  console.log(password)
-  res.render('register-class',{tab:9 , title: "Xác Nhận Đăng Ký", login: "true", password:password})
+  const id = req.params.id;
+  ClassRoom.findOne({_id: id}).exec((err, classr) =>{
+    const idclass = classr._id
+    const password = classr.password
+    res.render('register-class',{tab:9 , title: "Xác Nhận Đăng Ký", login: "true", password:password, idclass: idclass})
+  })
+})
+
+
+router.get('/checkloginclass/:id', ensureAuthenticated, function(req, res, next){
+  const id = req.params.id;
+  res.render('checkloginclass',{tab:12, title: "Tham Gia Lớp Học", login: "true", idclass: id})
+})
+
+router.post('/checklogin/', ensureAuthenticated, function(req, res, next){
+  const password = req.body.password
+  const idclass = req.body.idclass
+  
+  if(req.isAuthenticated()){
+    const iduser = req.user.id
+    ClassRoom.findOne({_id: idclass, password:password, student:iduser}).exec((err, login)=>{
+      if(login){
+        ClassRoom.findOne({_id: idclass}).exec((err, classroom)=>{
+          User.findOne({_id: iduser}).exec((err,user)=>{
+            const role = user.role
+            res.render('classroom', {tab: 11, title: "Lớp Học", login: "true",role: role, classroom: classroom, user:user})
+          })
+        })
+      }else{
+        res.redirect(req.get('referer'));
+      }
+    })
+  }
   
 })
 
 
+
 router.post('/register-class/:id', function(req, res, next){
-  const id = req.user.id
+  
   const email = req.body.useremail;
   const password = req.body.password;
-  console.log(id)
+  const idclass = req.body.idclass;
   console.log(email)
   console.log(password)
   User.findOne({email: email}).exec((err,user)=>{
@@ -167,6 +206,15 @@ router.post('/register-class/:id', function(req, res, next){
         if(user.role == 1){
           res.render('register-successful', {tab:10 ,title: "Đăng Ký Không Thành Công", login: "true", password: password, user: user })
         }else{
+          const iduser = user._id;
+          ClassRoom.findByIdAndUpdate(idclass, {$set:{
+            student:iduser
+          }}, {new: true}, (err, doc)=>{
+            if(err){
+                console.log("Something wrong when updating data!");
+            }
+            console.log(doc)
+          })
           res.render('register-successful', {tab:10 ,title: "Đăng Ký Thành Công", login: "true", password: password, user: user })
         }
       }else{
@@ -176,6 +224,7 @@ router.post('/register-class/:id', function(req, res, next){
   })
   
 })
+
 
 
 router.get('/classroom/:idclass',ensureAuthenticated, function(req,res, next){
@@ -198,12 +247,13 @@ router.post('/classroom/', function(req, res, next){
     const contain = req.body.contaillesson
     const video = req.body.idvideo
     const homework = req.body.homework
+    const idclass = req.body.idclass
     console.log(tittle)
     console.log(contain)
     console.log(video)
     console.log(homework)
-    const userid = req.user.id;
-    ClassRoom.findByIdAndUpdate(userid, {$set:{
+    console.log(idclass)
+    ClassRoom.findByIdAndUpdate(idclass, {$set:{
 
       tittle: tittle,
       conntain: contain,
@@ -381,5 +431,53 @@ router.get('/search', (req, res, next)=>{
   
   
 })
+
+
+router.post('/sendmail', (req, res, next)=>{
+  const fullname = req.body.author
+  const email =req.body.email
+  const subject = req.body.subject
+  const comment = req.body.comment
+
+  var nodemailer = require('nodemailer');
+
+  const option = {
+    service: 'gmail',
+    auth: {
+        user: 'ngoctrungdev20@gmail.com', // email hoặc username
+        pass: '1982140Aa!' // password
+    }
+  };
+  var transporter = nodemailer.createTransport(option);
+
+  transporter.verify(function(error, success) {
+    // Nếu có lỗi.
+    if (error) {
+        console.log(error);
+    } else { //Nếu thành công.
+        console.log('Kết nối thành công!');
+        var mail = {
+            from: 'ngoctrungdev20@gmail.com', // Địa chỉ email của người gửi
+            to: email, // Địa chỉ email của người nhận
+            subject: subject, // Tiêu đề mail
+            text: 'Hello:  '+fullname+"   Your problem:"+comment, // Nội dung mail dạng text
+        };
+        //Tiến hành gửi email
+        transporter.sendMail(mail, function(error, info) {
+            if (error) { // nếu có lỗi
+                console.log(error);
+            } else { //nếu thành công
+                console.log('Email sent: ' + info.response);
+            }
+        });
+    }
+});
+
+  res.render('thankyou', {tab: 13, title: "Thank You", login: "true"})
+})
+
+
+
+
 
 module.exports = router;

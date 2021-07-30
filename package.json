@@ -21,8 +21,11 @@
     "morgan": "~1.9.1",
     "multer": "^1.4.2",
     "nodemailer": "^6.6.3",
+<<<<<<< HEAD
     "normalize-text": "^2.3.2",
     "npm": "^7.20.3",
+=======
+>>>>>>> 3c210c783decfe28754ebee1c9bdf17db5a08085
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
