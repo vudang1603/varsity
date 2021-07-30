@@ -1,0 +1,169 @@
+<%- include('header'); %>
+
+<!-- Page breadcrumb -->
+<section id="mu-page-breadcrumb">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="mu-page-breadcrumb-area">
+            <h2><%-title%></h2>
+            <ol class="breadcrumb">
+             <li><a href="#">Trang Chủ</a></li>            
+             <li class="active"><%-title%></li>
+           </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End breadcrumb -->
+  <section id="mu-course-content">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="mu-course-content-area">
+             <div class="row">
+               <div class="col-md-9">
+                 <!-- start course content container -->
+                 <div class="mu-course-container">
+                   <div class="row">
+                    <% course.forEach(function(course){ %>
+                      <div class="col-md-6 col-sm-6">
+                        <div class="mu-latest-course-single">
+                          <figure class="mu-latest-course-img">
+                            <a href="course-detail/<%=course.id%>"><img src="data:course/<%=course.image.contentType%>;base64,<%=course.image.data.toString('base64')%>" alt="img"></a>
+                            <figcaption class="mu-latest-course-imgcaption">
+                              <a href="#"><%=course.category%></a>
+                              <span><%=course.lessons.length%> Bài Giảng</span>
+                            </figcaption>
+                          </figure>
+                          <div class="mu-latest-course-single-content">
+                           <h4><a href="course-detail/<%=course.id%>"><%=course.title%></a></h4>
+                           <p>Gia sư: <%=course.authorName%></p>
+                            <div class="mu-latest-course-single-contbottom">
+                               <a class="mu-course-details" href="course-detail/<%=course.id%>">Chi Tiết</a>
+                            </div>
+                          </div>
+                        </div> 
+                      </div>
+                        
+                      <% }) %>
+
+                      <% classes.forEach(function(classroom){ %>
+                        <div class="col-md-6 col-sm-6">
+                          <div class="mu-latest-course-single">
+                            <figure class="mu-latest-course-img">
+                              <a href="class-detail/<%=classroom.id%>"><img src="data:classroom/<%=classroom.image.contentType%>;base64,<%=classroom.image.data.toString('base64')%>" alt="img"></a>
+                              <figcaption class="mu-latest-course-imgcaption">
+                               
+                                <span><%=classroom.timetable%></span>
+                              </figcaption>
+                            </figure>
+                            <div class="mu-latest-course-single-content">
+                             <h4><a href="class-detail/<%=classroom.id%>"><%=classroom.classname%></a></h4>
+                             <p>Gia sư: <%=classroom.author%></p>
+                              <div class="mu-latest-course-single-contbottom">
+                                 <a class="mu-course-details" href="class-detail/<%=classroom.id%>">Chi Tiết</a>
+                                 <span class="mu-course-price" href="#"><%=classroom.price%> vnđ</span>
+                              </div>
+                            </div>
+                          </div> 
+                        </div>
+                          
+                        <% }) %>
+                    
+                   
+                  
+
+                  
+
+                  
+                  
+                   </div>
+                 </div>
+                 <!-- end course content container -->
+                 <!-- start course pagination -->
+                 <div class="mu-pagination">
+                   <nav>
+                     <ul class="pagination">
+                       <li>
+                         <a href="#" aria-label="Previous">
+                           <span class="fa fa-angle-left"></span> Prev 
+                         </a>
+                       </li>
+                       <li class="active"><a href="#">1</a></li>
+                       <li><a href="#">2</a></li>
+                       <li><a href="#">3</a></li>
+                       <li><a href="#">4</a></li>
+                       <li><a href="#">5</a></li>
+                       <li>
+                         <a href="#" aria-label="Next">
+                          Next <span class="fa fa-angle-right"></span>
+                         </a>
+                       </li>
+                     </ul>
+                   </nav>
+                 </div>
+                 <!-- end course pagination -->
+               </div>
+               <div class="col-md-3">
+                 <!-- start sidebar -->
+                 <aside class="mu-sidebar">
+                   <!-- start single sidebar -->
+                   <div class="mu-single-sidebar">
+                    <h3>Lớp Học Mới Nhất</h3>
+                    <div class="mu-sidebar-popular-courses">
+                       <% newClass.forEach(function(newClass){%>
+                           <div class="media">
+                             <div class="media-left">
+                               <a href="class-detail/<%=newClass.id%>">
+                                 <img class="media-object" src="data:newClass/<%=newClass.image.contentType%>;base64,<%=newClass.image.data.toString('base64')%>" alt="img">
+                               </a>
+                             </div>
+                             <div class="media-body">
+                               <h4 class="media-heading"><a href="class-detail/<%=newClass.id%>"><%=newClass.classname%></a></h4>
+                               <span class="popular-course-price"><%=newClass.price%> vnđ</span>
+                             </div>
+                           </div>
+                       <% }) %>
+          
+                    </div>
+                  </div>
+                   <!-- end single sidebar -->
+                   <!-- start single sidebar -->
+                   <div class="mu-single-sidebar">
+                     <h3>Khoá Học Mới Nhất</h3>
+                     <div class="mu-sidebar-popular-courses">
+                        <% newCourse.forEach(function(newCourse){%>
+                            <div class="media">
+                              <div class="media-left">
+                                <a href="course-detail/<%=newCourse.id%>">
+                                  <img class="media-object" src="data:newCourse/<%=newCourse.image.contentType%>;base64,<%=newCourse.image.data.toString('base64')%>" alt="img">
+                                </a>
+                              </div>
+                              <div class="media-body">
+                                <h4 class="media-heading"><a href="course-detail/<%=newCourse.id%>"><%=newCourse.title%></a></h4>
+                              </div>
+                            </div>
+                        <% }) %>
+           
+                     </div>
+                   </div>
+                   <!-- end single sidebar -->
+                   <!-- start single sidebar -->
+                   
+                   <!-- end single sidebar -->
+                   <!-- start single sidebar -->
+                   
+                   <!-- end single sidebar -->
+                 </aside>
+                 <!-- / end sidebar -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<%- include('footer'); %>

@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const {ensureAuthenticated} = require('../config/auth');
+const normalizeText = require('normalize-text')
 const Student = require('../models/student-profile')
 const Teacher = require('../models/teacher-profile');
 const User = require('../models/users');
@@ -10,7 +11,34 @@ const ClassRoom = require('../models/class-room');
 const Forums = require('../models/forums')
 const Comment = require('../models/comment')
 /* GET home page. */
-
+function removeVietnameseTones(str) {
+  str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g,"a"); 
+  str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g,"e"); 
+  str = str.replace(/ì|í|ị|ỉ|ĩ/g,"i"); 
+  str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g,"o"); 
+  str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g,"u"); 
+  str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g,"y"); 
+  str = str.replace(/đ/g,"d");
+  str = str.replace(/À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ/g, "A");
+  str = str.replace(/È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ/g, "E");
+  str = str.replace(/Ì|Í|Ị|Ỉ|Ĩ/g, "I");
+  str = str.replace(/Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ/g, "O");
+  str = str.replace(/Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ/g, "U");
+  str = str.replace(/Ỳ|Ý|Ỵ|Ỷ|Ỹ/g, "Y");
+  str = str.replace(/Đ/g, "D");
+  // Some system encode vietnamese combining accent as individual utf-8 characters
+  // Một vài bộ encode coi các dấu mũ, dấu chữ như một kí tự riêng biệt nên thêm hai dòng này
+  str = str.replace(/\u0300|\u0301|\u0303|\u0309|\u0323/g, ""); // ̀ ́ ̃ ̉ ̣  huyền, sắc, ngã, hỏi, nặng
+  str = str.replace(/\u02C6|\u0306|\u031B/g, ""); // ˆ ̆ ̛  Â, Ê, Ă, Ơ, Ư
+  // Remove extra spaces
+  // Bỏ các khoảng trắng liền nhau
+  str = str.replace(/ + /g," ");
+  str = str.trim();
+  // Remove punctuations
+  // Bỏ dấu câu, kí tự đặc biệt
+  str = str.replace(/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'|\"|\&|\#|\[|\]|~|\$|_|`|-|{|}|\||\\/g," ");
+  return str;
+}
 router.get('/', function(req, res, next) {
   var tcFind = Teacher.find({}).limit(8)
   var coFind = Course.find({}).limit(10)
@@ -322,10 +350,36 @@ router.get('/profile', ensureAuthenticated, (req, res, next) => {
 router.get('/search', (req, res, next)=>{
   let txt = req.query.search
   txt = txt.toLowerCase()
-  
-  Course.find({ 'title' : new RegExp("^"+txt+"$",'i')}).exec((err, course)=>{
-    console.log(course)
+  txt = removeVietnameseTones(txt)
+  var courseList = []
+  var classList = []
+  var clFind = ClassRoom.find({}).limit(3)
+  var coFind = Course.find({}).limit(3)
+  Course.find({}).exec((err, docs)=>{
+    ClassRoom.find({}).exec((err, classroom)=>{
+      classroom.forEach(function(c){
+        let lowercase = c.classname.toLowerCase()
+        lowercase = removeVietnameseTones(lowercase);
+        if(lowercase.indexOf(txt)>0){
+          classList.push(c)
+        }
+      })
+      docs.forEach(function(d){
+        let lowercase1 = d.title.toLowerCase()
+        lowercase1 = removeVietnameseTones(lowercase1);
+        if(lowercase1.indexOf(txt)>0){
+          courseList.push(d)
+        }
+      })
+      clFind.exec((err, newClass)=>{
+        coFind.exec((err, newCourse)=>{
+          res.render('search-list',{tab: 8, title: "Danh Sách Tìm Kiếm", login: "false", role: "0", course: courseList, classes: classList, newClass: newClass, newCourse: newCourse});
+        })
+      })  
+    })
   })
+  
+  
 })
 
 module.exports = router;
