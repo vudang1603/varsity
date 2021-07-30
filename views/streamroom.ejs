@@ -1,19 +1,27 @@
-<%- include('header') %>
 
   <div>
     <video id="localStream" width="300px"></video>
+    <br>
+    <video id="friendStream" width="300px"></video>
+
+    <br>
+    <p>Token</p>
+    <textarea id="txtmysignal" cols="50" rows="3"></textarea>
+
+    <br>
+    <p>Nhập token:</p>
+
+    <input type="text" name="txtfriendsignal" id="txtfriendsignal">
+
+    <button class="btn btn-primary" id="btnconnect">Kết nối</button>
   </div>
+  
+
+  <script type="text/javascript" src="/bundle.js"></script>
 
 
-  <script>
-    navigator.mediaDevices.getUserMedia({audio:false, video: true})
-    .then(stream => {
-      const video =document.getElementById("localStream");
-      video.srcObject = stream;
-      video.onloadedmetadata = function(){
-        video.play();
-      }
-    })
-    .catch(err => console.log(err))
-  </script>
-<%- include('footer') %>
+ 
+
+
+  
+

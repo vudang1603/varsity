@@ -424,5 +424,10 @@ router.get('/videocall/:id', ensureAuthenticated, (req, res, next) => {
   res.render('streamroom', {tab: 13, title: "Video Call", login: "true"})
 })
 
+router.get('/videocall/:id/#1', ensureAuthenticated, (req, res, next) => {
+  res.render('streamroom', {tab: 13, title: "Video Call", login: "true"})
+})
+
+
 
 module.exports = router;
