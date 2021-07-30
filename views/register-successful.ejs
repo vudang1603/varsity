@@ -3,14 +3,31 @@
 <div class="registerclass" style="width: 100%; display: flex; justify-content: center; align-items: center; flex-direction: column;">
     
 
-    <% if(<%=user.role%> == 1){ %>
-        <h1>Đăng Ký Không Thành Công :(</h1>
+    <% if( user.role == 1){ %>
+        <div style="width: 100%; height: 100vh; ">
+            <center>
+            <h1>Đăng Ký Không Thành Công</h1>
+            <p>Bạn là gia sư không thể đăng ký vào lớp</p>
+            <button type="button" class="btn btn-primary" onclick="backsite()">Quay lại</button>
+            </center>
+        </div>
+        
     <% }else{ %>
-        <h1>Đăng Ký Thành Công</h1>
-        <p> Mã tham gia lớp của bạn:  <%= password %></p>
+        <div style="width: 100%; height: 100vh; ">
+            <center>
+                <h1>Đăng Ký Thành Công</h1>
+                <p>Lưu trữ cẩn thận và không đưa cho bất kỳ ai.</p>
+                <p> Mã tham gia lớp của bạn:   <%= password %></p>
+            </center>
+        </div>
+        
     <% } %>
     
 </div>
 
-
+<script>
+      function backsite(){
+          history.back();
+      }
+  </script>
 <%- include('footer'); %>

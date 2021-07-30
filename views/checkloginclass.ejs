@@ -1,0 +1,20 @@
+<%- include('header'); %>
+
+
+<div style="width: 100%; height: 100vh;">
+    <center>
+    <H2>Đăng Nhập Lớp Học</H2>
+    <br>
+    <div style="width: 50%;">
+    <form action="../checklogin/" method="post" class="form-horizontal">
+    <p>Nhập mật mã lớp học:</p>
+    <input type="text" class="form-control" id="password" name="password">
+    <input type="hidden" value="<%=idclass%>" id="idclass" name="idclass">
+    <br>
+    <input type="submit" name="submit" value="Đăng Nhập Lớp" class="btn btn-primary">
+    </form>
+    </div>
+    </center>
+</div>
+
+<%- include('footer'); %>

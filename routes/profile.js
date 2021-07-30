@@ -36,6 +36,17 @@ var upload = multer({ storage: storage, fileFilter: multerFilter})
 
 
 
+router.get('/student-registeredclass', ensureAuthenticated, function(req, res, next){
+    const id = req.user.id;
+    var classroom = ClassRoom.find({})
+    classroom.exec((err,clroom)=>{
+        Student.findOne({_id: id}).exec((err, student)=>{
+            const image = student.image
+            const classimage = clroom.image
+            res.render('studentregisteredclass.ejs',{tab:12,title: "Lớp Học Đã Đăng Ký",class_room:clroom,classimage:classimage,login: "true",image:image, userid: id,student:student})
+        })
+    })
+})
 
 
 router.post('/', upload.single('file'), function(req, res, next){
