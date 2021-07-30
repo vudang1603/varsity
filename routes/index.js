@@ -94,17 +94,19 @@ router.get('/course-detail/:id', function(req, res, next) {
   
 });
 
-router.get('/register-class/:id', function(req, res, next){
+router.get('/register-class/:id', ensureAuthenticated, function(req, res, next){
   const password = req.params.id;
-  
+  console.log(password)
   res.render('register-class',{tab:9 , title: "Xác Nhận Đăng Ký", login: "true", password:password})
   
 })
 
 
-router.post('/register-class/', function(req, res, next){
+router.post('/register-class/:id', function(req, res, next){
+  const id = req.user.id
   const email = req.body.useremail;
   const password = req.body.password;
+  console.log(id)
   console.log(email)
   console.log(password)
   User.findOne({email: email}).exec((err,user)=>{
@@ -123,7 +125,7 @@ router.post('/register-class/', function(req, res, next){
 })
 
 
-router.get('/classroom/:idclass', function(req,res, next){
+router.get('/classroom/:idclass',ensureAuthenticated, function(req,res, next){
   const idclass = req.params.idclass;
   if(req.isAuthenticated()){
     const userid = req.user.id;
