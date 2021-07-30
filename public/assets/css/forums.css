@@ -125,3 +125,27 @@ body{
     min-height: 1px;
     padding: 1rem;
 }
+
+
+.comment-wrapper .panel-body {
+    max-height:650px;
+    overflow:auto;
+}
+
+.comment-wrapper .media-list .media img {
+    width:64px;
+    height:64px;
+    border:2px solid #e5e7e8;
+}
+
+.comment-wrapper .media-list .media {
+    border-bottom:1px dashed #efefef;
+    margin-bottom:25px;
+}
+
+.media-list .media a {
+    padding: 10px;
+}
+.media-list .media a img{
+    border-radius: 50px;
+}

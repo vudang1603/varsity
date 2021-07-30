@@ -64,16 +64,19 @@
                   <div class="mu-single-sidebar">
                     <h3>Lớp học của Thầy</h3>
                     <div class="mu-sidebar-popular-courses">
+                      <% classroom.forEach(function(classroom){ %>
                         <div class="media">
                           <div class="media-left">
                             <a href="course-detail">
-                              <img class="media-object" src="" alt="img">
+                              <img class="media-object" src="data:classroom/<%=classroom.image.contentType%>;base64,<%=classroom.image.data.toString('base64')%>" alt="img">
                             </a>
                           </div>
                           <div class="media-body">
-                            <h4 class="media-heading"><a href="course-detail"><%=classRoom.classname%></a></h4>                      
+                            <h4 class="media-heading"><a href="course-detail"><%=classroom.classname%></a></h4>                      
                           </div>
                         </div>
+                      <% }) %>
+                        
                       
  
                       

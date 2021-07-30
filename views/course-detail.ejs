@@ -39,17 +39,17 @@
                            </figcaption>
                          </figure>
                          <div class="mu-latest-course-single-content">
-                           <h2><a>Học tốt toán 12</a></h2>
+                           <h2><a><%=course.title%></a></h2>
                            <h4>Thông Tin Khoá Học</h4>
                            <ul>
                              <li> <span>Gia Sư: </span> <span><%=course.authorName%></span></li>
-                             <li> <span>Ngày Tải Lên</span> <span><%=date%></span></li>
+                             <li> <span>Ngày Tải Lên: </span> <span><%=date%></span></li>
                            </ul>
                            <h4>Mô Tả</h4>
                            <p><%=course.description%>.</p>
                            <div class="table-responsive">
                             
-                           <a class="mu-post-btn" href="">ĐĂNG KÝ</a>
+                           <a class="mu-post-btn" href="<%=course.id%>/register">ĐĂNG KÝ</a>
                            </div>
                          </div>
                        </div> 
@@ -120,17 +120,7 @@
                   </div>
                    <!-- end single sidebar -->
                    <!-- start single sidebar -->
-                   <div class="mu-single-sidebar">
-                     <h3>Categories</h3>
-                     <ul class="mu-sidebar-catg">
-                        <li><a href="#">Toán</a></li>
-                        <li><a href="">Hoá Học</a></li>
-                        <li><a href="">Vật Lý</a></li>
-                        <li><a href="">Sinh Học</a></li>
-                        <li><a href="">Anh Văn</a></li>
-                        <li><a href="">Ngữ Văn</a></li>
-                     </ul>
-                   </div>
+                   
                    <!-- end single sidebar -->
                    
                    <!-- start single sidebar -->

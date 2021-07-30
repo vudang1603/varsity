@@ -1,12 +1,13 @@
 const mongoose = require('mongoose')
 const {ensureAuthenticated} = require('../config/auth');
 const User = require('../models/users')
+const Schema = mongoose.Schema;
 
 
-const studentSchema = new mongoose.Schema({
+const studentSchema = Schema({
     _id: {
-        type: Object,
-        default: ''
+        type: Schema.Types.ObjectId,
+        ref: User
     },
     name: {
         type: String,

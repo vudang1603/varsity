@@ -12,6 +12,12 @@ var usersRouter = require('./routes/users');
 var profileRouter = require('./routes/profile');
 var app = express();
 
+
+
+
+
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -59,8 +65,14 @@ app.use(function(err, req, res, next) {
 });
 
 
+
+
+
+
 //mongoose
 const mongoose = require('mongoose');
+const { Server } = require('http');
+const { Socket } = require('dgram');
 mongoose.connect('mongodb+srv://vudang:0RYMgg8CEQHAvSst@cluster0.vniig.mongodb.net/varsity?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true}, function(err){
   if(err){
     console.log("Mongo connected error: "+ err);

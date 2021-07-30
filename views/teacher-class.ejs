@@ -42,7 +42,7 @@
                     </div>
                     <div class="content-panel" id="infor">
                         <h2 class="title">Tạo Lớp Học</h2>
-                            <br action="../profile/class-management/" method="POST" class="form-horizontal" enctype="multipart/form-data">
+                            <form action="../profile/class-management/" method="POST" class="form-horizontal" enctype="multipart/form-data">
                                 
                                 <p>Tên Lớp Học:</p>
                                 <input type="text" class="form-control" name="classname" id="classname">
@@ -78,6 +78,9 @@
                                         <a href="#"><img src="data:classimage/<%=classimage.contentType%>;base64,<%=classimage.data.toString('base64')%>" alt="img" style="width: 100%; height: 200px;"></a>
                                       <h4 class="card-title"><%-classroom.classname%></h4>
                                       <p class="card-text">Giáo viên: <%-classroom.author%></p>
+                                      <p class="card-text">Lịch Dạy: <%-classroom.timetable%></p>
+                                      <p class="card-text">Mô Tả: <%-classroom.description%></p>
+                                      <p class="card-text">Giá: <%-classroom.price%></p>
                                       <a href="#" class="btn btn-primary">Đi đến lớp học</a>
                                     </div>
                                   </div>
