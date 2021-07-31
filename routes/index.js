@@ -441,8 +441,8 @@ router.post('/sendmail', (req, res, next)=>{
   const option = {
     service: 'gmail',
     auth: {
-        user: 'ngoctrungdev20@gmail.com', // email hoặc username
-        pass: '1982140Aa!' // password
+        user: 'dangB1704802@student.ctu.edu.vn', // email hoặc username
+        pass: '01234696403' // password
     }
   };
   var transporter = nodemailer.createTransport(option);
@@ -454,10 +454,10 @@ router.post('/sendmail', (req, res, next)=>{
     } else { //Nếu thành công.
         console.log('Kết nối thành công!');
         var mail = {
-            from: 'ngoctrungdev20@gmail.com', // Địa chỉ email của người gửi
+            from: 'dangB1704802@student.ctu.edu.vn', // Địa chỉ email của người gửi
             to: email, // Địa chỉ email của người nhận
             subject: subject, // Tiêu đề mail
-            text: 'Hello:  '+fullname+"   Your problem:"+comment, // Nội dung mail dạng text
+            text: 'Xin chào:  '+fullname+"\nVấn đề của bạn là: "+comment, // Nội dung mail dạng text
         };
         //Tiến hành gửi email
         transporter.sendMail(mail, function(error, info) {
